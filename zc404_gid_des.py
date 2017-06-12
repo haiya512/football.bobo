@@ -1,15 +1,12 @@
 # coding: utf-8
 '''
-
+显示比赛总数前10名的球队，还有他们的球队比赛数占比
 '''
 import pandas as pd
 import numpy as np
 # import matplotlib as mpl
 from matplotlib import pyplot as plt
 import zsys
-import sys
-reload(sys)
-sys.setdefaultencoding('utf8')
 
 
 def gid_anz_top10(df, ksgn):
@@ -32,13 +29,8 @@ def gid_anz_top10(df, ksgn):
     plt.show()
 
 
-# -----------------------
-rs0 = './'
-fgid = rs0 + 'gid2017.dat'
+fgid = 'gid2017.dat'
 df = pd.read_csv(fgid, index_col=False, dtype=str)
 print(df.tail())
 print('\n', df.describe())
 gid_anz_top10(df, 'gset')
-# ------------
-#
-print('\nok, !')

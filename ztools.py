@@ -184,7 +184,9 @@ def lstPr(lst):
 
 
 def lst_keyGetStr(dlst, kstr0):
-    xlst, kstr, ksn = [], kstr0.upper(), len(kstr0)
+    xlst = []
+    kstr = kstr0.upper()
+    ksn = len(kstr0)
     for xd in dlst:
         x = str(xd)
         print(len(x), '#', kstr, x)
@@ -244,7 +246,7 @@ def f_rdXNum(fn, cod='gbk'):
     return dn
 
 
-def f_add(fn, dss, fgNew=False, cod='gbk'):
+def f_add(fn, dss, fgNew=False, cod='utf-8'):
     if fgNew:
         f = open(fn, 'w')
     else:
@@ -254,7 +256,7 @@ def f_add(fn, dss, fgNew=False, cod='gbk'):
     f.close()
 
 
-def f_addLst(fn, xlst, fgNew=True, cod='gbk'):
+def f_addLst(fn, xlst, fgNew=True, cod='utf-8'):
     if fgNew:
         f = open(fn, 'w', encoding=cod)
     else:
@@ -368,9 +370,9 @@ def timNHour(tim, tim0, fgPr=False):
 
 
 def timNDay(tim, tim0, fgPr=False):
-    if tim == '':
+    if not tim:
         tim = arrow.now()
-    if type(tim) == str:
+    if isinstance(tim, str):
         tim = arrow.get(tim)
     tn = tim - tim0
     xn = round(tn.total_seconds(), 2)

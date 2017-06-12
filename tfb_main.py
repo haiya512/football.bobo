@@ -3,7 +3,6 @@
 import zsys
 import ztools as zt
 import ztop_ai as zai
-#
 import tfb_sys as tfsys
 import tfb_tools as tft
 import tfb_backtest as tfbt
@@ -11,8 +10,6 @@ import tfb_strategy as tfsty
 
 
 def main_get(timStr='', nday=2):
-    #
-    # 1---init.sys
     print('\nmain_get,nday:', nday)
     tfsys.xnday_down = nday
     zsys.web_get001txtFg = True
@@ -39,6 +36,7 @@ def main_get(timStr='', nday=2):
     # nt('\n#4,update.data,tim:{0:.2f} s'.format(tn))
     #
 
+
 def main_bt(timStr='', nday=2):
     #
     # 1---init.sys
@@ -54,7 +52,6 @@ def main_bt(timStr='', nday=2):
         tfsys.xnday_down = xtfb.gid_nday + 10
         print('nday,', tfsys.xnday_down)
 
-     #
     # 3---backtest
     print('\n#3,backtest')
     if nday != 0:
@@ -97,7 +94,6 @@ def main_ai_bt(timStr='', nday=2):
         tfsys.xnday_down = xtfb.gid_nday + 10
         print('nday,', tfsys.xnday_down)
 
-     #
     # 3---backtest
     print('\n#3,backtest')
     if nday != 0:
@@ -137,9 +133,6 @@ def main_ai_bt(timStr='', nday=2):
     #
     # 6---end.main
     print('\n#6,end.main')
-
-#==================
-#----------main
 
 
 def main():
