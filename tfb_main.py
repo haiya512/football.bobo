@@ -39,9 +39,6 @@ def main_get(timStr='', nday=2):
     # nt('\n#4,update.data,tim:{0:.2f} s'.format(tn))
     #
 
-#----------main.backtest
-
-
 def main_bt(timStr='', nday=2):
     #
     # 1---init.sys
@@ -50,7 +47,7 @@ def main_bt(timStr='', nday=2):
     zsys.web_get001txtFg = True
 
     # 2---init.tfb
-    rs0 = '/tfbDat/'
+    rs0 = './'
     fgid = rs0 + 'gid2017.dat'
     xtfb = tft.fb_init(rs0, fgid)
     if nday == -1:
@@ -93,7 +90,7 @@ def main_ai_bt(timStr='', nday=2):
     zsys.web_get001txtFg = True
 
     # 2---init.tfb
-    rs0 = '/tfbDat/'
+    rs0 = './'
     fgid = rs0 + 'gid2017.dat'
     xtfb = tft.fb_init(rs0, fgid)
     if nday == -1:

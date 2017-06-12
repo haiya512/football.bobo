@@ -39,7 +39,7 @@ def fb_df_type4mlst(df, nlst, flst):
         df[xsgn] = df[xsgn].astype(float)
 
 
-def fb_init(rs0='/tfbDat/', fgid=''):
+def fb_init(rs0='./', fgid=''):
     # 1
     xtfb = tfsys.zTopFoolball()
     xtfb.tim_now = arrow.now()
@@ -55,10 +55,10 @@ def fb_init(rs0='/tfbDat/', fgid=''):
     xtfb.funSta = tfsty.sta00_sta
     #
     xss = xtfb.timStr_now
-    xtfb.poolTrdFN, xtfb.poolRetFN = 'log\poolTrd_' + \
-        xss + '.csv', 'log\poolRet_' + xss + '.csv'
+    xtfb.poolTrdFN = 'log/poolTrd_' + xss + '.csv'
+    xtfb.poolRetFN = 'log/poolRet_' + xss + '.csv'
     # 3
-    if rs0 != '':
+    if rs0:
         tfsys.rdat = rs0
         tfsys.rxdat = rs0 + 'xdat/'
         tfsys.rhtmOuzhi = rs0 + 'xhtm/htm_oz/'
@@ -66,7 +66,7 @@ def fb_init(rs0='/tfbDat/', fgid=''):
         tfsys.rhtmShuju = rs0 + 'xhtm/htm_sj/'
 
     # 4
-    if fgid != '':
+    if fgid:
         tfsys.gidsFN = fgid
         # xtfb.gids=pd.read_csv(fgid,index_col=0,dtype=str,encoding='gbk')
         tfsys.gids = pd.read_csv(
@@ -307,7 +307,7 @@ def fb_gid_getExtPool(df, nsub=5):
 
 
 def fb_gid_get_nday(xtfb, timStr, fgExt=False):
-    if timStr == '':
+    if not timStr:
         ktim = xtfb.tim_now
     else:
         ktim = arrow.get(timStr)

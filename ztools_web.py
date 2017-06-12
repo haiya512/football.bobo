@@ -28,7 +28,6 @@ import requests
 # import bs4
 from bs4 import BeautifulSoup
 from robobrowser import RoboBrowser
-from concurrent import futures
 from concurrent.futures import ProcessPoolExecutor, as_completed
 #
 
