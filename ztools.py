@@ -246,8 +246,8 @@ def f_rdXNum(fn, cod='gbk'):
     return dn
 
 
-def f_add(fn, dss, fgNew=False, cod='utf-8'):
-    if fgNew:
+def f_add(fn, dss, create_file=False, encode='utf-8'):
+    if create_file:
         f = open(fn, 'w')
     else:
         f = open(fn, 'a')

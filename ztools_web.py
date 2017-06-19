@@ -1,42 +1,24 @@
-# coding=utf-8
-# -*- coding: utf-8 -*-
+# coding: utf-8
 '''
-Top极宽量化(原zw量化)，Python量化第一品牌
-网站:www.TopQuant.vip   www.ziwang.com
-QQ总群:124134140   千人大群 zwPython量化&大数据
-
-TopQuant.vip ToolBox 2016
-Top极宽·量化开源工具箱 系列软件
-by Top极宽·量化开源团队 2016.12.25 首发
-
 文件名:ztools_web.py
 默认缩写：import ztools_web as zweb
 简介：Top极宽web网络与htm网页常用工具函数集
 '''
 
 import os
-import sys
-import io
 import re
-# import arrow
-import bs4
 import random
 import pandas as pd
-# import tushare as ts
-#
 import requests
-# import bs4
 from bs4 import BeautifulSoup
 from robobrowser import RoboBrowser
-from concurrent.futures import ProcessPoolExecutor, as_completed
-#
+from concurrent.futures import as_completed
 
 import zsys
 import ztools as zt
 import ztools_str as zstr
 import ztools_data as zdat
 #
-#-----------------------
 '''
 xxx.var&const
 misc
@@ -48,49 +30,44 @@ web_get_xxx.site...
 #----zdz.zwx.xxx   zdz.zwx-->zdzx
 #---bs4.xxx
 '''
-#-----------------------
 
-#------------web.var&const
 zt_headers = {
-    'User-Agent': "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1"}
-zt_xagent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; it; rv:1.8.1.11) Gecko/20071127 Firefox/2.0.0.11'
+    'User-Agent': '''Mozilla/5.0 (Windows NT 6.1; WOW64)
+    AppleWebKit/537.1 (KHTML, like Gecko)
+    Chrome/22.0.1207.1 Safari/537.1'''
+}
+zt_xagent = '''Mozilla/5.0 (Windows; U;
+Windows NT 5.1; it; rv:1.8.1.11)
+Gecko/20071127 Firefox/2.0.0.11'''
 
 
-#-----------------------
+# -----------------------
 
 
-#---web_get_xxx
+# ---web_get_xxx
 
 def web_get001(url):
     try:
         rx = requests.get(url, headers=zt_headers)  # 获得网页,headers
     except:
         rx = None
-        return None
-    finally:
-        return rx
-    #
     return rx
 
 
-def web_get001txt(url, ftg='', fcod='gbk'):
-    htm, rx = '', web_get001(url)
-    if rx != None:
-        xcod = rx.apparent_encoding  # print(xcod,uss)
-        rx.encoding = xcod  # gb-18030
-        # dss=rx.text
-        htm = rx.text  # print(htm)
-        if xcod.upper() == 'UTF-8':
-            # print('@@u8a');#print(htm)
+def web_get001txt(url, filename=''):
+    htm = ''
+    rx = web_get001(url)
+    if rx:
+        xcod = rx.encoding
+        htm = rx.text
+        if xcod == 'utf-8':
             htm = htm.replace('&nbsp;', ' ')
             css = htm.encode("UTF-8", 'ignore').decode("UTF-8", 'ignore')
             css = css.replace(u'\xfffd ', u' ')
             css = css.replace(u'\xa0 ', u' ')
             htm = css.encode("GBK", 'ignore').decode("GBK", 'ignore')
-        #
-        if ftg != '':
-            zt.f_add(ftg, htm, True, cod=fcod)
-    #
+        if filename:
+            zt.f_add(filename, htm, True)
     return htm
 
 
@@ -125,18 +102,18 @@ def web_getXLnks(url, ckn=10, kget=None, kflt=None, uget=None, uflt=None, ucod='
         css, uss = lnk.text, lnk.get('href')
         # print('cs0,',css,uss)
         #
-        if uflt != None and uss != None and zstr.str_xor(uss, uflt):
+        if uflt and uss and zstr.str_xor(uss, uflt):
             uss = None
-        if uget != None and uss != None and (not zstr.str_xor(uss, uget)):
+        if uget and uss and (not zstr.str_xor(uss, uget)):
             uss = None
         #
-        if kflt != None and uss != None and zstr.str_xor(css, kflt):
+        if kflt and uss and zstr.str_xor(css, kflt):
             uss = None
-        if kget != None and uss != None and (not zstr.str_xor(css, kget)):
+        if kget and uss and (not zstr.str_xor(css, kget)):
             uss = None
         # print('cs2,',css,uss)
         #
-        if uss == None:
+        if uss is None:
             css = ''
         css = zstr.str_fltHtmHdr(css)
         if len(css) > ckn:
@@ -153,12 +130,12 @@ def web_getXTxt001div(bs, claSgn):
     x10, tss = bs.find_all('div'), ''
     for x in x10:
         # print('@x',x)
-        if x != None:
+        if x:
             x2 = x.find('div', class_=claSgn)
         else:
             x2 = None
         #
-        if x2 != None:
+        if x2:
             css = x2.text
             if tss.find(css) == -1:
                 css = zstr.str_fltHtm(css)
@@ -177,7 +154,7 @@ def web_getXTxt001k(bs):
     if x10 == []:
         x10 = bs.find_all('div')
     for x in x10:
-        if x != None:
+        if x:
             css = x.text
             if tss.find(css) == -1:
                 css = zstr.str_fltHtm(css)
@@ -198,7 +175,7 @@ def web_getXTxt010x9(uss):
     #
 
     bs = BeautifulSoup(htm, 'html5lib')  # 'lxml'
-    if bs.title == None:
+    if bs.title is None:
         return ''
     #
     if uss.find('.zhihu.com') > 0:
@@ -228,7 +205,6 @@ def web_getXTxt100(df, rs0, txtn0=200):
             # print(css,'\n',fss)
             zt.f_add(fss, css, True)
 
-#--- web_get_xxx.site...
 
 
 def web_get_bdnews010(kstr, pn=1):
@@ -272,10 +248,7 @@ def web_get_zhihu010(kstr):
         print(df)
 
     return df
-#-----------------------
 
-
-#--web_dz.xxx
 
 def zdz_post010(uid, unam, upas, chdr, ctxt, uhost='http://ziwang.com/'):
     brow = RoboBrowser(history=True, cache=True)
@@ -288,7 +261,7 @@ def zdz_post010(uid, unam, upas, chdr, ctxt, uhost='http://ziwang.com/'):
     zt.wait(2)  # print('ulog,',ulog)
     xact = "member.php?mod=logging&action=login&loginsubmit=yes&infloat=yes&lssubmit=yes"
     xlog = brow.get_form(action=xact)  # print('xlog',xlog)
-    if xlog == None:
+    if xlog is None:
         return False
     print('@xlog,', unam, upas)
     #
@@ -304,11 +277,11 @@ def zdz_post010(uid, unam, upas, chdr, ctxt, uhost='http://ziwang.com/'):
     xact_post = 'forum.php?mod=post&action=newthread&fid=' + \
         uid + '&extra=&topicsubmit=yes'
     xpost = brow.get_form(action=xact_post)
-    #print('@xpost, ',xpost)
+    # print('@xpost, ',xpost)
     #
     xpost['subject'].value, xpost['message'].value = chdr, ctxt
     brow.submit_form(xpost)
-    #print('@xpost, ',upost);
+    # print('@xpost, ',upost);
     #
     # re_brow,upost,chk_post
     return True
@@ -319,7 +292,7 @@ def zdz_getKHdrFlt9(df9, dfnew, rsk):
     dfnew = dfnew.dropna()
     for i, row in dfnew.iterrows():
         hdr = row['hdr']  # print('\n',hdr)
-        if hdr != None:
+        if hdr:
             xfg = zdat.df_strFind01(df9['hdr'], hdr)  # print('\ndf9,',xfg,hdr)
             if not xfg:
                 fss = ''.join([rsk, hdr, '.txt'])

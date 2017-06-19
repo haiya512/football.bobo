@@ -26,9 +26,7 @@ def df_get8tim(df, ksgn, kpre, kn9, kpos):
 
 
 ksgn = 'tplay'
-print('#1',)
 xdf = df_get8tim(df, ksgn, '-', 12, 4)
 
-print('#2',)
 tfdr.dr_gid_top10(df, 'kwin')
 print('\nok,!')

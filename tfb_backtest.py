@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-#
 
 import os
 import arrow
@@ -15,33 +14,30 @@ def bt_lnkXDat(g10, kcid):
         gid = row['gid']
         fxdat = tfsys.rxdat + gid + '_oz.dat'
         if os.path.exists(fxdat):
-            df = pd.read_csv(fxdat, index_col=False,
+            df = pd.read_csv(fxdat,
+                             index_col=False,
                              dtype=str)
             c10 = df[df.cid == kcid]
 
             if len(c10.index) == 1:
                 df9 = df9.append(df)
                 g20 = g20.append(row.T, ignore_index=True)
-    #
-    # fss='tmp/df901.dat'
-    # df9.to_csv(fss,index=False)
-    #
     return df9, g20
-
-#----------fb.bt.1day.xxx
 
 
 def bt_1d_ret(xtfb):
-    # print('\n@bt_1d_ret')
     ret1d = pd.Series(tfsys.retNil, index=tfsys.retSgn)
-    ret1d['xtim'], ret1d['cid'], ret1d['num9'] = xtfb.ktimStr, xtfb.kcid, 0
+    ret1d['xtim'] = xtfb.ktimStr
+    ret1d['cid'] = xtfb.kcid
+    ret1d['num9'] = 0
     #
     df9 = xtfb.poolDay
     xnum = len(df9.index)
     if xnum == 0:
         return ret1d
     #
-    nlst, flst = ['kwin', 'kwin_sta'], ['pwin9', 'pdraw9', 'plost9']
+    nlst = ['kwin', 'kwin_sta']
+    flst = ['pwin9', 'pdraw9', 'plost9']
     tft.fb_df_type4mlst(df9, nlst, flst)
     #
     for i, row in df9.iterrows():
@@ -49,17 +45,14 @@ def bt_1d_ret(xtfb):
         if kwin > -1:
             rsgn = 'num' + str(kwin2)
             ret1d['num9'], ret1d[rsgn] = ret1d['num9'] + 1, ret1d[rsgn] + 1
-            #
             if kwin == kwin2:
                 dmoney = tft.fb_kwin2pdat(kwin, row)
                 rsgn = 'nwin' + str(kwin2)
-                ret1d['nwin9'], ret1d[rsgn] = ret1d[
-                    'nwin9'] + 1, ret1d[rsgn] + 1
+                ret1d['nwin9'] = ret1d['nwin9'] + 1
+                ret1d[rsgn] = ret1d[rsgn] + 1
                 rsgn = 'ret' + str(kwin2)
-                ret1d['ret9'], ret1d[rsgn] = ret1d[
-                    'ret9'] + dmoney, ret1d[rsgn] + dmoney
-                # print(i,'#1',kwin,dmoney)
-    #
+                ret1d['ret9'] = ret1d['ret9'] + dmoney
+                ret1d[rsgn] = ret1d[rsgn] + dmoney
     xlst = [9, 3, 1, 0]
     for xd in xlst:
         xss = str(xd)
@@ -67,20 +60,15 @@ def bt_1d_ret(xtfb):
         if dn > 0:
             ret1d['kret' + xss] = round(ret1d['ret' + xss] / dn * 100, 2)
             ret1d['knum' + xss] = round(ret1d['nwin' + xss] / dn * 100, 2)
-
-    #
-    # print(ret1d);
     return ret1d
 
 
 def bt_1d_anz_1play(xtfb):
-    # print('\nbt_1d_anz_1play')
     bars = xtfb.bars
     gid = bars['gid']
     xtfb.kgid = gid
     df = xtfb.xdat10[xtfb.xdat10.gid == gid]
     xkwin = xtfb.funSta(xtfb, df)
-    #---trade
     if xkwin != -9:
         xtfb.poolInx.append(gid)
         #
@@ -93,12 +81,10 @@ def bt_1d_anz_1play(xtfb):
         #
         xtfb.poolDay = xtfb.poolDay.append(g10.T, ignore_index=True)
         xtfb.poolTrd = xtfb.poolTrd.append(g10.T, ignore_index=True)
-        # print(xtfb.poolDay)
 
 
 def bt_1d_anz(xtfb):
-    # 1#day
-    #
+
     for i, row in xtfb.gid10.iterrows():
         xtfb.bars = row
         #
@@ -108,7 +94,6 @@ def bt_1d_anz(xtfb):
         ret01 = bt_1d_ret(xtfb)
         if ret01['num9'] > 0:
             xtfb.poolRet = xtfb.poolRet.append(ret01.T, ignore_index=True)
-            # print(xtfb.poolRet)
 
 
 def bt_1dayMain(xtfb):
@@ -117,26 +102,14 @@ def bt_1dayMain(xtfb):
     #
     df = tfsys.gids
     g10 = df[df.tplay == xtfb.ktimStr]
-    #------  lnk.xdat
     xdat, xtfb.gid10 = bt_lnkXDat(g10, xtfb.kcid)
     if len(xdat.index) > 0:
-        #--dat.pre0
         xlst = ['pwin0', 'pdraw0', 'plost0', 'pwin9', 'pdraw9', 'plost9']
         tft.fb_df_type2float(xdat, xlst)
         tft.fb_df_type_xed(xdat)
-        #
         xtfb.xdat10 = xdat
-        #
-        # 2  data.pre
         xtfb.funPre(xtfb)
-        # fss='tmp/df901b.dat'
-        # xtfb.xdat10.to_csv(fss,index=False)
-        #
-        # 3  bt.anz&trade #gid -->pool
         bt_1d_anz(xtfb)
-        #
-
-#----------bt--main
 
 
 def bt_main(xtfb, timStr):

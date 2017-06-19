@@ -1,42 +1,31 @@
-# coding=utf-8
+# coding: utf-8
 
 import arrow
 import ztools as zt
+from ztools import zt_headers
 import ztools_web as zweb
+import requests
 import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
-#
 
-# -----------------------
-# ---1#
-xtim = '2010-01-01'
-us0 = 'http://trade.500.com/jczq/?date='
-uss = us0 + xtim
-fss = 'tmp/500_' + xtim + '_utf8.htm'
-print('f,', fss)
-rx = zweb.web_get001(uss)
-htm = rx.text
-zt.f_add(fss, htm, True, cod='utf-8')
-#
-# ---2#
-fss = 'tmp/500_' + xtim + '_gbk.htm'
-print('f,', fss)
-# zt.f_add(fss, htm, True, cod='GBK')
-zt.f_add(fss, htm, True)
-#
-# ---3#
-fss = 'tmp/500_' + xtim + '.htm'
-print('f,', fss)
-zweb.web_get001txt(uss, ftg=fss)
+_date_2010 = '2010-01-01'
+url_pre = 'http://trade.500.com/jczq/?date='
+url = url_pre + _date_2010
+file_name = 'tmp/500_' + _date_2010 + '_utf8.htm'
+rx = zweb.web_get001(url)
+rx_new = requests.get(url, headers=zt_headers)
+try:
+    html_content = rx.text
+    zt.f_add(file_name, html_content, create_file=True, encode='utf-8')
+except:
+    print("Error: get 2010-01-01 500 ")
+
 #
 # ---4#
-xtim = arrow.now().format('YYYY-MM-DD')
-uss = us0 + xtim
-fss = 'tmp/500_' + xtim + '.htm'
-print('f,', fss)
-zweb.web_get001txt(uss, ftg=fss)
-# ------------
-#
+today = arrow.now().format('YYYY-MM-DD')
 
-print('\nok,完成!!')
+today_url = url_pre + today
+file_name = 'tmp/500_' + today + '.htm'
+print('filename: ', file_name)
+zweb.web_get001txt(today_url, filename=file_name)

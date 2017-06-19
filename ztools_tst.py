@@ -41,7 +41,7 @@ def fun_timer(function):
         xtsum = 0
         for xc in range(zt_fun_tst_time_nloop):
             t0 = arrow.now()
-            tfn = function(*args, **kwargs)
+            # tfn = function(*args, **kwargs)
             t1 = arrow.now()
             xtn = t1 - t0
             xt0 = min(xt0, xtn)
@@ -93,13 +93,13 @@ def fun_tim010(func, dat):
 
 
 def fun_tim010call():
-    arr = np.arange(9999999).reshape(3333333, 3)
+    # arr = np.arange(9999999).reshape(3333333, 3)
     dnum = 50000000
     d_np = np.arange(dnum)
-    #
-    #zz_tst010(abs001,d_np,'py tn:')
-    #zz_tst010(abs001_nb,d_np,'nb tn:')
-    #zz_tst010(abs001_ex,d_np,'ex tn:')
+
+    # zz_tst010(abs001,d_np,'py tn:')
+    # zz_tst010(abs001_nb,d_np,'nb tn:')
+    # zz_tst010(abs001_ex,d_np,'ex tn:')
     #
     # fun_tim010(sum2d,arr)
     # fun_tim010(sum2d_nb,arr)
