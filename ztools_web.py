@@ -59,6 +59,7 @@ def web_get001txt(url, filename=''):
     rx = web_get001(url)
     if rx:
         xcod = rx.encoding
+        print(xcod)
         htm = rx.text
         if xcod == 'utf-8':
             htm = htm.replace('&nbsp;', ' ')
@@ -76,7 +77,7 @@ def web_get001txtFg(uss, fss):
     if zsys.web_get001txtFg or(fsiz < 1000):
         # print(zsys.sgnSP8,fss,fsiz)
         # uss=xtfb.us0_extOuzhi+xtfb.kgid+'.shtml';#print(uss)
-        htm = web_get001txt(uss, ftg=fss, fcod='GB18030')  # print(fss)
+        htm = web_get001txt(uss, fss)  # print(fss)
     else:
         htm = zt.f_rd(fss, cod='GB18030')
     #

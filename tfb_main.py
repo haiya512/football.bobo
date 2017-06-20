@@ -27,7 +27,7 @@ def main_get(timStr='', nday=2):
     #
     # 3---update.data
     print('\n#3,update.data')
-    if nday != 0:
+    if nday:
         tft.fb_gid_get_nday(xtfb, timStr, fgExt=True)
     #
     # 4

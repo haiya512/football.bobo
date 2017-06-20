@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 # import matplotlib as mpl
 from matplotlib import pyplot as plt
-import zsys
+from zsys import cors_brg
 
 
 def gid_anz_top10(df, ksgn):
@@ -18,7 +18,7 @@ def gid_anz_top10(df, ksgn):
     # 指定默认字体
     # mpl.rcParams['axes.unicode_minus'] = False
     # 解决保存图像是负号'-'显示为方块的问题
-    d10.plot(kind='bar', rot=0, color=zsys.cors_brg)
+    d10.plot(kind='bar', rot=0, color=cors_brg)
     plt.show()
     #
     dsum = d10.sum()

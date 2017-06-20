@@ -252,6 +252,7 @@ def f_add(fn, dss, create_file=False, encode='utf-8'):
     else:
         f = open(fn, 'a')
     #
+    print(dss)
     f.write(dss + '\n')
     f.close()
 

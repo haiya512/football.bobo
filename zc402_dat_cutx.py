@@ -7,15 +7,16 @@ import ztools_data as zdat
 
 
 rs0 = './'
-fgid, fdat = rs0 + 'gid2017.dat', rs0 + 'xdat2017.dat'
+fgid = rs0 + 'gid2017.dat'
+fdat = rs0 + 'xdat2017.dat'
 gids = pd.read_csv(fgid, index_col=False, dtype=str)
 xdats = pd.read_csv(fdat, index_col=False, dtype=str)
 #
 ksgn = 'tplay'
-ylst = ['2010', '2011', '2012', '2013', '2014', '2015', '2016']
+yearlist = ['2010', '2011', '2012', '2013', '2014', '2015', '2016']
 #
-ftg0 = 'tmp/gidx_'
-zdat.df_kcut8yearlst(gids, ksgn, ftg0, ylst)
+gid_filename_pre = 'tmp/gidx_'
+zdat.df_kcut8yearlst(gids, ksgn, gid_filename_pre, yearlist)
 #
-ftg0 = 'tmp/xd_'
-zdat.df_kcut8yearlst(xdats, ksgn, ftg0, ylst)
+xd_filename_pre = 'tmp/xd_'
+zdat.df_kcut8yearlst(xdats, ksgn, xd_filename_pre, yearlist)

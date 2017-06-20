@@ -63,7 +63,8 @@ us0_extOuzhi = us0_ext0 + 'ouzhi-'
 us0_extYazhi = us0_ext0 + 'yazhi-'
 us0_extShuju = us0_ext0 + 'shuju-'
 #
-rdat0 = '/tfbDat/'
+rdat0 = './'
+# rdat0 = '/tfbDat/'
 rxdat = rdat0 + 'xdat/'
 rmdat = rdat0 + 'mdat/'
 rmlib = rdat0 + 'mlib/'  # ai.mx.lib.xxx
@@ -98,10 +99,10 @@ class zTopFoolball(object):
     def __init__(self):
         self.tim0Str_gid = '2010-01-01'
         self.tim0_gid = arrow.get(self.tim0Str_gid)
-        self.gid_tim0str, self.gid_tim9str = '', ''
-        self.gid_nday, self.gid_nday_tim9 = 0, 0
-        self.tim0, self.tim9, self.tim_now = None, None, None
-        self.tim0Str, self.tim9Str, self.timStr_now = '', '', ''
+        self.gid_tim0str = self.gid_tim9str = ''
+        self.gid_nday = self.gid_nday_tim9 = 0
+        self.tim0 = self.tim9 = self.tim_now = None
+        self.tim0Str = self.tim9Str = self.timStr_now = ''
         #
 
         self.kgid = ''
@@ -112,24 +113,24 @@ class zTopFoolball(object):
         self.poolDay = pd.DataFrame(columns=poolSgn)
         self.poolTrd = pd.DataFrame(columns=poolSgn)
         self.poolRet = pd.DataFrame(columns=retSgn)
-        self.poolTrdFN, self.poolRetFN = '', ''
+        self.poolTrdFN = self.poolRetFN = ''
         #
         self.bars = None
         self.gid10 = None
         self.xdat10 = None
 
-        self.funPre, self.funSta = None, None
-        self.preVars, self.staVars = [], []
+        self.funPre = self.funSta = None
+        self.preVars = self.staVars = []
         self.ai_mxFN0 = ''
         self.ai_mx_sgn_lst = []
         self.ai_xlst = []
         self.ai_ysgn = ''
-        self.ai_xdat, self.ai_xdat = None, None
+        self.ai_xdat = self.ai_xdat = None
 
-        self.ret_nday, self.ret_nWin = 0, 0
-        self.ret_nplay, self.ret_nplayWin = 0, 0
+        self.ret_nday = self.ret_nWin = 0
+        self.ret_nplay = self.ret_nplayWin = 0
 
         self.ret_msum = 0
 
 
-#----------zTopFoolball.init.obj
+# ----------zTopFoolball.init.obj

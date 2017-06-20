@@ -26,5 +26,5 @@ fgid = rs0 + 'gid2017.dat'
 df = pd.read_csv(fgid, index_col=False, dtype=str)
 print df.head()
 #
-ylst = ['2010', '2011', '2012', '2013', '2014', '2015', '2016']
-dr_gid_tim(df, 'gid', ylst)
+year_list = ['2010', '2011', '2012', '2013', '2014', '2015', '2016']
+dr_gid_tim(df, 'gid', year_list)

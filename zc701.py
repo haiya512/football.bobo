@@ -21,8 +21,6 @@ try:
 except:
     print("Error: get 2010-01-01 500 ")
 
-#
-# ---4#
 today = arrow.now().format('YYYY-MM-DD')
 
 today_url = url_pre + today
