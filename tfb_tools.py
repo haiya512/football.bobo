@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#  coding: utf-8
 '''
 
 '''
@@ -77,7 +77,7 @@ def fb_init(rs0='./', fgid=''):
         tim0 = arrow.get(xtfb.gid_tim0str)
         tim9 = arrow.get(xtfb.gid_tim9str)
 
-        xtfb.gid_nday, = zt.timNDay('', tim0)
+        xtfb.gid_nday = zt.timNDay('', tim0)
         xtfb.gid_nday_tim9 = zt.timNDay('', tim9)
 
         print('gid tim0: {0}, nday: {1}'.format(

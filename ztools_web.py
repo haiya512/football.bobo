@@ -14,6 +14,10 @@ import zsys
 import ztools as zt
 import ztools_str as zstr
 import ztools_data as zdat
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
 #
 '''
 xxx.var&const
