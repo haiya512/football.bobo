@@ -7,13 +7,10 @@ import ztop_ai as zai
 
 
 def sta00_pre(xtfb):
-    #
     return -9
 
 
 def sta00_sta(xtfb, df):
-
-    #
     return -9
 
 #------------- sta01..sta

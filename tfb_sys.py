@@ -131,6 +131,3 @@ class zTopFoolball(object):
         self.ret_nplay = self.ret_nplayWin = 0
 
         self.ret_msum = 0
-
-
-# ----------zTopFoolball.init.obj

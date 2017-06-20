@@ -1,8 +1,5 @@
 # coding: utf-8
 '''
-文件名:ztools_web.py
-默认缩写：import ztools_web as zweb
-简介：Top极宽web网络与htm网页常用工具函数集
 '''
 
 import os
@@ -13,7 +10,6 @@ import requests
 from bs4 import BeautifulSoup
 from robobrowser import RoboBrowser
 from concurrent.futures import as_completed
-
 import zsys
 import ztools as zt
 import ztools_str as zstr
@@ -40,11 +36,6 @@ zt_xagent = '''Mozilla/5.0 (Windows; U;
 Windows NT 5.1; it; rv:1.8.1.11)
 Gecko/20071127 Firefox/2.0.0.11'''
 
-
-# -----------------------
-
-
-# ---web_get_xxx
 
 def web_get001(url):
     try:
@@ -73,14 +64,15 @@ def web_get001txt(url, filename=''):
 
 
 def web_get001txtFg(uss, fss):
+    # 获取网页内容或者文件内容的函数
+    # 判断文件大小,如果大于1000,则直接读取文件
     fsiz = zt.f_size(fss)
-    if zsys.web_get001txtFg or(fsiz < 1000):
+    if zsys.web_get001txtFg or (fsiz < 1000):
         # print(zsys.sgnSP8,fss,fsiz)
         # uss=xtfb.us0_extOuzhi+xtfb.kgid+'.shtml';#print(uss)
-        htm = web_get001txt(uss, fss)  # print(fss)
+        htm = web_get001txt(uss, fss)
     else:
-        htm = zt.f_rd(fss, cod='GB18030')
-    #
+        htm = zt.f_rd(fss)
     return htm
 
 
@@ -207,7 +199,6 @@ def web_getXTxt100(df, rs0, txtn0=200):
             zt.f_add(fss, css, True)
 
 
-
 def web_get_bdnews010(kstr, pn=1):
     # pn=50x
     url_bdnews0 = 'http://news.baidu.com/ns?cl=2&ct=0&rn=50&ie=gbk&word={0}&pn={1}'
@@ -225,7 +216,7 @@ def web_get_bdnews010(kstr, pn=1):
 
 def web_get_cnblog010(kstr, timSgn='OneWeek', npg=2):
     us0 = 'http://zzk.cnblogs.com/s/blogpost?DateTimeRange=' + \
-        timSgn + '&Keywords={0}&pageindex={1}'
+          timSgn + '&Keywords={0}&pageindex={1}'
     df9 = pd.DataFrame(columns=['hdr', 'url'])
     for xc in range(0, npg):
         uss = us0.format(kstr, xc)
@@ -241,7 +232,7 @@ def web_get_zhihu010(kstr):
     # 1d=day;1w=week
     uss = 'https://www.zhihu.com/search?type=content&range=1w&q={0}'.format(
         kstr)
-    #print( uss)
+    # print( uss)
     df = web_getXLnks(uss, uget=['/question'], uflt=['/answer'])  # print(df)
     # https://www.zhihu.com/question/21063634
     if len(df['hdr']) > 0:
@@ -276,7 +267,7 @@ def zdz_post010(uid, unam, upas, chdr, ctxt, uhost='http://ziwang.com/'):
     x = brow.open(upost)
     zt.wait(1)
     xact_post = 'forum.php?mod=post&action=newthread&fid=' + \
-        uid + '&extra=&topicsubmit=yes'
+                uid + '&extra=&topicsubmit=yes'
     xpost = brow.get_form(action=xact_post)
     # print('@xpost, ',xpost)
     #
@@ -324,7 +315,8 @@ def zdz_getKHdr050(kstr, rsk, df9_hdr):
     #
     return df_hdr
 
-#----zdz.zwx.xxx
+
+# ----zdz.zwx.xxx
 
 
 def zwx_finx2urls(pn9=9, finx='dat/zw_bbs30k.csv', us0='http://ziwang.com/'):
@@ -342,7 +334,7 @@ def zwx_finx2urls(pn9=9, finx='dat/zw_bbs30k.csv', us0='http://ziwang.com/'):
 
 
 def zwx_getHdr001(uss):
-    #print('    x1,',uss)
+    # print('    x1,',uss)
     df = web_getXLnks(uss, 10)  # print(df.tail())
     print('    x9,', uss)
     return df
@@ -409,7 +401,7 @@ def zwx_post010(fsr0, rsk, uid, unam, upas, df9_hdr):
     ntxt, fgRename, fgFindHdr = len(
         ctxt), False, df_strFind01(df9_hdr['hdr'], chdr)
     # print('ntxt',ntxt,fgRename,fgFindHdr,chdr)
-    if (ntxt < 200)or(fgFindHdr):
+    if (ntxt < 200) or (fgFindHdr):
         fgRename = True
     else:
         xfg = zdz_post010(uid, unam, upas, chdr2, ctxt2)
@@ -435,10 +427,11 @@ def zwx_post100(ulst, rsk, uid, df9_hdr):
         unam, upas = ulst.nam[xc], ulst.pas[xc]
         #
         zwx_post010(fn0, rsk, uid, unam, upas, df9_hdr)
-    #
+        #
 
 
-def zwx_main500(xc0, xnk=1, fgGet=1, rs0='txt/', fhdr9='tmp/dz100hdr.csv', fkey='dat/zw_bbs30_xkey.csv', fusr='dat/zw_usr2017m1k.dat'):
+def zwx_main500(xc0, xnk=1, fgGet=1, rs0='txt/', fhdr9='tmp/dz100hdr.csv', fkey='dat/zw_bbs30_xkey.csv',
+                fusr='dat/zw_usr2017m1k.dat'):
     df = pd.read_csv(fkey, index_col=False, encoding='gbk')
     df9_hdr = pd.read_csv(fhdr9, index_col=False, encoding='gbk')
     ulst = pd.read_csv(fusr, index_col=False)
@@ -462,8 +455,10 @@ def zwx_main500(xc0, xnk=1, fgGet=1, rs0='txt/', fhdr9='tmp/dz100hdr.csv', fkey=
         #  post
         zwx_post100(ulst, rsk, uid, df9_hdr)
 
-    #
-#------bs4.xxx
+        #
+
+
+# ------bs4.xxx
 
 
 def bs_get_ktag(tag):

@@ -53,13 +53,15 @@ def initSysVar(fgView=False):
 
 
 def get_fun_nam():
+    # 解析堆栈, 感觉没啥用
+    # 如果是在centos下面跑,会有问题, 不知道Python3是不是这样
     return inspect.stack()[1][3]
 
 
 def xinEQ(d, k0, k9):
     ''' 如果d位于(k0, k9)间，包含等于，返回True
                     d可以是数值，字符串
-       '''
+    '''
     # return (d>=k0)&(d<=k9)
     return ne.evaluate('(d>=k0)&(d<=k9)')
 
@@ -67,7 +69,7 @@ def xinEQ(d, k0, k9):
 def xin(xk, k0sgn, k9sgn):
     ''' 如果xk位于(x0sgn, x9sgn)间，不含等于，返回True
        xk可以是数值，字符串
-       '''
+    '''
 
     # return (xk>k0sgn)&(xk<k9sgn)
     return ne.evaluate('(xk>k0sgn)&(xk<k9sgn)')
@@ -107,7 +109,7 @@ def wait(n, mstr=''):
     time.sleep(n)
 
 
-# def cpu_chk():
+    # def cpu_chk():
     try:
         cpu._check_arch()
     except Exception as err:
@@ -210,7 +212,7 @@ def lst_keyFltStr(dlst, kstr0):
 
 
 def f_addLog(dss):
-    if zsys.logFN != '':
+    if zsys.logFN:
         timStr = arrow.now().format('YYYY:MM:DD HH:mm:ss')
         tss = timStr + '-->  ' + dss  # print('log,',tss)
         f_add(zsys.logFN, tss)
@@ -223,11 +225,11 @@ def f_size(fss):
         return 0
 
 
-def f_rd(fn, cod='gbk'):
-    f = open(fn, 'r', encoding=cod)
-    dss = f.read()
+def f_rd(fn):
+    f = open(fn, 'r')
+    content = f.read()
     f.close()
-    return dss
+    return content
 
 
 def f_rdXHdr(fn, cod='gbk'):
@@ -252,7 +254,7 @@ def f_add(fn, dss, create_file=False, encode='utf-8'):
     else:
         f = open(fn, 'a')
     #
-    print(dss)
+    # print(dss)
     f.write(dss + '\n')
     f.close()
 

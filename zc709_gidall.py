@@ -22,12 +22,14 @@ def fb_gid_get_nday(xtfb, timStr, fgExt=False):
     nday = tfsys.xnday_down
     for tc in range(0, nday):
         xtim = ktim.shift(days=-tc)
+        print("xtim: ", xtim)
         xtimStr = xtim.format('YYYY-MM-DD')
         # print('\nxtim',xtim,xtim<xtfb.tim0_gid)
         #
         xss = str(tc) + '#,' + xtimStr + ',@' + zt.get_fun_nam()
         zt.f_addLog(xss)
         if xtim < xtfb.tim0_gid:
+            # 如果当前的时间早于2010-01-01
             # print('#brk;')
             break
         #
@@ -43,11 +45,12 @@ def fb_gid_get_nday(xtfb, timStr, fgExt=False):
                 tfsys.gids = tfsys.gids.append(df)
                 tfsys.gids.drop_duplicates(subset='gid', keep='last', inplace=True)
                 #
-                if fgExt: tft.fb_gid_getExt(df)
+                if fgExt:
+                    tft.fb_gid_getExt(df)
                 # if fgExt:tft.fb_gid_getExtPool(df)
     #
     if tfsys.gidsFN:
-        print(tfsys.gids.tail())
+        # print(tfsys.gids.tail())
         tfsys.gids.to_csv(tfsys.gidsFN, index=False)
 
 
@@ -56,11 +59,11 @@ xtfb = tft.fb_init()
 tfsys.gidsFN = 'tmp/gid01.csv'
 zsys.web_get001txtFg = True
 #
-tim0str = '2010-01-01'
-tim0 = arrow.get(tim0str)
+tim0 = arrow.get('2010-01-01')
 tn = arrow.now() - tim0
 
 timStr = ''
+# 算最近两天的数值
 nday = 2
 tfsys.xnday_down = nday
 fb_gid_get_nday(xtfb, timStr, fgExt=False)

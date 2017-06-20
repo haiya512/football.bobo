@@ -40,24 +40,23 @@ def fb_df_type4mlst(df, nlst, flst):
 
 
 def fb_init(rs0='./', fgid=''):
-    # 1
+    # 给定义的类赋初始值
     xtfb = tfsys.zTopFoolball()
     xtfb.tim_now = arrow.now()
     xtfb.timStr_now = xtfb.tim_now.format('YYYY-MM-DD')
     xtfb.tim0 = xtfb.tim_now
     xtfb.tim0Str = xtfb.timStr_now
-    print('now:', zt.tim_now_str())
+    # print('now:', zt.tim_now_str())
 
-    # 2
     # xtfb.pools=[]
     xtfb.kcid = '1'  # 官方,3=Bet365
     xtfb.funPre = tfsty.sta00_pre
     xtfb.funSta = tfsty.sta00_sta
     #
-    xss = xtfb.timStr_now
-    xtfb.poolTrdFN = 'log/poolTrd_' + xss + '.csv'
-    xtfb.poolRetFN = 'log/poolRet_' + xss + '.csv'
-    # 3
+    today_date = xtfb.timStr_now
+    xtfb.poolTrdFN = 'log/poolTrd_' + today_date + '.csv'
+    xtfb.poolRetFN = 'log/poolRet_' + today_date + '.csv'
+    # 定义存放数据的目录
     if rs0:
         tfsys.rdat = rs0
         tfsys.rxdat = rs0 + 'xdat/'
@@ -69,15 +68,18 @@ def fb_init(rs0='./', fgid=''):
     if fgid:
         tfsys.gidsFN = fgid
         # xtfb.gids=pd.read_csv(fgid,index_col=0,dtype=str,encoding='gbk')
-        tfsys.gids = pd.read_csv(
-            fgid, index_col=False, dtype=str)
+        tfsys.gids = pd.read_csv(fgid, index_col=False, dtype=str)
         fb_df_type_xed(tfsys.gids)
         tfsys.gidsNum = len(tfsys.gids.index)
         xtfb.gid_tim0str = tfsys.gids['tplay'].min()
         xtfb.gid_tim9str = tfsys.gids['tplay'].max()
-        tim0, tim9 = arrow.get(xtfb.gid_tim0str), arrow.get(xtfb.gid_tim9str)
-        xtfb.gid_nday, xtfb.gid_nday_tim9 = zt.timNDay(
-            '', tim0), zt.timNDay('', tim9)
+
+        tim0 = arrow.get(xtfb.gid_tim0str)
+        tim9 = arrow.get(xtfb.gid_tim9str)
+
+        xtfb.gid_nday, = zt.timNDay('', tim0)
+        xtfb.gid_nday_tim9 = zt.timNDay('', tim9)
+
         print('gid tim0: {0}, nday: {1}'.format(
             xtfb.gid_tim0str, xtfb.gid_nday))
         print('gid tim9: {0}, nday: {1}'.format(
@@ -95,7 +97,7 @@ def fb_tweekXed(tstr):
 
 
 def fb_kwin4qnum(jq, sq, rq=0):
-    if (jq < 0)or(sq < 0):
+    if (jq < 0) or (sq < 0):
         return -1
     #
     jqk = jq + rq  # or -rq
@@ -125,7 +127,7 @@ def fb_gid_get4htm(htm):
     df = pd.DataFrame(columns=tfsys.gidSgn, dtype=str)
     ds = pd.Series(tfsys.gidNil, index=tfsys.gidSgn, dtype=str)
 
-    #---1#
+    # ---1#
     zsys.bs_get_ktag_kstr = 'isend'
     x10 = bs.find_all(zweb.bs_get_ktag)
     for xc, x in enumerate(x10):
@@ -140,7 +142,7 @@ def fb_gid_get4htm(htm):
         #
         df = df.append(ds.T, ignore_index=True)
 
-    #---2#
+    # ---2#
     x20 = bs.find_all('a', class_='score')
     for xc, x in enumerate(x20):
         xss = x['href']
@@ -156,7 +158,7 @@ def fb_gid_get4htm(htm):
             kwin = fb_kwin4qnum(int(clst[0]), int(clst[1]))
             df['kwin'][inx] = str(kwin)
 
-    #---3#
+    # ---3#
     x20 = bs.find_all('td', class_='left_team')
     if (len(x20) == len(x10)):
         for xc, x in enumerate(x20):
@@ -168,7 +170,7 @@ def fb_gid_get4htm(htm):
                 g01 = df['gid'][xc]
                 if xid == '':
                     zt.f_addLog('tid-mtid,nil,' + xss + ',gid,' + g01)
-    #---4#
+    # ---4#
     x20 = bs.find_all('td', class_='right_team')
     if (len(x20) == len(x10)):
         for xc, x in enumerate(x20):
@@ -181,7 +183,7 @@ def fb_gid_get4htm(htm):
                 if xid == '':
                     zt.f_addLog('tid-gtid,nil,' + xss + ',gid,' + g01)
 
-    #---5#
+    # ---5#
     df = df[df['gid'] != '-1']
     return df
 
@@ -229,7 +231,7 @@ def fb_gid_getExt_oz4htm(htm, bars, ftg=''):
 
     #
     # print('xx',xc)
-    #--footer
+    # --footer
     if xc > 0:
         x10 = bs.find_all('tr', xls='footer')
 
@@ -270,7 +272,7 @@ def fb_gid_getExt010(x10):
     fsiz = zt.f_size(fxdat)  # print(zsys.sgnSP4,'@',fsiz,fxdat)
     #
     # print('xtfb.bars',xtfb.bars)
-    if (fsiz < 1000)or(tfsys.xnday_down < 10):
+    if (fsiz < 1000) or (tfsys.xnday_down < 10):
         fb_gid_getExt_oz4htm(htm, bars, ftg=fxdat)
 
     '''
@@ -346,7 +348,6 @@ def fb_gid_get_nday(xtfb, timStr, fgExt=False):
 
 
 def fb_xdat_xrd020(fsr, xlst, ysgn='kwin', k0=1, fgPr=False):
-
     # 1
     df = pd.read_csv(fsr, index_col=False)
     # 2
