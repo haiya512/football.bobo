@@ -341,7 +341,7 @@ def fb_gid_get_nday(xtfb, timStr, fgExt=False):
                 if fgExt:
                     fb_gid_getExtPool(df)
     #
-    if tfsys.gidsFN != '':
+    if tfsys.gidsFN:
         print('')
         print(tfsys.gids.tail())
         tfsys.gids.to_csv(tfsys.gidsFN, index=False)

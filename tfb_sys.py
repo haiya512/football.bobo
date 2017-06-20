@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 '''
 '''
-#
 
 import arrow
 import pandas as pd
@@ -37,10 +36,9 @@ retSgn = ['xtim', 'kret9', 'kret3', 'kret1', 'kret0',
           'knum9', 'knum3', 'knum1', 'knum0', 'ret9',
           'num9', 'nwin9', 'ret3', 'ret1', 'ret0',
           'nwin3', 'nwin1', 'nwin0', 'num3', 'num1', 'num0']
-#retNil=[0,0,0,0, 0,0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0]
-#retSgn=['kret9','kret3','kret1','kret0',  'knum9','knum3','knum1','knum0',  'ret9','num9','nwin9', 'ret3','num3','nwin3', 'ret1','num1','nwin1', 'ret0','num0','nwin0']
+# retNil=[0,0,0,0, 0,0,0,0, 0,0,0, 0,0,0, 0,0,0, 0,0,0]
+# retSgn=['kret9','kret3','kret1','kret0',  'knum9','knum3','knum1','knum0',  'ret9','num9','nwin9', 'ret3','num3','nwin3', 'ret1','num1','nwin1', 'ret0','num0','nwin0']
 
-#--bt.var
 btvarNil = ['', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '']
 btvarSgn = ['xtim', 'kret9', 'kret3', 'kret1', 'kret0',
@@ -49,10 +47,7 @@ btvarSgn = ['xtim', 'kret9', 'kret3', 'kret1', 'kret0',
             'num3', 'num1', 'num0',
             'v1', 'v2', 'v3', 'v4', 'v5', 'nday', 'doc']
 
-# self.nsum,self.nwin,self.ndraw,self.nlost=0,0,0,0
-# self.kwin,self.kdraw,self.klost=0,0,0
-#-------------------
-#
+
 # us0='http://trade.500.com/jczq/?date='
 # http://odds.500.com/fenxi/shuju-278181.shtml
 # http://odds.500.com/fenxi/yazhi-278181.shtml
@@ -67,17 +62,17 @@ rdat0 = './'
 # rdat0 = '/tfbDat/'
 rxdat = rdat0 + 'xdat/'
 rmdat = rdat0 + 'mdat/'
-rmlib = rdat0 + 'mlib/'  # ai.mx.lib.xxx
+rmlib = rdat0 + 'mlib/'
 
 # rgdat=rdat0+'gdat/'
 #
-rghtm = rdat0 + 'xhtm/ghtm/'  # gids_htm,days
+rghtm = rdat0 + 'xhtm/ghtm/'
 rhtmOuzhi = rdat0 + 'xhtm/htm_oz/'
 rhtmYazhi = rdat0 + 'xhtm/htm_az/'
 rhtmShuju = rdat0 + 'xhtm/htm_sj/'
 #
 
-#---glibal.lib.xxx
+# ---glibal.lib.xxx
 gids = pd.DataFrame(columns=gidSgn, dtype=str)
 xdats = pd.DataFrame(columns=gxdatSgn, dtype=str)
 

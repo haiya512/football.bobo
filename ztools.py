@@ -345,16 +345,16 @@ def tim_now_str():
 
 
 def timNSec(tim, tim0, fgPr=False):
-    if tim == '':
+    # 获取时间差
+    if not tim:
         tim = arrow.now()
-    if type(tim) == str:
+    if isinstance(tim, str):
         tim = arrow.get(tim)
     tn = tim - tim0
     xn = round(tn.total_seconds(), 2)
     if fgPr:
         print(xn, 's,', tim.format('HH:mm:ss'),
               ',t0,', tim0.format('HH:mm:ss'))
-    #
     return xn
 
 

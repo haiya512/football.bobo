@@ -2,20 +2,23 @@
 '''
 获取排列前10名的比赛次数
 '''
-import sys
+
 import pandas as pd
 import numpy as np
 import matplotlib as mpl
 from matplotlib import pyplot as plt
 import zsys
+import sys
+
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
 
-def gid_anz_top10(df, ksgn):
-    xn9 = len(df['gid'])
-    d10 = df[ksgn].value_counts()[:10]
-    print(d10)
+def gid_anz_top10(df, column):
+    total_numbers = len(df['gid'])
+    # 获取俱乐部排名前10,依据比赛次数从大到小排列
+    d10 = df[column].value_counts()[:10]
+    # print(d10)
 
     # mpl.rcParams['font.sans-serif'] = ['STHeiti-Light.ttc']  # 指定默认字体
     mpl.rcParams['axes.unicode_minus'] = False  # 解决保存图像是负号'-'显示为方块的问题
@@ -26,9 +29,12 @@ def gid_anz_top10(df, ksgn):
     d10.plot(kind='bar', rot=0, color=zsys.cors_brg)
     plt.show()
     #
-    dsum = d10.sum()
-    d10['other'] = xn9 - dsum
-    k10 = np.round(d10 / xn9 * 100, decimals=2)
+    d10_sum = d10.sum()
+    d10['other'] = total_numbers - d10_sum
+
+    # d10是一个pandas对象
+    k10 = np.round(d10 / total_numbers * 100, decimals=2)
+    # print(k10)
 
     k10.plot(kind='pie', rot=0, table=True)
     plt.show()
@@ -37,8 +43,4 @@ def gid_anz_top10(df, ksgn):
 rs0 = './'
 fgid = rs0 + 'gid2017.dat'
 df = pd.read_csv(fgid, index_col=False, dtype=str)
-# print(df.tail())
-# print('\n', df.describe())
-#
 gid_anz_top10(df, 'gset')
-print('\nok,!')
