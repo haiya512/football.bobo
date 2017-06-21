@@ -77,14 +77,13 @@ def bt_1d_anz_1play(xtfb):
         #
         g10['kwin_sta'], g10['cid'] = xkwin, xtfb.kcid
         g10['pwin9'], g10['pdraw9'], g10['plost9'] = c10[
-            'pwin9'][0], c10['pdraw9'][0], c10['plost9'][0]
+                                                         'pwin9'][0], c10['pdraw9'][0], c10['plost9'][0]
         #
         xtfb.poolDay = xtfb.poolDay.append(g10.T, ignore_index=True)
         xtfb.poolTrd = xtfb.poolTrd.append(g10.T, ignore_index=True)
 
 
 def bt_1d_anz(xtfb):
-
     for i, row in xtfb.gid10.iterrows():
         xtfb.bars = row
         #
@@ -160,13 +159,14 @@ def bt_main_ret(xtfb, fgMsg=False):
         xtfb.poolRet[xsgn] = round(xtfb.poolRet[xsgn], 2)
         ret9[xsgn] = round(ret9[xsgn], 2)
     # 4
-    #--save.dat
-    ret9['xtim'], ret9['cid'] = 'sum', xtfb.kcid
+    # --save.dat
+    ret9['xtim'] = 'sum'
+    ret9['cid'] = xtfb.kcid
+
     xtfb.poolRet = xtfb.poolRet.append(ret9, ignore_index=True)
     xtfb.poolTrd.to_csv(xtfb.poolTrdFN)
     xtfb.poolRet.to_csv(xtfb.poolRetFN)
 
-    # 5
     if fgMsg:
         print('\nxtfb.poolTrd,足彩推荐')
         print(xtfb.poolTrd.head())

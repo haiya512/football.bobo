@@ -9,14 +9,13 @@ gidNil = ['', '', '', '', '', '', '-1',
           '-1', '0', '0', '-1', '-1', '', '', '']
 gidSgn = ['gid', 'gset', 'mplay', 'mtid', 'gplay', 'gtid', 'qj',
           'qs', 'qr', 'kend', 'kwin', 'kwinrq', 'tweek', 'tplay', 'tsell']
-#
+
 poolNil = ['', '', '', '', '', '', '-1', '-1', '0',
            '0', '-1', '-1', '', '', '', '0', 0, 0, 0, '-9']
 poolSgn = ['gid', 'gset', 'mplay',
            'mtid', 'gplay', 'gtid', 'qj', 'qs', 'qr',
            'kend', 'kwin', 'kwinrq', 'tweek', 'tplay',
            'tsell', 'cid', 'pwin9', 'pdraw9', 'plost9', 'kwin_sta']
-#
 
 gxdatNil = ['', '', '', 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -81,6 +80,7 @@ gidsNum = len(gids.index)
 xdatsNum = len(xdats.index)
 #
 xbars = None
+# 偏离今天的时间长度
 xnday_down = 0
 
 
@@ -94,35 +94,50 @@ class zTopFoolball(object):
     def __init__(self):
         self.tim0Str_gid = '2010-01-01'
         self.tim0_gid = arrow.get(self.tim0Str_gid)
-        self.gid_tim0str = self.gid_tim9str = ''
-        self.gid_nday = self.gid_nday_tim9 = 0
-        self.tim0 = self.tim9 = self.tim_now = None
-        self.tim0Str = self.tim9Str = self.timStr_now = ''
-        #
+
+        self.gid_tim0str = ''
+        self.gid_tim9str = ''
+
+        self.gid_nday = 0
+        self.gid_nday_tim9 = 0
+
+        self.tim0 = None
+        self.tim9 = None
+        self.tim_now = None
+
+        self.tim0Str = ''
+        self.tim9Str = ''
+        self.timStr_now = ''
 
         self.kgid = ''
         self.kcid = ''
         self.ktimStr = ''
-        #
+
         self.poolInx = []
         self.poolDay = pd.DataFrame(columns=poolSgn)
         self.poolTrd = pd.DataFrame(columns=poolSgn)
         self.poolRet = pd.DataFrame(columns=retSgn)
-        self.poolTrdFN = self.poolRetFN = ''
-        #
+
+        self.poolTrdFN = ''
+        self.poolRetFN = ''
+
         self.bars = None
+
         self.gid10 = None
         self.xdat10 = None
 
         self.funPre = self.funSta = None
         self.preVars = self.staVars = []
+
         self.ai_mxFN0 = ''
         self.ai_mx_sgn_lst = []
         self.ai_xlst = []
         self.ai_ysgn = ''
-        self.ai_xdat = self.ai_xdat = None
+        self.ai_xdat = None
+        self.ai_xdat = None
 
-        self.ret_nday = self.ret_nWin = 0
-        self.ret_nplay = self.ret_nplayWin = 0
-
+        self.ret_nday = 0
+        self.ret_nWin = 0
+        self.ret_nplay = 0
+        self.ret_nplayWin = 0
         self.ret_msum = 0

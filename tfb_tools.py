@@ -64,12 +64,13 @@ def fb_init(rs0='./', fgid=''):
         tfsys.rhtmYazhi = rs0 + 'xhtm/htm_az/'
         tfsys.rhtmShuju = rs0 + 'xhtm/htm_sj/'
 
-    # 4
+    # 定义
     if fgid:
         tfsys.gidsFN = fgid
         # xtfb.gids=pd.read_csv(fgid,index_col=0,dtype=str,encoding='gbk')
         tfsys.gids = pd.read_csv(fgid, index_col=False, dtype=str)
-        fb_df_type_xed(tfsys.gids)
+        # 为了方面查找最大最小值
+        # fb_df_type_xed(tfsys.gids)
         tfsys.gidsNum = len(tfsys.gids.index)
         xtfb.gid_tim0str = tfsys.gids['tplay'].min()
         xtfb.gid_tim9str = tfsys.gids['tplay'].max()

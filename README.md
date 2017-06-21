@@ -1,6 +1,6 @@
 ## 环境
->Python v3.5
->       2.7也可以
+* Python v3.5
+* python v2.7
 ## 需要安装包
 arrow
 
@@ -9,4 +9,42 @@ arrow
 >推荐文件大小50M,所以都暂存在本地
 
 
-gid2017.dat
+### 数据文件列表
+* gid2017.dat
+* xdat2017.dat
+
+
+### 数据文件gid2017字段意义
+* gid 比赛场次ID编码，全局唯一
+* gset  game-set 联赛名称
+* mplay main-play 主队
+* mtid 主队编码ID
+* gplaoy 客队
+* gtid  客队编码ID
+* qj 进球数
+* qs 失球数
+* qr 让球数
+* kend  1代表比赛完结，0代码比赛取消
+* kwin  比赛胜负情况, 3为主队胜，1为平局，0为客队胜，默认和取消的比赛为-1
+* kwinrq 让球的比赛胜负情况 ，同上
+* tweek  比赛星期换算
+* tplay 比赛日期
+* tsell 博彩销售截止日期
+*
+* cid 菠菜公司代码  全局唯一
+* cname 菠菜公司名称
+* pwin0 pdraw0 plost0  开盘时主队胜平负的赔率
+* vwin0 vdraw0 vlost0
+* vwin0kaili vdraw0 vlost0  主队胜平负的 开盘凯利指数
+* pwin9 pdraw9 plost9  收盘时主队胜平负的赔率
+* vwin9 vdraw9 vlost9
+* vwin9kaili vdraw9 vlost9  主队胜平负的 收盘凯利指数
+
+### 脚本作用
+* zc101_gid01des.py     获取排列前10名的比赛次数
+* zc401_dat_cut.py      文件切割
+* zc402_dat_cutx.py     批量切割
+* zc404_gid_des.py      显示比赛总数前10名的球队，还有他们的球队比赛数占比
+* zc405_gid_anz.py      计算各关键字段前10名的占比并画图
+* zc406_gid_anz2.py     比赛场次年度数量的走势
+* 

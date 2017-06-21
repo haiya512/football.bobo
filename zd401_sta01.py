@@ -5,7 +5,6 @@
 '''
 import zsys
 import ztools as zt
-import pandas as pd
 import tfb_sys as tfsys
 import tfb_tools as tft
 import tfb_strategy as tfsty
@@ -58,5 +57,3 @@ timStr = ''
 #
 # 3#,backtest,main_bt
 main_bt(timStr, 2)
-
-print('\nok!')

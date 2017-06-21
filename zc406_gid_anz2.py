@@ -1,8 +1,9 @@
 # coding: utf-8
 '''
-比赛数据年度图表分析
+比赛场次年度数量的走势
 '''
 import pandas as pd
+import matplotlib.pyplot as plt
 
 
 def dr_gid_tim(df, ksgn, year_list):
@@ -17,14 +18,15 @@ def dr_gid_tim(df, ksgn, year_list):
         ds['dnum'] = len(df3[ksgn])
         xdf = xdf.append(ds.T, ignore_index=True)
     xdf.index = xdf['nam']
-    print(xdf)
+    # print(xdf)
     xdf.plot(kind='bar', rot=0)
+    plt.show()
 
 
 rs0 = './'
 fgid = rs0 + 'gid2017.dat'
 df = pd.read_csv(fgid, index_col=False, dtype=str)
-print df.head()
+# print df.head()
 #
 year_list = ['2010', '2011', '2012', '2013', '2014', '2015', '2016']
 dr_gid_tim(df, 'gid', year_list)

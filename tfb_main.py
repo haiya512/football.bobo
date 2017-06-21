@@ -14,8 +14,6 @@ def main_get(timStr='', nday=2):
     tfsys.xnday_down = nday
     zsys.web_get001txtFg = True
 
-    #
-    # 2---init.tfb
     # rs0 = 'tfbDat/'
     rs0 = './'
     fgid = rs0 + 'gid2017.dat'
