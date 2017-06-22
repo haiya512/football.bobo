@@ -11,11 +11,11 @@ import tfb_sys as tfsys
 import tfb_tools as tft
 
 
-def fb_gid_get_nday(xtfb, timStr, fgExt=False):
-    if not timStr:
+def fb_gid_get_nday(xtfb, timeStr, fgExt=False):
+    if not timeStr:
         ktim = xtfb.tim_now
     else:
-        ktim = arrow.get(timStr)
+        ktim = arrow.get(timeStr)
     #
     nday = tfsys.xnday_down
     for tc in range(0, nday):
@@ -28,11 +28,10 @@ def fb_gid_get_nday(xtfb, timStr, fgExt=False):
         if xtim < xtfb.tim0_gid:
             print('#brk;')
             break
-        #
-
+        # 网页数据文件名
         fss = tfsys.rghtm + xtimStr + '.htm'
         uss = tfsys.us0_gid + xtimStr
-        print(timStr, tc, '#', fss)
+        print(timeStr, tc, '#', fss)
         #
         htm = zweb.web_get001txtFg(uss, fss)
         if len(htm) > 5000:
@@ -41,9 +40,10 @@ def fb_gid_get_nday(xtfb, timStr, fgExt=False):
                 tfsys.gids = tfsys.gids.append(df)
                 tfsys.gids.drop_duplicates(subset='gid', keep='last', inplace=True)
                 #
-                if fgExt: tft.fb_gid_getExt(df)
+                if fgExt:
+                    tft.fb_gid_getExt(df)
                 # if fgExt:tft.fb_gid_getExtPool(df)
-    #
+    # 如果设置保存数据文件名,
     if tfsys.gidsFN:
         print('')
         print(tfsys.gids.tail())
@@ -56,13 +56,12 @@ def fb_gid_get_nday(xtfb, timStr, fgExt=False):
 xtfb = tft.fb_init()
 xtfb.gidsFN = 'tmp/gid01.csv'
 zsys.web_get001txtFg = True
-tim0str = '2010-01-01'
-tim0 = arrow.get(tim0str)
+tim0 = arrow.get('2010-01-01')
 tn = arrow.now() - tim0
 # print('tn,', tn)
 #
 tfsys.rghtm = tfsys.rxhtm = tfsys.rxdat = tfsys.rhtmOuzhi = 'tmp/'
-timStr = ''
+timeStr = ''
 nday = 2
 tfsys.xnday_down = nday
-fb_gid_get_nday(xtfb, timStr, fgExt=True)
+fb_gid_get_nday(xtfb, timeStr, fgExt=True)

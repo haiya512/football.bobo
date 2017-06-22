@@ -10,7 +10,7 @@ import tfb_strategy as tfsty
 import tfb_backtest as tfbt
 
 
-def main_bt(timStr='', nday=2):
+def main_bt(timeStr='', nday=2):
     tfsys.xnday_down = nday
     zsys.web_get001txtFg = True
 
@@ -28,13 +28,12 @@ def main_bt(timStr='', nday=2):
         xtfb.staVars = []
         xtfb.kcid = '1'  # cn,3=bet365
         #
-        tfbt.bt_main(xtfb, timStr)
+        tfbt.bt_main(xtfb, timeStr)
         tfbt.bt_main_ret(xtfb, True)
         print('kcid', xtfb.kcid)
 
     tn = zt.timNSec('', xtfb.tim0, '')
     print('\n#5,backtest,tim:{0:.2f} s'.format(tn))
-    print('\n#6,end.main')
 
 
 main_bt('', 2)

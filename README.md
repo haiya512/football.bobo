@@ -22,6 +22,7 @@ arrow
 * kend  1代表比赛完结，0代码比赛取消
 * kwin  比赛胜负情况, 3为主队胜，1为平局，0为客队胜，默认和取消的比赛为-1
 * kwinrq 让球的比赛胜负情况 ，同上
+# kwin_sta  ????
 * tweek  比赛星期换算
 * tplay 比赛日期
 * tsell 博彩销售截止日期
@@ -59,6 +60,12 @@ arrow
 * zc408_pv01.py         分析单个文件所有球队数据
 * zc409_pv02.py         生成各个参数的图片数据并保存
 * zc501_pdx01.py        看的不是很懂,数学公式很多
+
 * zc701.py              打开2010-01-01和今天的网页数据并保存为.html 很好奇,这个文件是以网站名字开头的,那么怎么合成gid和xdat呢?数据是不是合成这两个文件需要的呢?
 * zc709_gidall.py       保存近2天的数据
-* /Users/bobo/gitcenter/football/ziwang.lottery/zc712_xdat001.py
+* zc712_xdat001.py      生成网页数据文件
+* zc713_xdat002.py      获取某场比赛数据
+* zc801_main_get.py     实盘数据更新
+* zc802_xdat.py         看看读取文件花费的时间
+* zc803_main_bt.py      一堆引用,MD
+* zd401_sta01.py

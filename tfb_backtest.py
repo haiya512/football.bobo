@@ -96,7 +96,8 @@ def bt_1d_anz(xtfb):
 
 
 def bt_1dayMain(xtfb):
-    xtfb.poolInx, xtfb.xdat10 = [], None
+    xtfb.poolInx = []
+    xtfb.xdat10 = None
     xtfb.poolDay = pd.DataFrame(columns=tfsys.poolSgn)
     #
     df = tfsys.gids
@@ -111,11 +112,11 @@ def bt_1dayMain(xtfb):
         bt_1d_anz(xtfb)
 
 
-def bt_main(xtfb, timStr):
-    if timStr == '':
+def bt_main(xtfb, timeStr):
+    if timeStr == '':
         ktim = xtfb.tim_now
     else:
-        ktim = arrow.get(timStr)
+        ktim = arrow.get(timeStr)
     #
     nday = tfsys.xnday_down
     #

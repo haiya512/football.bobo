@@ -11,7 +11,7 @@ import tfb_sys as tfsys
 import tfb_tools as tft
 
 
-def main_get(timStr='', nday=2):
+def main_get(timeStr='', nday=2):
     tfsys.xnday_down = nday
     zsys.web_get001txtFg = True
 
@@ -23,10 +23,10 @@ def main_get(timStr='', nday=2):
         print('nday,', tfsys.xnday_down)
 
     if nday != 0:
-        tft.fb_gid_get_nday(xtfb, timStr, fgExt=True)
+        tft.fb_gid_get_nday(xtfb, timeStr, fgExt=True)
 
     # 获取时间差
-    tn = zt.timNSec(timStr, xtfb.tim0, '')
+    tn = zt.timNSec(timeStr, xtfb.tim0, '')
 
 
 main_get('', 2)

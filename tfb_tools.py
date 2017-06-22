@@ -341,7 +341,7 @@ def fb_gid_get_nday(xtfb, timStr, fgExt=False):
                     subset='gid', keep='last', inplace=True)
                 if fgExt:
                     fb_gid_getExtPool(df)
-    #
+    # 如果设置文件路径,将数据保存到文件
     if tfsys.gidsFN:
         print('')
         print(tfsys.gids.tail())

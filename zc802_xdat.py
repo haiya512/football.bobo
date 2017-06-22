@@ -5,9 +5,9 @@
 
 import arrow
 import pandas as pd
+
 import ztools as zt
 
-# 1
 rs0 = './'
 fgid = rs0 + 'gid2017.dat'
 fxdat = rs0 + 'xdat2017.dat'

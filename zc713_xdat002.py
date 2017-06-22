@@ -64,12 +64,13 @@ gids = pd.read_csv(fgid, index_col=False, dtype=str)
 g10 = gids[gids['gid'] == gid]
 
 bars = pd.Series(list(g10.values[0]), index=list(g10))
-print('\n#2')
-print(bars)
-print('\ntype(g10),', type(g10))
+# print('\n#2')
+# print(bars)
+# print('\ntype(g10),', type(g10))
 
 fhtm = 'dat/' + gid + '_oz.htm'
 ftg = 'tmp/' + gid + '_xd.dat'
+# 读取文件内容
 htm = zt.f_rd(fhtm)
 df = fb_gid_getExt_oz4htm(htm, bars, ftg)
 # print('\n#3')
