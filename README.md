@@ -9,13 +9,8 @@ arrow
 >推荐文件大小50M,所以都暂存在本地
 
 
-### 数据文件列表
-* gid2017.dat
-* xdat2017.dat
-
-
 ### 数据文件gid2017字段意义
-* gid 比赛场次ID编码，全局唯一
+* gid 比赛场次ID编码，全局唯一(gameid)
 * gset  game-set 联赛名称
 * mplay main-play 主队
 * mtid 主队编码ID
@@ -40,11 +35,30 @@ arrow
 * vwin9 vdraw9 vlost9
 * vwin9kaili vdraw9 vlost9  主队胜平负的 收盘凯利指数
 
-### 脚本作用
+
+### 数据文件列表
+* gid2017.dat
+* xdat2017.dat
+
+
+### 脚本列表
+* cpuinfo.py            cpu信息
+* tfb_backtest.py       回测
+* tfb_draw.py           画图脚本
+* tfb_main.py           很多函数
+* tfb_strategy.py
+* tfb_sys.py            全局预定义变量
+* tfb_tools.py          工具函数
+
 * zc101_gid01des.py     获取排列前10名的比赛次数
 * zc401_dat_cut.py      文件切割
 * zc402_dat_cutx.py     批量切割
 * zc404_gid_des.py      显示比赛总数前10名的球队，还有他们的球队比赛数占比
 * zc405_gid_anz.py      计算各关键字段前10名的占比并画图
 * zc406_gid_anz2.py     比赛场次年度数量的走势
-* 
+* zc408_pv01.py         分析单个文件所有球队数据
+* zc409_pv02.py         生成各个参数的图片数据并保存
+* zc501_pdx01.py        看的不是很懂,数学公式很多
+* zc701.py              打开2010-01-01和今天的网页数据并保存为.html 很好奇,这个文件是以网站名字开头的,那么怎么合成gid和xdat呢?数据是不是合成这两个文件需要的呢?
+* zc709_gidall.py       保存近2天的数据
+* /Users/bobo/gitcenter/football/ziwang.lottery/zc712_xdat001.py

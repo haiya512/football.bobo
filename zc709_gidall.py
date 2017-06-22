@@ -13,16 +13,18 @@ reload(sys)
 sys.setdefaultencoding("utf-8")
 
 
-def fb_gid_get_nday(xtfb, timStr, fgExt=False):
+def fb_gid_get_nday(xtfb, timStr, fgExt=False, nday=0):
     if not timStr:
         ktim = xtfb.tim_now
     else:
         ktim = arrow.get(timStr)
     #
-    nday = tfsys.xnday_down
+    if not nday:
+        print("nday should not be 0")
+        return False
     for tc in range(0, nday):
         xtim = ktim.shift(days=-tc)
-        print("xtim: ", xtim)
+        # print("xtim: ", xtim)
         xtimStr = xtim.format('YYYY-MM-DD')
         # print('\nxtim',xtim,xtim<xtfb.tim0_gid)
         #
@@ -35,20 +37,21 @@ def fb_gid_get_nday(xtfb, timStr, fgExt=False):
         #
 
         fss = tfsys.rghtm + xtimStr + '.htm'
-        uss = tfsys.us0_gid + xtimStr
-        print(timStr, tc, '#', fss)
+        url = tfsys.us0_gid + xtimStr
+        # print(timStr, tc, '#', fss)
         #
-        htm = zweb.web_get001txtFg(uss, fss)
+        htm = zweb.web_get001txtFg(url, fss)
         if len(htm) > 5000:
             df = tft.fb_gid_get4htm(htm)
             if len(df['gid']) > 0:
                 tfsys.gids = tfsys.gids.append(df)
+                # 去除重复行函数
                 tfsys.gids.drop_duplicates(subset='gid', keep='last', inplace=True)
                 #
                 if fgExt:
                     tft.fb_gid_getExt(df)
                 # if fgExt:tft.fb_gid_getExtPool(df)
-    #
+    # 如果设置了xx文件名,就写入到文件
     if tfsys.gidsFN:
         # print(tfsys.gids.tail())
         tfsys.gids.to_csv(tfsys.gidsFN, index=False)
@@ -58,14 +61,13 @@ def fb_gid_get_nday(xtfb, timStr, fgExt=False):
 xtfb = tft.fb_init()
 tfsys.gidsFN = 'tmp/gid01.csv'
 zsys.web_get001txtFg = True
-#
-tim0 = arrow.get('2010-01-01')
-tn = arrow.now() - tim0
+
+# tn = arrow.now() - arrow.get('2010-01-01')
+# print('tn,',tn)
 
 timStr = ''
 # 算最近两天的数值
 nday = 2
-tfsys.xnday_down = nday
-fb_gid_get_nday(xtfb, timStr, fgExt=False)
+fb_gid_get_nday(xtfb, timStr, fgExt=False, nday=nday)
 
 # df=zfbt.fb_gidGet(hss)

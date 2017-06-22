@@ -212,6 +212,7 @@ def lst_keyFltStr(dlst, kstr0):
 
 
 def f_addLog(dss):
+    # 如果设置了日志文件名
     if zsys.logFN:
         timStr = arrow.now().format('YYYY:MM:DD HH:mm:ss')
         tss = timStr + '-->  ' + dss  # print('log,',tss)

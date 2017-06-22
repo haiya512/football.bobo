@@ -10,20 +10,20 @@ gid = '512751'
 dfk = df[df['gid'] == gid]
 df2 = dfk[dfk['cid'] < '90000']
 
-print('\n#1')
-print(df2.describe())
 
-print('\n#2')
+print(df2.describe())
 print(df2.tail())
 
-print('\n#3')
 print(dfk.tail())
 #
 ds = pd.Series()
 ksgn = 'pwin0'
 df2[ksgn] = df2[ksgn].astype(float)
-ds['xmin'], ds['xmax'] = df2[ksgn].min(), df2[ksgn].max()
-ds['xavg'], ds['xmed'] = df2[ksgn].mean(), df2[ksgn].median()
+ds['xmin'] = df2[ksgn].min()
+ds['xmax'] = df2[ksgn].max()
+
+ds['xavg'] = df2[ksgn].mean()
+ds['xmed'] = df2[ksgn].median()
 #
 ds['q-0.1'] = df2[ksgn].quantile(0.1)
 ds['q-0.25'] = df2[ksgn].quantile(0.25)
@@ -69,8 +69,6 @@ print('\nok,!')
 	diff，计算一阶差分（对时间序列很有用）。
 	pct_change，计算百分数变化。
 
-
-
 print(dfk.tail())
 
 dfk['inx']=dfk['tplay']
@@ -83,7 +81,7 @@ dfk=dfk.sortindex()
 print('\n#3')
 print(dfk.tail())
 
-            gid   gset  mplay   mtid  gplay   gtid     qj     qs     qr   kend   kwin kwinrq  tweek       tplay                tsell
+gid   gset  mplay   mtid  gplay   gtid     qj     qs     qr   kend   kwin kwinrq  tweek       tplay                tsell
 count    68522  68521  68521  68517  68521  68517  68522  68522  68522  68522  68522  68522  68522       68522                68522
 unique   68522    154   2007   1724   1958   1681     14     11      1      2      4      1      7        2530                14785
 top     438989     英甲    布里斯    653    布里斯    653      1      1      0      1      3     -1      6  2016-05-08  2013-02-08 23:30:00

@@ -1,4 +1,4 @@
-# coding=utf-8
+# coding: utf-8
 
 import pandas as pd
 import ztools_tst as ztst
@@ -15,9 +15,12 @@ def df_get8tim(df, ksgn, kpre, kn9, kpos):
     xdf = pd.DataFrame(columns=['nam', 'dnum'])
     ds = pd.Series(['', 0], index=['nam', 'dnum'])
     for xc in range(1, kn9 + 1):
-        xss, kss = '{0:02d}'.format(xc), '{0}{1:02d}'.format(kpre, xc)
+        xss = '{0:02d}'.format(xc)
+        kss = '{0}{1:02d}'.format(kpre, xc)
+        # print df[df[ksgn]]
         df2 = df[df[ksgn].str.find(kss) == kpos]
-        ds['nam'], ds['dnum'] = xss, len(df2['gid'])
+        ds['nam'] = xss
+        ds['dnum'] = len(df2['gid'])
         xdf = xdf.append(ds.T, ignore_index=True)
         # print(xc,'#',xss,kss)
     #
@@ -25,8 +28,7 @@ def df_get8tim(df, ksgn, kpre, kn9, kpos):
     return xdf
 
 
-ksgn = 'tplay'
-xdf = df_get8tim(df, ksgn, '-', 12, 4)
+xdf = df_get8tim(df, 'tplay', '-', 12, 4)
+# print xdf
 
 tfdr.dr_gid_top10(df, 'kwin')
-print('\nok,!')

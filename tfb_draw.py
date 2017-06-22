@@ -7,7 +7,7 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 
 
-def dr_gid_top10(df, column, title=None, save=False):
+def dr_gid_top10(df, column, title=None):
     """
     column: 要传入的列名
     png_name: 图片的名称

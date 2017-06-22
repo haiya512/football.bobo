@@ -1,8 +1,10 @@
 # coding=utf-8
+"""
+生成图片并保存
+"""
 
 import pandas as pd
 import tfb_draw as tfdr
-
 
 rs0 = './'
 fdat = rs0 + 'xdat2017.dat'
@@ -17,9 +19,7 @@ xlst = ['pwin0', 'pdraw0', 'plost0', 'pwin9', 'pdraw9', 'plost9',
         'vlost9kali']
 
 for ksgn in xlst:
-    print('\ndf', ksgn)
+    # print('\ndf', ksgn)
     tfdr.dr_gid_top10(df, ksgn, 'tmp/' + ksgn + '_df_')
-    print('@dfk')
+    # print('@dfk')
     tfdr.dr_gid_top10(dfk, ksgn, 'tmp/' + ksgn + '_dk_')
-
-print('\nok,!')

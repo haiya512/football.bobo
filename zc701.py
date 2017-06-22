@@ -1,8 +1,14 @@
 # coding: utf-8
 
+"""
+很好奇,这个文件是以网站名字开头的,那么怎么合成gid和xdat呢?
+数据是不是合成这两个文件需要的呢?
+"""
+
 import arrow
 import ztools as zt
-from ztools import zt_headers
+# from ztools import zt_headers
+from ztools_web import zt_headers
 import ztools_web as zweb
 import requests
 import sys

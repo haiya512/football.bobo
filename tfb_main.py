@@ -140,4 +140,3 @@ def main():
     # 2
     # main_bt()
     # 3
-    print('main,ok')
