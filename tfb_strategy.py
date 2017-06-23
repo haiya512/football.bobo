@@ -13,12 +13,10 @@ def sta00_pre(xtfb):
 def sta00_sta(xtfb, df):
     return -9
 
-#------------- sta01..sta
-
 
 def sta01_sta(xtfb, df):
     xkwin, k0 = -9, xtfb.staVars[0]
-    #---k0=1.1,k1=80
+    # ---k0=1.1,k1=80
     df2 = df[df.cid == xtfb.kcid]
     if len(df2.index) > 0:
         dwin, dlose = df2['pwin0'][0], df2['plost0'][0]
@@ -32,7 +30,7 @@ def sta01_sta(xtfb, df):
 
 def sta01ext_sta(xtfb, df):
     xkwin, k30, k00 = -9, xtfb.staVars[0], xtfb.staVars[1]
-    #---k0=1.1,k1=80
+    # ---k0=1.1,k1=80
     df2 = df[df.cid == xtfb.kcid]
     if len(df2.index) > 0:
         dwin, dlose = df2['pwin0'][0], df2['plost0'][0]
@@ -46,7 +44,7 @@ def sta01ext_sta(xtfb, df):
 
 def sta10_sta(xtfb, df):
     xkwin, k0, k1 = -9, xtfb.staVars[0], xtfb.staVars[1]
-    #---k0=1.1,k1=80
+    # ---k0=1.1,k1=80
     df3 = df[df.pwin0 < k0]
     df0 = df[df.plost0 < k0]
     xn9 = len(df.index)
@@ -59,7 +57,8 @@ def sta10_sta(xtfb, df):
     #
     return xkwin
 
-#------------- sta30.mul.sta
+
+# ------------- sta30.mul.sta
 
 
 def sta310_pre(xtfb):
@@ -112,24 +111,24 @@ def sta310_sta(xtfb, df):
     xkwin = -9
     xk3, xk1, xk0 = sta310_sta3(xtfb, df), sta310_sta1(
         xtfb, df), sta310_sta0(xtfb, df)
-    if (xk3 == 3)and(xk1 < 0)and(xk0 < 1):
+    if (xk3 == 3) and (xk1 < 0) and (xk0 < 1):
         xkwin = 3
-    if (xk3 < 1)and(xk1 == 1)and(xk0 < 0):
+    if (xk3 < 1) and (xk1 == 1) and (xk0 < 0):
         xkwin = 1
-    if (xk3 < 1)and(xk1 < 0)and(xk0 == 0):
+    if (xk3 < 1) and (xk1 < 0) and (xk0 == 0):
         xkwin = 0
     #
     # print('sta',xkwin,xk3,xk1,xk0)
     return xkwin
 
 
-#------------- sta.ai.xxx
+# ------------- sta.ai.xxx
 
 
 def sta_ai_log01(xtfb, df):
     # 1
     xkwin, k00, k10, k30 = - \
-        9, xtfb.staVars[0], xtfb.staVars[1], xtfb.staVars[2]
+                               9, xtfb.staVars[0], xtfb.staVars[1], xtfb.staVars[2]
     ysgn = 'kwin'  # xtfb.ai_ysgn
     # 2
     df[ysgn] = df[ysgn].astype(str)
@@ -152,17 +151,17 @@ def sta_ai_log01(xtfb, df):
     # 8
     if dsum > 0:
         dk3, dk1, dk0 = dn3 / dsum * 100, dn1 / dsum * 100, dn0 / dsum * 100
-        if (dn3 == dn9)and(dk3 > k30):
+        if (dn3 == dn9) and (dk3 > k30):
             xkwin = 3
-        elif (dn1 == dn9)and(dk1 > k10):
+        elif (dn1 == dn9) and (dk1 > k10):
             xkwin = 1
-        elif (dn0 == dn9)and(dk0 > k00):
+        elif (dn0 == dn9) and (dk0 > k00):
             xkwin = 0
-        #
-        # yk310=df9['y_test'][0]
-        # xs0='@log01,{0}#,{1},xk,gid,{2},dsum.{3},dn310,{4},{5},{6},dk310,{7:.1f}%,{8:.1f}%,{9:.1f}%'
-        # xss=xs0.format(xkwin,yk310,xtfb.kgid,dsum,dn3,dn1,dn0,dk3,dk1,dk0)
-        # print(xss)
+            #
+            # yk310=df9['y_test'][0]
+            # xs0='@log01,{0}#,{1},xk,gid,{2},dsum.{3},dn310,{4},{5},{6},dk310,{7:.1f}%,{8:.1f}%,{9:.1f}%'
+            # xss=xs0.format(xkwin,yk310,xtfb.kgid,dsum,dn3,dn1,dn0,dk3,dk1,dk0)
+            # print(xss)
 
     # 9
     return xkwin

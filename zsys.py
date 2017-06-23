@@ -21,7 +21,9 @@ fn_time_nloop5 = 500
 
 sgnSP4 = '    '
 sgnSP8 = sgnSP4 + sgnSP4
+# 日志文件名
 logFN = ''
+#
 web_get001txtFg = False
 
 

@@ -68,10 +68,11 @@ bars = pd.Series(list(g10.values[0]), index=list(g10))
 # print(bars)
 # print('\ntype(g10),', type(g10))
 
-fhtm = 'dat/' + gid + '_oz.htm'
+gid_htm_file = 'dat/' + gid + '_oz.htm'
 ftg = 'tmp/' + gid + '_xd.dat'
 # 读取文件内容
-htm = zt.f_rd(fhtm)
+htm = zt.f_rd(gid_htm_file)
+# 生成文件
 df = fb_gid_getExt_oz4htm(htm, bars, ftg)
 # print('\n#3')
 print(df.tail())

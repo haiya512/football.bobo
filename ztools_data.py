@@ -1,22 +1,6 @@
-# coding=utf-8
-# -*- coding: utf-8 -*-
-
+# coding: utf-8
 
 import pandas as pd
-# import tushare as ts
-# import cpuinfo as cpu
-import psutil as psu
-import inspect
-#
-import matplotlib as mpl
-import matplotlib.colors
-from matplotlib import cm
-
-#
-import zsys
-import ztools as zt
-import ztools_str as zstr
-import ztools_web as zweb
 
 
 def fb_df_type2float(df, xlst):
@@ -69,14 +53,31 @@ def df_get8tim(df, ksgn, kpre, kn9, kpos):
 
 
 def df_kcut8tim(df, ksgn, tim0str, tim9str):
+    """
+    df pandas.dataframe
+    :param df: pandas data
+    :param ksgn:  key world columns
+    :param tim0str: start time
+    :param tim9str:  stop time
+    :return: df
+    """
     df2 = df[tim0str <= df[ksgn]]
     df3 = df2[df2[ksgn] <= tim9str]
     return df3
 
 
 def df_kcut8yearlst(df, ksgn, ftg0, yearlst):
+    """
+    给一个年份列表: 元素格式如: 2010-01-01, 按照每年来切割成为一个文件
+    :param df:
+    :param ksgn:
+    :param ftg0:  file path or dir path
+    :param yearlst:
+    :return:
+    """
     for ystr in yearlst:
-        tim0str, tim9str = ystr + '-01-01', ystr + '-12-31'
+        tim0str = ystr + '-01-01'
+        tim9str = ystr + '-12-31'
         df2 = df_kcut8tim(df, ksgn, tim0str, tim9str)
         ftg = ftg0 + ystr + '.dat'
         print(ftg)
@@ -84,6 +85,15 @@ def df_kcut8yearlst(df, ksgn, ftg0, yearlst):
 
 
 def df_kcut8myearlst(df, ksgn, tim0str, ftg0, yearlst):
+    """
+    给一个年份列表, 累计的来切割查看走势
+    :param df:
+    :param ksgn:
+    :param tim0str:
+    :param ftg0:
+    :param yearlst:
+    :return:
+    """
     for ystr in yearlst:
         tim9str = ystr + '-12-31'
         df2 = df_kcut8tim(df, ksgn, tim0str, tim9str)

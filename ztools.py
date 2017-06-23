@@ -374,6 +374,13 @@ def timNHour(tim, tim0, fgPr=False):
 
 
 def timNDay(tim, tim0, fgPr=False):
+    '''
+    返回一个天数
+    :param tim:
+    :param tim0:
+    :param fgPr:
+    :return:
+    '''
     if not tim:
         tim = arrow.now()
     if isinstance(tim, str):

@@ -14,35 +14,18 @@ by Top极宽·量化开源团队 2016.12.25 首发
 简介：Top极宽字符串常用工具函数集
 '''
 
-import os, sys, io, re
-import arrow, bs4
-import pandas as pd
-# import tushare as ts
+import re
 
-import requests
-#
-
-import zsys
-import ztools as zt
-#
-# -----------------------
 '''
-
 str.misc.xxx
 #
 str_xpos
 str.del.xxx
 str.flt.xxx
-
 #
 pd.str.xxx  pandas
-
 '''
 
-
-# -----------------------
-
-# -------str.misc.xxx
 def str_fnDay(cs0):
     mss = str(dt.date.today())
     xss = ''.join([cs0, '_', mss, '.dat'])

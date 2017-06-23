@@ -75,9 +75,11 @@ def bt_1d_anz_1play(xtfb):
         g10 = bars
         c10 = df[df.cid == xtfb.kcid]
         #
-        g10['kwin_sta'], g10['cid'] = xkwin, xtfb.kcid
-        g10['pwin9'], g10['pdraw9'], g10['plost9'] = c10[
-                                                         'pwin9'][0], c10['pdraw9'][0], c10['plost9'][0]
+        g10['kwin_sta'] = xkwin
+        g10['cid'] = xtfb.kcid
+        g10['pwin9'] = c10['pwin9'][0]
+        g10['pdraw9'] = c10['pdraw9'][0]
+        g10['plost9'] = c10['plost9'][0]
         #
         xtfb.poolDay = xtfb.poolDay.append(g10.T, ignore_index=True)
         xtfb.poolTrd = xtfb.poolTrd.append(g10.T, ignore_index=True)
@@ -125,11 +127,8 @@ def bt_main(xtfb, timeStr):
     for tc in range(-3, nday):
         xtim = ktim.shift(days=-tc)
         xtimStr = xtim.format('YYYY-MM-DD')
-        print('\n', tc, '#', xtimStr)
-        #
         if xtim < xtfb.tim0_gid:
             break
-        #
         xtfb.ktimStr = xtimStr
         bt_1dayMain(xtfb)
         #
@@ -159,8 +158,7 @@ def bt_main_ret(xtfb, fgMsg=False):
         print xtfb.poolRet[xsgn]
         xtfb.poolRet[xsgn] = round(xtfb.poolRet[xsgn], 2)
         ret9[xsgn] = round(ret9[xsgn], 2)
-    # 4
-    # --save.dat
+
     ret9['xtim'] = 'sum'
     ret9['cid'] = xtfb.kcid
 
