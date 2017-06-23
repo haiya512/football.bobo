@@ -19,6 +19,10 @@ tim0_str = ''
 fn_time_nloop = 5
 fn_time_nloop5 = 500
 
+file_dir = './'
+gid_file_name = 'gid2017.dat'
+gid_file = file_dir + gid_file_name
+
 sgnSP4 = '    '
 sgnSP8 = sgnSP4 + sgnSP4
 # 日志文件名

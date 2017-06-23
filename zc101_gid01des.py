@@ -7,7 +7,7 @@ import pandas as pd
 import numpy as np
 import matplotlib as mpl
 from matplotlib import pyplot as plt
-import zsys
+from zsys import cors_brg, gid_file
 import sys
 
 reload(sys)
@@ -26,7 +26,7 @@ def gid_anz_top10(df, column):
     # http://wenda.chinahadoop.cn/question/5304
     # help(d10.plot)
     # 柱状图
-    d10.plot(kind='bar', rot=0, color=zsys.cors_brg)
+    d10.plot(kind='bar', rot=0, color=cors_brg)
     plt.show()
     #
     d10_sum = d10.sum()
@@ -40,7 +40,7 @@ def gid_anz_top10(df, column):
     plt.show()
 
 
-rs0 = './'
-fgid = rs0 + 'gid2017.dat'
-df = pd.read_csv(fgid, index_col=False, dtype=str)
+# rs0 = './'
+# fgid = rs0 + 'gid2017.dat'
+df = pd.read_csv(gid_file, index_col=False, dtype=str)
 gid_anz_top10(df, 'gset')

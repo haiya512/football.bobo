@@ -43,6 +43,7 @@ arrow
 
 
 ### 脚本列表
+##### 工具函数
 * cpuinfo.py            cpu信息
 * tfb_backtest.py       回测
 * tfb_draw.py           画图脚本
@@ -51,6 +52,7 @@ arrow
 * tfb_sys.py            全局预定义变量
 * tfb_tools.py          工具函数
 
+#### 计算脚本
 * zc101_gid01des.py     获取排列前10名的比赛次数
 * zc401_dat_cut.py      文件切割
 * zc402_dat_cutx.py     批量切割
