@@ -219,9 +219,9 @@ def f_addLog(dss):
         f_add(zsys.logFN, tss)
 
 
-def f_size(fss):
-    if os.path.exists(fss):
-        return os.path.getsize(fss)
+def f_size(filename):
+    if os.path.exists(filename):
+        return os.path.getsize(filename)
     else:
         return 0
 
@@ -249,14 +249,18 @@ def f_rdXNum(fn, cod='gbk'):
     return dn
 
 
-def f_add(fn, dss, create_file=False, encode='utf-8'):
-    if create_file:
-        f = open(fn, 'w')
+def f_add(filename, content):
+    """
+    内容写入文件的函数
+    :param filename:
+    :param content:
+    :return:
+    """
+    if os.path.isfile(filename):
+        f = open(filename, 'w')
     else:
-        f = open(fn, 'a')
-    #
-    # print(dss)
-    f.write(dss + '\n')
+        f = open(filename, 'a')
+    f.write(content + '\n')
     f.close()
 
 

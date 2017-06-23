@@ -5,40 +5,34 @@
 import os
 import re
 import random
+import sys
+
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 from robobrowser import RoboBrowser
 from concurrent.futures import as_completed
+
 import zsys
 import ztools as zt
 import ztools_str as zstr
 import ztools_data as zdat
-import sys
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
-#
-'''
-xxx.var&const
-misc
-#
-web_get_xxx
-web_get_xxx.site...
-#
-#--web_dz.xxx   ,discuz
-#----zdz.zwx.xxx   zdz.zwx-->zdzx
-#---bs4.xxx
-'''
 
 zt_headers = {
-    'User-Agent': '''Mozilla/5.0 (Windows NT 6.1; WOW64)
+    'User-Agent': '''
+    Mozilla/5.0 (Windows NT 6.1; WOW64)
     AppleWebKit/537.1 (KHTML, like Gecko)
-    Chrome/22.0.1207.1 Safari/537.1'''
+    Chrome/22.0.1207.1 Safari/537.1
+    '''
 }
-zt_xagent = '''Mozilla/5.0 (Windows; U;
-Windows NT 5.1; it; rv:1.8.1.11)
-Gecko/20071127 Firefox/2.0.0.11'''
+zt_xagent = '''
+            Mozilla/5.0 (Windows; U;
+            Windows NT 5.1; it; rv:1.8.1.11)
+            Gecko/20071127 Firefox/2.0.0.11
+            '''
 
 
 def web_get001(url):
@@ -51,11 +45,11 @@ def web_get001(url):
 
 def web_get001txt(url, filename=''):
     htm = ''
-    rx = web_get001(url)
-    if rx:
-        xcod = rx.encoding
-        print(xcod)
-        htm = rx.text
+    req_html = web_get001(url)
+    if req_html:
+        xcod = req_html.encoding
+        # print(xcod)
+        htm = req_html.text
         if xcod == 'utf-8':
             htm = htm.replace('&nbsp;', ' ')
             css = htm.encode("UTF-8", 'ignore').decode("UTF-8", 'ignore')
@@ -63,20 +57,20 @@ def web_get001txt(url, filename=''):
             css = css.replace(u'\xa0 ', u' ')
             htm = css.encode("GBK", 'ignore').decode("GBK", 'ignore')
         if filename:
-            zt.f_add(filename, htm, True)
+            zt.f_add(filename, htm)
     return htm
 
 
-def web_get001txtFg(uss, fss):
+def web_get001txtFg(url, filename):
     # 获取网页内容或者文件内容的函数
     # 判断文件大小,如果大于1000,则直接读取文件
-    fsiz = zt.f_size(fss)
-    if zsys.web_get001txtFg or (fsiz < 1000):
-        # print(zsys.sgnSP8,fss,fsiz)
+    # 返回的一定是格式化好的数据
+    file_siz = zt.f_size(filename)
+    if zsys.web_get001txtFg or (file_siz < 1000):
         # uss=xtfb.us0_extOuzhi+xtfb.kgid+'.shtml';#print(uss)
-        htm = web_get001txt(uss, fss)
+        htm = web_get001txt(url, filename)
     else:
-        htm = zt.f_rd(fss)
+        htm = zt.f_rd(filename)
     return htm
 
 
