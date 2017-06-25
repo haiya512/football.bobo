@@ -27,7 +27,7 @@ arrow
 * tplay 比赛日期
 * tsell 博彩销售截止日期
 *
-* cid 菠菜公司代码  全局唯一
+* cid 菠菜公司ID  全局唯一
 * cname 菠菜公司名称
 * pwin0 pdraw0 plost0  开盘时主队胜平负的赔率
 * vwin0 vdraw0 vlost0

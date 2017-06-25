@@ -13,34 +13,33 @@ reload(sys)
 sys.setdefaultencoding("utf-8")
 
 
-def fb_gid_get_nday(xtfb, timStr, fgExt=False, nday=0):
-    if not timStr:
-        ktim = xtfb.tim_now
+def fb_gid_get_nday(xtfb, timeStr, fgExt=False, nday=0):
+    if not timeStr:
+        ktime = xtfb.tim_now
     else:
-        ktim = arrow.get(timStr)
-    #
+        ktime = arrow.get(timeStr)
+
     if not nday:
         print("nday should not be 0")
         return False
     for tc in range(0, nday):
-        xtim = ktim.shift(days=-tc)
+        xtime = ktime.shift(days=-tc)
         # print("xtim: ", xtim)
-        xtimStr = xtim.format('YYYY-MM-DD')
+        xtimeStr = xtime.format('YYYY-MM-DD')
         # print('\nxtim',xtim,xtim<xtfb.tim0_gid)
-        #
-        xss = str(tc) + '#,' + xtimStr + ',@' + zt.get_fun_nam()
-        zt.f_addLog(xss)
-        if xtim < xtfb.tim0_gid:
+        # 这个是日志文件名
+        logfile_name = str(tc) + '#,' + xtimeStr + ',@' + zt.get_fun_nam()
+        zt.f_addLog(logfile_name)
+        if xtime < xtfb.tim0_gid:
             # 如果当前的时间早于2010-01-01
             # print('#brk;')
             break
-        #
 
-        fss = tfsys.rghtm + xtimStr + '.htm'
-        url = tfsys.us0_gid + xtimStr
+        html_filename = tfsys.rghtm + xtimeStr + '.htm'
+        url = tfsys.us0_gid + xtimeStr
         # print(timStr, tc, '#', fss)
         #
-        htm = zweb.web_get001txtFg(url, fss)
+        htm = zweb.web_get001txtFg(url, html_filename)
         if len(htm) > 5000:
             df = tft.fb_gid_get4htm(htm)
             if len(df['gid']) > 0:
@@ -65,9 +64,9 @@ zsys.web_get001txtFg = True
 # tn = arrow.now() - arrow.get('2010-01-01')
 # print('tn,',tn)
 
-timStr = ''
+timeStr = ''
 # 算最近两天的数值
 nday = 2
-fb_gid_get_nday(xtfb, timStr, fgExt=False, nday=nday)
+fb_gid_get_nday(xtfb, timeStr, fgExt=False, nday=nday)
 
 # df=zfbt.fb_gidGet(hss)

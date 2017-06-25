@@ -120,16 +120,15 @@ def fb_kwin2pdat(kwin, ds):
         xd = ds['pdraw9']
     elif kwin == 0:
         xd = ds['plost9']
-    #
     return xd
 
 
 def fb_gid_get4htm(htm):
-    bs = BeautifulSoup(htm, 'html5lib')  # 'lxml'
+    # bs = BeautifulSoup(htm, 'html5lib')  # 'lxml'
+    bs = BeautifulSoup(htm, 'lxml')  # 'lxml'
     df = pd.DataFrame(columns=tfsys.gidSgn, dtype=str)
     ds = pd.Series(tfsys.gidNil, index=tfsys.gidSgn, dtype=str)
 
-    # ---1#
     zsys.bs_get_ktag_kstr = 'isend'
     x10 = bs.find_all(zweb.bs_get_ktag)
     print("x10: {0}".format(x10))
@@ -152,8 +151,7 @@ def fb_gid_get4htm(htm):
         xss = x['href']
         kss = zstr.str_xmid(xss, 'ju-', '.sh')
         clst = x.text.split(':')
-        #
-        ds = df[df['gid'] == kss]
+
         ds = df[df['gid'] == kss]
         if len(ds) == 1:
             inx = ds.index
@@ -184,10 +182,9 @@ def fb_gid_get4htm(htm):
                 xid = zstr.str_xmid(xss, '/team/', '/')
                 df['gtid'][xc] = xid
                 g01 = df['gid'][xc]
-                if xid == '':
+                if not xid:
                     zt.f_addLog('tid-gtid,nil,' + xss + ',gid,' + g01)
 
-    # ---5#
     df = df[df['gid'] != '-1']
     return df
 
@@ -214,7 +211,8 @@ def fb_gid_getExt_oz4clst(ds, clst):
 
 
 def fb_gid_getExt_oz4htm(htm, bars, ftg=''):
-    bs = BeautifulSoup(htm, 'html5lib')  # 'lxml'
+    # bs = BeautifulSoup(htm, 'html5lib')  # 'lxml'
+    bs = BeautifulSoup(htm, 'lxml')  # 'lxml'
     x10 = bs.find_all('tr', ttl='zy')
     df = pd.DataFrame(columns=tfsys.gxdatSgn)
     ds = pd.Series(tfsys.gxdatNil, index=tfsys.gxdatSgn)
@@ -233,9 +231,7 @@ def fb_gid_getExt_oz4htm(htm, bars, ftg=''):
         zdat.df_2ds8xlst(bars, ds, xlst)
         df = df.append(ds.T, ignore_index=True)
 
-    #
-    # print('xx',xc)
-    # --footer
+
     if xc > 0:
         x10 = bs.find_all('tr', xls='footer')
 

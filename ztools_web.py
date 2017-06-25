@@ -17,6 +17,7 @@ import zsys
 import ztools as zt
 import ztools_str as zstr
 import ztools_data as zdat
+import urllib2
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -37,7 +38,10 @@ zt_xagent = '''
 
 def web_get001(url):
     try:
-        rx = requests.get(url, headers=zt_headers)  # 获得网页,headers
+        # rx = requests.get(url, headers=zt_headers)  # 获得网页,headers
+        request = urllib2.Request(url)
+        response = urllib2.urlopen(request)
+        rx = response.read()
     except:
         rx = None
     return rx
@@ -47,15 +51,17 @@ def web_get001txt(url, filename=''):
     htm = ''
     req_html = web_get001(url)
     if req_html:
-        xcod = req_html.encoding
+        # xcod = req_html.encoding
         # print(xcod)
-        htm = req_html.text
-        if xcod == 'utf-8':
+        # htm = req_html.text
+        htm = req_html
+        # if xcod == 'utf-8':
+        if htm:
             htm = htm.replace('&nbsp;', ' ')
-            css = htm.encode("UTF-8", 'ignore').decode("UTF-8", 'ignore')
-            css = css.replace(u'\xfffd ', u' ')
+            # css = htm.encode("UTF-8", 'ignore').decode("UTF-8", 'ignore')
+            css = htm.replace(u'\xfffd ', u' ')
             css = css.replace(u'\xa0 ', u' ')
-            htm = css.encode("GBK", 'ignore').decode("GBK", 'ignore')
+            # htm = css.encode("GBK", 'ignore').decode("GBK", 'ignore')
         if filename:
             zt.f_add(filename, htm)
     return htm
