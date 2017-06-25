@@ -34,7 +34,7 @@ def bs010(fsr):
     print('bs.a["target"],', bs.a['target'])
     print('bs.a["href"],', bs.a['href'])
     print('type:bs.a["data_tongji"],', bs.a['data_tongji'])
-    
+
     print('\n\n@ bs #4')
     print('bs.a.get("class"),', bs.a.get('class'))
     print('bs.a.get("rel"),', bs.a.get('rel'))
