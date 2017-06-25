@@ -101,9 +101,9 @@ def bt_1dayMain(xtfb):
     xtfb.poolInx = []
     xtfb.xdat10 = None
     xtfb.poolDay = pd.DataFrame(columns=tfsys.poolSgn)
-    #
     df = tfsys.gids
     g10 = df[df.tplay == xtfb.ktimStr]
+    print("g10: {0}".format(g10))
     xdat, xtfb.gid10 = bt_lnkXDat(g10, xtfb.kcid)
     if len(xdat.index) > 0:
         xlst = ['pwin0', 'pdraw0', 'plost0', 'pwin9', 'pdraw9', 'plost9']
@@ -115,13 +115,12 @@ def bt_1dayMain(xtfb):
 
 
 def bt_main(xtfb, timeStr):
-    if timeStr == '':
+    if not timeStr:
         ktim = xtfb.tim_now
     else:
         ktim = arrow.get(timeStr)
-    #
+
     nday = tfsys.xnday_down
-    #
     tfsys.gids['kwin_sta'] = -9
     xtfb.poolRet = pd.DataFrame(columns=tfsys.retSgn)
     for tc in range(-3, nday):
@@ -131,7 +130,6 @@ def bt_main(xtfb, timeStr):
             break
         xtfb.ktimStr = xtimStr
         bt_1dayMain(xtfb)
-        #
 
 
 def bt_main_ret(xtfb, fgMsg=False):
@@ -151,8 +149,9 @@ def bt_main_ret(xtfb, fgMsg=False):
             ret9['knum' + xss] = round(ret9['nwin' + xss] / dn * 100, 2)
     # 3
     nlst = ['num9', 'nwin9', 'num3', 'nwin3', 'num1', 'nwin1', 'num0', 'nwin0']
-    float_lst = ['kret9', 'kret3', 'kret1', 'kret0', 'knum9',
-                 'knum3', 'knum1', 'knum0', 'ret9', 'ret3', 'ret1', 'ret0']
+    float_lst = ['kret9', 'kret3', 'kret1', 'kret0',
+                 'knum9', 'knum3', 'knum1', 'knum0',
+                 'ret9', 'ret3', 'ret1', 'ret0']
     tft.fb_df_type4mlst(xtfb.poolRet, nlst, float_lst)
     for xsgn in float_lst:
         print xtfb.poolRet[xsgn]

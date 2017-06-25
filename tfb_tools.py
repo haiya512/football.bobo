@@ -28,7 +28,8 @@ def fb_df_type_xed(df):
 
 def fb_df_type2float(df, xlst):
     for xsgn in xlst:
-        df[xsgn] = df[xsgn].astype(float)
+        if isinstance(xsgn, float):
+            df[xsgn] = df[xsgn].astype(float)
 
 
 def fb_df_type4mlst(df, nlst, flst):
@@ -131,9 +132,11 @@ def fb_gid_get4htm(htm):
     # ---1#
     zsys.bs_get_ktag_kstr = 'isend'
     x10 = bs.find_all(zweb.bs_get_ktag)
+    print("x10: {0}".format(x10))
     for xc, x in enumerate(x10):
         # print('\n@x\n',xc,'#',x.attrs)
-        ds['gid'], ds['gset'] = x['fid'], zstr.str_fltHtmHdr(x['lg'])
+        ds['gid'] = x['fid']
+        ds['gset'] = zstr.str_fltHtmHdr(x['lg'])
         ds['mplay'] = zstr.str_fltHtmHdr(x['homesxname'])
         ds['gplay'] = zstr.str_fltHtmHdr(x['awaysxname'])
         ds['kend'] = x['isend']
@@ -309,30 +312,29 @@ def fb_gid_getExtPool(df, nsub=5):
         print('@_getExtPool,xn9:', ns9, fss)
 
 
-def fb_gid_get_nday(xtfb, timStr, fgExt=False):
-    if not timStr:
+def fb_gid_get_nday(xtfb, timeStr, fgExt=False):
+    if not timeStr:
         ktim = xtfb.tim_now
     else:
-        ktim = arrow.get(timStr)
+        ktim = arrow.get(timeStr)
     #
     nday = tfsys.xnday_down
     for tc in range(0, nday):
         xtim = ktim.shift(days=-tc)
         xtimStr = xtim.format('YYYY-MM-DD')
         # print('\nxtim',xtim,xtim<xtfb.tim0_gid)
-        #
         xss = str(tc) + '#,' + xtimStr + ',@' + zt.get_fun_nam()
         zt.f_addLog(xss)
+        # 如果时间太早
         if xtim < xtfb.tim0_gid:
-            print('#brk;')
             break
         #
-
         fss = tfsys.rghtm + xtimStr + '.htm'
         uss = tfsys.us0_gid + xtimStr
-        print(timStr, tc, '#', fss)
+        print(timeStr, tc, '#', fss)
         #
         htm = zweb.web_get001txtFg(uss, fss)
+        # 如果文件内容过小,可能没有数据,当天没有比赛
         if len(htm) > 5000:
             df = fb_gid_get4htm(htm)
             if len(df['gid']) > 0:

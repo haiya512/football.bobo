@@ -4,6 +4,7 @@
 '''
 
 import arrow
+
 import zsys
 import ztools as zt
 import ztools_web as zweb
@@ -22,7 +23,6 @@ def fb_gid_get_nday(xtfb, timeStr, fgExt=False):
         xtim = ktim.shift(days=-tc)
         xtimStr = xtim.format('YYYY-MM-DD')
         # print('\nxtim',xtim,xtim<xtfb.tim0_gid)
-        #
         xss = str(tc) + '#,' + xtimStr + ',@' + zt.get_fun_nam()
         zt.f_addLog(xss)
         if xtim < xtfb.tim0_gid:
@@ -42,15 +42,12 @@ def fb_gid_get_nday(xtfb, timeStr, fgExt=False):
                 #
                 if fgExt:
                     tft.fb_gid_getExt(df)
-                # if fgExt:tft.fb_gid_getExtPool(df)
+                    # if fgExt:tft.fb_gid_getExtPool(df)
     # 如果设置保存数据文件名,
     if tfsys.gidsFN:
-        print('')
+        # print('')
         print(tfsys.gids.tail())
         tfsys.gids.to_csv(tfsys.gidsFN, index=False)
-
-
-# -----------------------
 
 
 xtfb = tft.fb_init()
@@ -58,8 +55,6 @@ xtfb.gidsFN = 'tmp/gid01.csv'
 zsys.web_get001txtFg = True
 tim0 = arrow.get('2010-01-01')
 tn = arrow.now() - tim0
-# print('tn,', tn)
-#
 tfsys.rghtm = tfsys.rxhtm = tfsys.rxdat = tfsys.rhtmOuzhi = 'tmp/'
 timeStr = ''
 nday = 2

@@ -36,4 +36,5 @@ def main_bt(timeStr='', nday=2):
     print('\n#5,backtest,tim:{0:.2f} s'.format(tn))
 
 
-main_bt('', 2)
+# main_bt('', 2)
+main_bt('', 100)
