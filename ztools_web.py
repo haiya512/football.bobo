@@ -49,6 +49,7 @@ def web_get001(url):
 
 
 def web_get001txt(url, filename=''):
+    # 把获取到的网页内容写入到文件
     # htm = ''
     htm = web_get001(url)
     # if req_html:
@@ -61,7 +62,7 @@ def web_get001txt(url, filename=''):
         htm = htm.replace('&nbsp;', ' ')
         # css = htm.encode("UTF-8", 'ignore').decode("UTF-8", 'ignore')
         css = htm.replace(u'\xfffd ', u' ')
-        css = css.replace(u'\xa0 ', u' ')
+        htm = css.replace(u'\xa0 ', u' ')
         # htm = css.encode("GBK", 'ignore').decode("GBK", 'ignore')
     if filename:
         zt.f_add(filename, htm)

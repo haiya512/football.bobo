@@ -131,7 +131,7 @@ def fb_gid_get4htm(htm):
 
     zsys.bs_get_ktag_kstr = 'isend'
     x10 = bs.find_all(zweb.bs_get_ktag)
-    print("x10: {0}".format(x10))
+    # print("x10: {0}".format(x10))
     for xc, x in enumerate(x10):
         # print('\n@x\n',xc,'#',x.attrs)
         ds['gid'] = x['fid']
@@ -141,11 +141,10 @@ def fb_gid_get4htm(htm):
         ds['kend'] = x['isend']
         s2 = ds['tweek'] = x['gdate'].split(' ')[0]  # tweek
         ds['tweek'] = fb_tweekXed(s2)
-        ds['tplay'], ds['tsell'] = x['pdate'], x['pendtime']  # tplay,tsell,
-        #
+        ds['tplay'] = x['pdate']
+        ds['tsell'] = x['pendtime']  # tplay,tsell,
         df = df.append(ds.T, ignore_index=True)
 
-    # ---2#
     x20 = bs.find_all('a', class_='score')
     for xc, x in enumerate(x20):
         xss = x['href']
@@ -160,7 +159,6 @@ def fb_gid_get4htm(htm):
             kwin = fb_kwin4qnum(int(clst[0]), int(clst[1]))
             df['kwin'][inx] = str(kwin)
 
-    # ---3#
     x20 = bs.find_all('td', class_='left_team')
     if (len(x20) == len(x10)):
         for xc, x in enumerate(x20):
@@ -172,7 +170,7 @@ def fb_gid_get4htm(htm):
                 g01 = df['gid'][xc]
                 if xid == '':
                     zt.f_addLog('tid-mtid,nil,' + xss + ',gid,' + g01)
-    # ---4#
+
     x20 = bs.find_all('td', class_='right_team')
     if (len(x20) == len(x10)):
         for xc, x in enumerate(x20):
@@ -267,10 +265,10 @@ def fb_gid_getExt010(x10):
     uss = tfsys.us0_extOuzhi + gid + '.shtml'  # print(uss)
     # zt.zt_web_get001txtFg or(fsiz<5000):
     htm = zweb.web_get001txtFg(uss, fss)
-    #
+
     fxdat = tfsys.rxdat + gid + '_oz.dat'
     fsiz = zt.f_size(fxdat)  # print(zsys.sgnSP4,'@',fsiz,fxdat)
-    #
+
     # print('xtfb.bars',xtfb.bars)
     if (fsiz < 1000) or (tfsys.xnday_down < 10):
         fb_gid_getExt_oz4htm(htm, bars, ftg=fxdat)

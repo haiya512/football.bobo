@@ -17,12 +17,14 @@ def fb_gid_get_nday(xtfb, timeStr, fgExt=False):
         ktim = xtfb.tim_now
     else:
         ktim = arrow.get(timeStr)
-    #
-    nday = tfsys.xnday_down
+
+    # nday = tfsys.xnday_down
+    nday = 2
     for tc in range(0, nday):
         xtim = ktim.shift(days=-tc)
         xtimStr = xtim.format('YYYY-MM-DD')
         # print('\nxtim',xtim,xtim<xtfb.tim0_gid)
+        #
         xss = str(tc) + '#,' + xtimStr + ',@' + zt.get_fun_nam()
         zt.f_addLog(xss)
         if xtim < xtfb.tim0_gid:
@@ -43,7 +45,7 @@ def fb_gid_get_nday(xtfb, timeStr, fgExt=False):
                 if fgExt:
                     tft.fb_gid_getExt(df)
                     # if fgExt:tft.fb_gid_getExtPool(df)
-    # 如果设置保存数据文件名,
+    # 如果设置保存数据文件名
     if tfsys.gidsFN:
         # print('')
         print(tfsys.gids.tail())
@@ -58,5 +60,5 @@ tn = arrow.now() - tim0
 tfsys.rghtm = tfsys.rxhtm = tfsys.rxdat = tfsys.rhtmOuzhi = 'tmp/'
 timeStr = ''
 nday = 2
-tfsys.xnday_down = nday
+# tfsys.xnday_down = nday
 fb_gid_get_nday(xtfb, timeStr, fgExt=True)

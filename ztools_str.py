@@ -61,10 +61,11 @@ def str_r01x(dss, kss):
 
 def str_xmid(dss, ks1, ks9):
     # s="abcd232" ;x=str_xmid(s,'b','2');print(x)
-    mx = ''.join(['(', ks1, ')(.*?)(', ks9, ')']);
+    mx = ''.join(['(', ks1, ')(.*?)(', ks9, ')'])
     r = re.search(mx, dss)
     dat = ''
-    if r: dat = r.groups()[1]
+    if r:
+        dat = r.groups()[1]
     return dat
 
 
@@ -104,8 +105,9 @@ def str_del4sp(dss):
 
 
 # -------str.flt.xxx
-def str_flt(dss, xlst):
-    for x in xlst:
+def str_flt(dss, xlist):
+    # 去除所有在xlist中的字符
+    for x in xlist:
         dss = dss.replace(x, '')
     return dss
 

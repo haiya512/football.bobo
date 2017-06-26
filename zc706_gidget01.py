@@ -11,6 +11,7 @@ import zsys
 import ztools_str as zstr
 import ztools_web as zweb
 import tfb_sys as tfsys
+from ztools_web import web_get001
 
 
 def gid_get001(htm):
@@ -52,9 +53,10 @@ _date_2010 = '2017-06-23'
 # _date_2010 = '2010-01-01'
 url_pre = 'http://trade.500.com/jczq/?date='
 url = url_pre + _date_2010
-request = urllib2.Request(url)
-response = urllib2.urlopen(request)
-html_doc = response.read()
+# request = urllib2.Request(url)
+# response = urllib2.urlopen(request)
+# html_doc = response.read()
+html_doc = web_get001(url)
 
 df = gid_get001(html_doc)
 # print('')
