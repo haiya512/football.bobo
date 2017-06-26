@@ -37,33 +37,34 @@ zt_xagent = '''
 
 
 def web_get001(url):
+    # 如果编码是gb2312, 则将gb2312改成utf-8
+    request = urllib2.Request(url)
+    response = urllib2.urlopen(request)
+    rx = response.read()
     try:
-        # rx = requests.get(url, headers=zt_headers)  # 获得网页,headers
-        request = urllib2.Request(url)
-        response = urllib2.urlopen(request)
-        rx = response.read()
+        rx = rx.decode("UTF-8")
     except:
-        rx = None
+        rx = rx.decode("gb2312")
     return rx
 
 
 def web_get001txt(url, filename=''):
-    htm = ''
-    req_html = web_get001(url)
-    if req_html:
+    # htm = ''
+    htm = web_get001(url)
+    # if req_html:
         # xcod = req_html.encoding
         # print(xcod)
         # htm = req_html.text
-        htm = req_html
+        # htm = req_html
         # if xcod == 'utf-8':
-        if htm:
-            htm = htm.replace('&nbsp;', ' ')
-            # css = htm.encode("UTF-8", 'ignore').decode("UTF-8", 'ignore')
-            css = htm.replace(u'\xfffd ', u' ')
-            css = css.replace(u'\xa0 ', u' ')
-            # htm = css.encode("GBK", 'ignore').decode("GBK", 'ignore')
-        if filename:
-            zt.f_add(filename, htm)
+    if htm:
+        htm = htm.replace('&nbsp;', ' ')
+        # css = htm.encode("UTF-8", 'ignore').decode("UTF-8", 'ignore')
+        css = htm.replace(u'\xfffd ', u' ')
+        css = css.replace(u'\xa0 ', u' ')
+        # htm = css.encode("GBK", 'ignore').decode("GBK", 'ignore')
+    if filename:
+        zt.f_add(filename, htm)
     return htm
 
 

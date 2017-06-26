@@ -19,9 +19,9 @@ def fb_dat_cut(df, tim0str, tim9str):
     return df3
 
 
-rs0 = './'
+# rs0 = './'
 # gid_file = rs0 + 'gid2017.dat'
-xdat_file = rs0 + 'xdat2017.dat'
+# xdat_file = rs0 + 'xdat2017.dat'
 # tim0 = arrow.now()
 # gids = pd.read_csv(gid_file, index_col=False, dtype=str)
 # tim2 = arrow.now()

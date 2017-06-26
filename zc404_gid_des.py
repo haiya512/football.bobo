@@ -7,6 +7,7 @@ import numpy as np
 # import matplotlib as mpl
 from matplotlib import pyplot as plt
 from zsys import cors_brg
+from zsys import gid_file
 
 
 def gid_anz_top10(df, ksgn):
@@ -29,8 +30,8 @@ def gid_anz_top10(df, ksgn):
     plt.show()
 
 
-fgid = 'gid2017.dat'
-df = pd.read_csv(fgid, index_col=False, dtype=str)
+# fgid = 'gid2017.dat'
+df = pd.read_csv(gid_file, index_col=False, dtype=str)
 print(df.tail())
 print('\n', df.describe())
 gid_anz_top10(df, 'gset')

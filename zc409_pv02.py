@@ -4,12 +4,13 @@
 """
 
 import pandas as pd
-import tfb_draw as tfdr
+from tfb_draw import dr_gid_top10
+from zsys import xdat_file
 
-rs0 = './'
-fdat = rs0 + 'xdat2017.dat'
+# rs0 = './'
+# fdat = rs0 + 'xdat2017.dat'
 # fdat='dat/xd_2016.dat'
-df = pd.read_csv(fdat, index_col=False, dtype=str)
+df = pd.read_csv(xdat_file, index_col=False, dtype=str)
 dfk = df[df['cid'] == '1']
 
 xlst = ['pwin0', 'pdraw0', 'plost0', 'pwin9', 'pdraw9', 'plost9',
@@ -20,6 +21,6 @@ xlst = ['pwin0', 'pdraw0', 'plost0', 'pwin9', 'pdraw9', 'plost9',
 
 for ksgn in xlst:
     # print('\ndf', ksgn)
-    tfdr.dr_gid_top10(df, ksgn, 'tmp/' + ksgn + '_df_')
+    dr_gid_top10(df, ksgn, 'tmp/' + ksgn + '_df_')
     # print('@dfk')
-    tfdr.dr_gid_top10(dfk, ksgn, 'tmp/' + ksgn + '_dk_')
+    dr_gid_top10(dfk, ksgn, 'tmp/' + ksgn + '_dk_')

@@ -1,11 +1,13 @@
 # coding=utf-8
 
 import pandas as pd
+from zsys import xdat_file
 
-rs0 = './'
+# rs0 = './'
 # fdat=rs0+'xdat2017.dat'
-fdat = 'dat/xd_2016.dat'
-df = pd.read_csv(fdat, index_col=False, dtype=str)
+# fdat = 'dat/xd_2016.dat'
+df = pd.read_csv(xdat_file, index_col=False, dtype=str)
+
 gid = '512751'
 dfk = df[df['gid'] == gid]
 df2 = dfk[dfk['cid'] < '90000']
@@ -47,7 +49,6 @@ ds['pct_change'] = df2[ksgn].pct_change()
 print('\n#4')
 print(ds)
 
-print('\nok,!')
 '''
 	count	，计算非 NA 值的数量。
 	describe，针对 Series 或 DF 的列计算汇总统计。

@@ -11,6 +11,7 @@ def dr_gid_top10(df, column, title=None):
     """
     column: 要传入的列名
     png_name: 图片的名称
+    获取排列前10名的图片
     """
 
     xn9 = len(df['gid'])

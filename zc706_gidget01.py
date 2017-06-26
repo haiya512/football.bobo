@@ -25,12 +25,14 @@ def gid_get001(htm):
     for xc, x in enumerate(x10):
         print('\n@x\n', xc, '#', x.attrs)
         # print('\n@x\n',xc,'#',x.attrs)
-        ds['gid'], ds['gset'] = x['fid'], zstr.str_fltHtmHdr(x['lg'])
+        ds['gid'] = zstr.str_fltHtmHdr(x['lg'])
+        ds['gset'] = x['fid']
         ds['mplay'] = zstr.str_fltHtmHdr(x['homesxname'])
         ds['gplay'] = zstr.str_fltHtmHdr(x['awaysxname'])
         ds['kend'] = x['isend']
         ds['tweek'] = x['gdate'].split(' ')[0]  # tweek
-        ds['tplay'], ds['tsell'] = x['pdate'], x['pendtime']  # tplay,tsell,
+        ds['tplay'] = x['pendtime']  # tplay,tsell,
+        ds['tsell'] = x['pdate']
         #
         df = df.append(ds.T, ignore_index=True)
 

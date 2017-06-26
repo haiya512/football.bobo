@@ -1,18 +1,13 @@
 # coding: utf-8
 '''
+由从文件读取数据改为直接读取网页
 '''
-from bs4 import BeautifulSoup
 import urllib2
-# from pyquery import PyQuery as pq
 
-import ztools as zt
+from bs4 import BeautifulSoup
 
 
 def bs010(fsr):
-    # html_content = zt.f_rd(fsr)
-    # bs = BeautifulSoup(html_content, 'html5lib')  # 'lxml'
-    # bs = BeautifulSoup(html_content, 'html5lib')  # 'lxml'
-    # bs = pq(html_content)
     bs = BeautifulSoup(fsr, 'lxml')  # 'lxml'
     # print('\n@ bs.type #1')
     # print('\ntype:bs,', type(bs))
