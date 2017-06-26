@@ -1,5 +1,6 @@
 # coding: utf-8
 '''
+演示栗子用
 ## 波波点评：
     没什么重要的作用
     一大堆的垃圾导入
@@ -8,13 +9,8 @@
 '''
 
 import pandas as pd
-import arrow
-
-# import zsys
-import ztools as zt
-# import zpd_talib as zta
-# import tfb_sys as tfsys
-# import tfb_tools as tft
+from zsys import xdat_file, gid_file
+from ztools_data import df_kcut8tim
 
 
 def fb_dat_cut(df, tim0str, tim9str):
@@ -24,16 +20,16 @@ def fb_dat_cut(df, tim0str, tim9str):
 
 
 rs0 = './'
-fgid = rs0 + 'gid2017.dat'
-fdat = rs0 + 'xdat2017.dat'
+# gid_file = rs0 + 'gid2017.dat'
+xdat_file = rs0 + 'xdat2017.dat'
 # tim0 = arrow.now()
-gids = pd.read_csv(fgid, index_col=False, dtype=str)
+# gids = pd.read_csv(gid_file, index_col=False, dtype=str)
 # tim2 = arrow.now()
 # t1 = zt.timNSec(tim2, tim0)
 # 为了获取读文件gid2017.dat所耗费的时间
 # print('rd gid2017 #1, ', t1)
 
-xdats = pd.read_csv(fdat, index_col=False, dtype=str)
+xdats = pd.read_csv(xdat_file, index_col=False, dtype=str)
 # tim2 = arrow.now()
 # t1 = zt.timNSec(tim2, tim0)
 # print(t1)
@@ -42,6 +38,7 @@ xdats = pd.read_csv(fdat, index_col=False, dtype=str)
 
 tim0str, tim9str = '2016-01-01', '2016-12-31'
 xd2016 = fb_dat_cut(xdats, tim0str, tim9str)
+# xd2016 = df_kcut8tim(xdats, 'tplay', tim0str, tim9str)
 # tim2 = arrow.now()
 # t1 = zt.timNSec(tim2, tim0)
 # 仅仅是获取切割文件所用的时间
@@ -65,4 +62,3 @@ print(df2.tail(), '\n')
 # t2 = zt.timNHour(tim2, tim0)
 # t3 = zt.timNDay(tim2, tim0)
 # print('s, h, d#9, ', t1, t2, t3)
-

@@ -80,7 +80,6 @@ def df_kcut8yearlst(df, ksgn, ftg0, yearlst):
         tim9str = ystr + '-12-31'
         df2 = df_kcut8tim(df, ksgn, tim0str, tim9str)
         ftg = ftg0 + ystr + '.dat'
-        print(ftg)
         df2.to_csv(ftg, index=False)
 
 

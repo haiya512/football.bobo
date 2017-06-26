@@ -2,12 +2,18 @@
 * Python v3.5
 * python v2.7
 ## 需要安装包
-arrow
+* arrow
 
 
 >xdat2017.dat.utf8 太大，GitHub支持的单个文件大小上限为100M,
 >推荐文件大小50M,所以都暂存在本地
 
+### 目录层次
+* xhtm 网页文件存档 默认包括四个子目录
+* xhtm/ghtm 基本比赛数据网页文件 按日期保存
+* xhtm/htm_oz  欧赔赔率网页文件,按gid比赛场次保存,每场比赛一个文件
+* xhtm/htm_az  亚赔赔率网页文件
+* xhtm/htm_sj  数据分析网页文件
 
 ### 数据文件gid2017字段意义
 * gid 比赛场次ID编码，全局唯一(gameid)
@@ -45,11 +51,11 @@ arrow
 ### 脚本列表
 ##### 工具函数
 * cpuinfo.py            cpu信息
-* tfb_backtest.py       回测
+* tfb_backtest.py       回测分析
 * tfb_draw.py           画图脚本
-* tfb_main.py           很多函数
-* tfb_strategy.py
-* tfb_sys.py            全局预定义变量
+* tfb_main.py           很多函数, 量化分析主程序入口
+* tfb_strategy.py       常用策略函数
+* tfb_sys.py            全局预定义变量,
 * tfb_tools.py          工具函数
 
 #### 计算脚本
