@@ -6,9 +6,9 @@
 import zsys
 import ztools as zt
 
-#
 import tfb_sys as tfsys
 import tfb_tools as tft
+from zsys import gid_file
 
 
 def main_get(timeStr='', nday=2):
@@ -16,8 +16,7 @@ def main_get(timeStr='', nday=2):
     zsys.web_get001txtFg = True
 
     rs0 = './'
-    fgid = rs0 + 'gid2017.dat'
-    xtfb = tft.fb_init(rs0, fgid)
+    xtfb = tft.fb_init(rs0, gid_file)
     if nday == -1:
         tfsys.xnday_down = xtfb.gid_nday + 10
         print('nday,', tfsys.xnday_down)

@@ -317,6 +317,7 @@ def fb_gid_get_nday(xtfb, timeStr, fgExt=False):
         xtim = ktim.shift(days=-tc)
         xtimStr = xtim.format('YYYY-MM-DD')
         # print('\nxtim',xtim,xtim<xtfb.tim0_gid)
+        # 添加日志,无关紧要
         xss = str(tc) + '#,' + xtimStr + ',@' + zt.get_fun_nam()
         zt.f_addLog(xss)
         # 如果时间太早

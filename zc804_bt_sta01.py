@@ -48,15 +48,15 @@ def main_bt(timStr='', nday=2):
         print('staVar,', xtfb.staVars)
     #
     # 5
-    tn = zt.timNSec('', xtfb.tim0, '')
-    print('\n#5,backtest,tim:{0:.2f} s'.format(tn))
+    # tn = zt.timNSec('', xtfb.tim0, '')
+    # print('\n#5,backtest,tim:{0:.2f} s'.format(tn))
     #
     # 6---end.main
-    print('\n#6,end.main')
+    # print('\n#6,end.main')
 
 
 #-----------------------
 timStr = '2017-02-10'
-print(__file__.name)
+# print(__file__.name)
 tfb_main.main_bt(timStr, 5)
-print('\nok!')
+# print('\nok!')

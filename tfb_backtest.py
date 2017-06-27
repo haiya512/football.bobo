@@ -154,6 +154,7 @@ def bt_main_ret(xtfb, fgMsg=False):
                  'ret9', 'ret3', 'ret1', 'ret0']
     tft.fb_df_type4mlst(xtfb.poolRet, nlst, float_lst)
     for xsgn in float_lst:
+        print "zhe yi bu"
         print xtfb.poolRet[xsgn]
         xtfb.poolRet[xsgn] = round(xtfb.poolRet[xsgn], 2)
         ret9[xsgn] = round(ret9[xsgn], 2)
