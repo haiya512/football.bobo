@@ -147,17 +147,18 @@ def bt_main_ret(xtfb, fgMsg=False):
         if dn > 0:
             ret9['kret' + xss] = round(ret9['ret' + xss] / dn * 100, 2)
             ret9['knum' + xss] = round(ret9['nwin' + xss] / dn * 100, 2)
-    # 3
+
     nlst = ['num9', 'nwin9', 'num3', 'nwin3', 'num1', 'nwin1', 'num0', 'nwin0']
     float_lst = ['kret9', 'kret3', 'kret1', 'kret0',
                  'knum9', 'knum3', 'knum1', 'knum0',
                  'ret9', 'ret3', 'ret1', 'ret0']
     tft.fb_df_type4mlst(xtfb.poolRet, nlst, float_lst)
     for xsgn in float_lst:
-        print "zhe yi bu"
+        # print "zhe yi bu"
         print xtfb.poolRet[xsgn]
-        xtfb.poolRet[xsgn] = round(xtfb.poolRet[xsgn], 2)
-        ret9[xsgn] = round(ret9[xsgn], 2)
+        if len(xtfb.poolRet[xsgn]):
+            xtfb.poolRet[xsgn] = round(xtfb.poolRet[xsgn], 2)
+            ret9[xsgn] = round(ret9[xsgn], 2)
 
     ret9['xtim'] = 'sum'
     ret9['cid'] = xtfb.kcid

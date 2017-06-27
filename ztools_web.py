@@ -41,6 +41,7 @@ def web_get001(url):
     request = urllib2.Request(url)
     response = urllib2.urlopen(request)
     rx = response.read()
+    # print "web_get001, url: {0}\n rx: {1}".format(url, rx)
     try:
         rx = rx.decode("UTF-8")
     except:

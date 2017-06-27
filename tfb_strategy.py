@@ -7,10 +7,14 @@ import ztop_ai as zai
 
 
 def sta00_pre(xtfb):
+    # 策略函数
+    # 这里的返回值其实就是比赛的预测结果
     return -9
 
 
 def sta00_sta(xtfb, df):
+    # 策略函数
+    # 这里的返回值其实就是比赛的预测结果
     return -9
 
 

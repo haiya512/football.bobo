@@ -13,7 +13,9 @@ from zsys import gid_file
 
 def main_get(timeStr='', nday=2):
     tfsys.xnday_down = nday
-    zsys.web_get001txtFg = True
+    # 是否重新获取网页数据
+    # zsys.web_get001txtFg = True
+    zsys.web_get001txtFg = False
 
     rs0 = './'
     xtfb = tft.fb_init(rs0, gid_file)
@@ -28,4 +30,4 @@ def main_get(timeStr='', nday=2):
     tn = zt.timNSec(timeStr, xtfb.tim0, '')
 
 
-main_get('', 2)
+main_get()
