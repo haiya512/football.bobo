@@ -41,7 +41,8 @@
 * pwin9 pdraw9 plost9  收盘时主队胜平负的赔率
 * vwin9 vdraw9 vlost9
 * vwin9kaili vdraw9 vlost9  主队胜平负的 收盘凯利指数
-
+* kplost
+* dwin
 
 ### 数据文件列表
 * gid2017.dat
