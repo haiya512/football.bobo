@@ -135,6 +135,7 @@ def bt_main(xtfb, timeStr):
     # 难道又是定死了推荐结果为-9?
     tfsys.gids['kwin_sta'] = -9
     xtfb.poolRet = pd.DataFrame(columns=tfsys.retSgn)
+    # print("这里输出了什么1")
     for tc in range(-3, nday):
         xtim = ktim.shift(days=-tc)
         xtimStr = xtim.format('YYYY-MM-DD')
@@ -147,7 +148,10 @@ def bt_main(xtfb, timeStr):
         xtfb.poolDay = pd.DataFrame(columns=tfsys.poolSgn)
         df = tfsys.gids
         g10 = df[df.tplay == xtfb.ktimStr]
-        print("g10: {0}".format(g10))
+        # print("这里输出了什么2")
+        if len(g10) > 0:
+            print("g10.index: {0}".format(g10.index))
+            print("g10: xxxx {0}".format(g10))
         xdat, xtfb.gid10 = bt_lnkXDat(g10, xtfb.kcid)
         if len(xdat.index) > 0:
             xlst = ['pwin0', 'pdraw0', 'plost0', 'pwin9', 'pdraw9', 'plost9']
@@ -188,7 +192,9 @@ def bt_main_ret(xtfb, fgMsg=False):
     tft.fb_df_type4mlst(xtfb.poolRet, nlst, float_lst)
     for xsgn in float_lst:
         # print "zhe yi bu"
-        print xtfb.poolRet[xsgn]
+        if len(xtfb.poolRet[xsgn]) > 0:
+            print "> 0"
+            print xtfb.poolRet[xsgn]
         if len(xtfb.poolRet[xsgn]):
             xtfb.poolRet[xsgn] = round(xtfb.poolRet[xsgn], 2)
             ret9[xsgn] = round(ret9[xsgn], 2)
@@ -201,7 +207,7 @@ def bt_main_ret(xtfb, fgMsg=False):
     xtfb.poolRet.to_csv(xtfb.poolRetFN)
 
     if fgMsg:
-        print('\nxtfb.poolTrd,足彩推荐')
+        print('\nxtfb.poolTrd, 推荐')
         print(xtfb.poolTrd.head())
         print('\nxtfb.poolRet，回报率汇总')
         print(xtfb.poolRet.tail())
