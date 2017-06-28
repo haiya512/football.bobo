@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import os
+
 import arrow
+
 import pandas as pd
+
 import tfb_sys as tfsys
 import tfb_tools as tft
 
@@ -41,10 +44,12 @@ def bt_1d_ret(xtfb):
     tft.fb_df_type4mlst(df9, nlst, flst)
     #
     for i, row in df9.iterrows():
-        kwin, kwin2 = row['kwin'], row['kwin_sta']
+        kwin = row['kwin']
+        kwin2 = row['kwin_sta']
         if kwin > -1:
             rsgn = 'num' + str(kwin2)
-            ret1d['num9'], ret1d[rsgn] = ret1d['num9'] + 1, ret1d[rsgn] + 1
+            ret1d['num9'] = ret1d['num9'] + 1
+            ret1d[rsgn] = ret1d[rsgn] + 1
             if kwin == kwin2:
                 dmoney = tft.fb_kwin2pdat(kwin, row)
                 rsgn = 'nwin' + str(kwin2)
@@ -84,13 +89,11 @@ def bt_1d_anz_1play(xtfb):
         xtfb.poolDay = xtfb.poolDay.append(g10.T, ignore_index=True)
         xtfb.poolTrd = xtfb.poolTrd.append(g10.T, ignore_index=True)
 
-
+'''
 def bt_1d_anz(xtfb):
     for i, row in xtfb.gid10.iterrows():
         xtfb.bars = row
-        #
         bt_1d_anz_1play(xtfb)
-    #
     if len(xtfb.poolDay.index) > 0:
         ret01 = bt_1d_ret(xtfb)
         if ret01['num9'] > 0:
@@ -111,7 +114,15 @@ def bt_1dayMain(xtfb):
         tft.fb_df_type_xed(xdat)
         xtfb.xdat10 = xdat
         xtfb.funPre(xtfb)
-        bt_1d_anz(xtfb)
+        # bt_1d_anz(xtfb)
+        for i, row in xtfb.gid10.iterrows():
+            xtfb.bars = row
+            bt_1d_anz_1play(xtfb)
+        if len(xtfb.poolDay.index) > 0:
+            ret01 = bt_1d_ret(xtfb)
+            if ret01['num9'] > 0:
+                xtfb.poolRet = xtfb.poolRet.append(ret01.T, ignore_index=True)
+'''
 
 
 def bt_main(xtfb, timeStr):
@@ -121,6 +132,7 @@ def bt_main(xtfb, timeStr):
         ktim = arrow.get(timeStr)
 
     nday = tfsys.xnday_down
+    # 难道又是定死了推荐结果为-9?
     tfsys.gids['kwin_sta'] = -9
     xtfb.poolRet = pd.DataFrame(columns=tfsys.retSgn)
     for tc in range(-3, nday):
@@ -129,7 +141,28 @@ def bt_main(xtfb, timeStr):
         if xtim < xtfb.tim0_gid:
             break
         xtfb.ktimStr = xtimStr
-        bt_1dayMain(xtfb)
+        # bt_1dayMain(xtfb)
+        xtfb.poolInx = []
+        xtfb.xdat10 = None
+        xtfb.poolDay = pd.DataFrame(columns=tfsys.poolSgn)
+        df = tfsys.gids
+        g10 = df[df.tplay == xtfb.ktimStr]
+        print("g10: {0}".format(g10))
+        xdat, xtfb.gid10 = bt_lnkXDat(g10, xtfb.kcid)
+        if len(xdat.index) > 0:
+            xlst = ['pwin0', 'pdraw0', 'plost0', 'pwin9', 'pdraw9', 'plost9']
+            tft.fb_df_type2float(xdat, xlst)
+            tft.fb_df_type_xed(xdat)
+            xtfb.xdat10 = xdat
+            xtfb.funPre(xtfb)
+            # bt_1d_anz(xtfb)
+            for i, row in xtfb.gid10.iterrows():
+                xtfb.bars = row
+                bt_1d_anz_1play(xtfb)
+            if len(xtfb.poolDay.index) > 0:
+                ret01 = bt_1d_ret(xtfb)
+                if ret01['num9'] > 0:
+                    xtfb.poolRet = xtfb.poolRet.append(ret01.T, ignore_index=True)
 
 
 def bt_main_ret(xtfb, fgMsg=False):

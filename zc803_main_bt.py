@@ -1,4 +1,4 @@
-# coding=utf-8
+# coding: utf-8
 '''
 
 '''
@@ -8,6 +8,7 @@ import tfb_sys as tfsys
 import tfb_tools as tft
 import tfb_strategy as tfsty
 import tfb_backtest as tfbt
+from zsys import file_dir, gid_file
 
 
 def main_bt(timeStr='', nday=2):
@@ -16,9 +17,9 @@ def main_bt(timeStr='', nday=2):
     # zsys.web_get001txtFg = True
     zsys.web_get001txtFg = True
 
-    rs0 = './'
-    fgid = rs0 + 'gid2017.dat'
-    xtfb = tft.fb_init(rs0, fgid)
+    # rs0 = './'
+    fgid = file_dir + gid_file
+    xtfb = tft.fb_init(file_dir, fgid)
     if nday == -1:
         tfsys.xnday_down = xtfb.gid_nday + 10
         print('nday,', tfsys.xnday_down)

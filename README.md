@@ -42,7 +42,7 @@
 * vwin9 vdraw9 vlost9
 * vwin9kaili vdraw9 vlost9  主队胜平负的 收盘凯利指数
 * kplost
-* dwin
+* dwin, fgid
 
 ### 数据文件列表
 * gid2017.dat

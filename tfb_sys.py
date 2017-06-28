@@ -75,6 +75,7 @@ rhtmShuju = rdat0 + 'xhtm/htm_sj/'
 gids = pd.DataFrame(columns=gidSgn, dtype=str)
 xdats = pd.DataFrame(columns=gxdatSgn, dtype=str)
 
+# gid file name, gid文件名称
 gidsFN = ''
 gidsNum = len(gids.index)
 xdatsNum = len(xdats.index)
@@ -88,9 +89,7 @@ class zTopFoolball(object):
     '''
     设置TopFoolball项目的各个全局参数
     尽量做到all in one
-
     '''
-
     def __init__(self):
         self.tim0Str_gid = '2010-01-01'
         self.tim0_gid = arrow.get(self.tim0Str_gid)
@@ -126,7 +125,10 @@ class zTopFoolball(object):
         self.gid10 = None
         self.xdat10 = None
 
-        self.funPre = self.funSta = None
+        # 策略函数返回的推荐结果或者策略函数
+        self.funPre = None
+        self.funSta = None
+
         self.preVars = self.staVars = []
 
         self.ai_mxFN0 = ''

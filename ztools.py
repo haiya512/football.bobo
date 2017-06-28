@@ -377,7 +377,7 @@ def timNHour(tim, tim0, fgPr=False):
     return hn
 
 
-def timNDay(tim, tim0, fgPr=False):
+def timNDay(time, tim0, fgPr=False):
     '''
     返回一个天数
     :param tim:
@@ -385,14 +385,15 @@ def timNDay(tim, tim0, fgPr=False):
     :param fgPr:
     :return:
     '''
-    if not tim:
-        tim = arrow.now()
-    if isinstance(tim, str):
-        tim = arrow.get(tim)
-    tn = tim - tim0
+    if not time:
+        time = arrow.now()
+    if isinstance(time, str):
+        time = arrow.get(time)
+    # 求得间隔秒数
+    tn = time - tim0
     xn = round(tn.total_seconds(), 2)
-    dn = round(xn / 3600 / 24)
+    day_nums = round(xn / 3600 / 24)
     if fgPr:
-        print(dn, ' days,', tim.format('YYYY-MM-DD'),
+        print(day_nums, ' days,', time.format('YYYY-MM-DD'),
               ',t0,', tim0.format('YYYY-MM-DD'))
-    return dn
+    return day_nums

@@ -6,14 +6,14 @@
 import arrow
 import pandas as pd
 from bs4 import BeautifulSoup
-#
+
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import zsys
 import ztools as zt
 import ztools_str as zstr
 import ztools_web as zweb
 import ztools_data as zdat
-#
+
 import tfb_sys as tfsys
 import tfb_strategy as tfsty
 
@@ -40,7 +40,7 @@ def fb_df_type4mlst(df, nlst, flst):
         df[xsgn] = df[xsgn].astype(float)
 
 
-def fb_init(rs0='./', fgid=''):
+def fb_init(rs0='./', gid_file=''):
     # 给定义的类赋初始值
     xtfb = tfsys.zTopFoolball()
     xtfb.tim_now = arrow.now()
@@ -48,9 +48,9 @@ def fb_init(rs0='./', fgid=''):
     xtfb.tim0 = xtfb.tim_now
     xtfb.tim0Str = xtfb.timStr_now
     # print('now:', zt.tim_now_str())
-
     # xtfb.pools=[]
     xtfb.kcid = '1'  # 官方,3=Bet365
+    #
     xtfb.funPre = tfsty.sta00_pre
     xtfb.funSta = tfsty.sta00_sta
     #
@@ -66,19 +66,22 @@ def fb_init(rs0='./', fgid=''):
         tfsys.rhtmShuju = rs0 + 'xhtm/htm_sj/'
 
     # 定义
-    if fgid:
-        tfsys.gidsFN = fgid
-        # xtfb.gids=pd.read_csv(fgid,index_col=0,dtype=str,encoding='gbk')
-        tfsys.gids = pd.read_csv(fgid, index_col=False, dtype=str)
-        # 为了方面查找最大最小值
+    if gid_file:
+        tfsys.gidsFN = gid_file
+        # xtfb.gids = pd.read_csv(fgid,index_col=0,dtype=str,encoding='gbk')
+        tfsys.gids = pd.read_csv(gid_file, index_col=False, dtype=str)
+        # 为了方便查找最大最小值
         # fb_df_type_xed(tfsys.gids)
         tfsys.gidsNum = len(tfsys.gids.index)
         xtfb.gid_tim0str = tfsys.gids['tplay'].min()
         xtfb.gid_tim9str = tfsys.gids['tplay'].max()
 
+        # 最早一场比赛的开始时间
         tim0 = arrow.get(xtfb.gid_tim0str)
+        # 最晚一场比赛的开始时间
         tim9 = arrow.get(xtfb.gid_tim9str)
 
+        # 两场比赛距离现在的天数
         xtfb.gid_nday = zt.timNDay('', tim0)
         xtfb.gid_nday_tim9 = zt.timNDay('', tim9)
 
@@ -229,7 +232,6 @@ def fb_gid_getExt_oz4htm(htm, bars, ftg=''):
         zdat.df_2ds8xlst(bars, ds, xlst)
         df = df.append(ds.T, ignore_index=True)
 
-
     if xc > 0:
         x10 = bs.find_all('tr', xls='footer')
 
@@ -306,41 +308,41 @@ def fb_gid_getExtPool(df, nsub=5):
         print('@_getExtPool,xn9:', ns9, fss)
 
 
-def fb_gid_get_nday(xtfb, timeStr, fgExt=False):
+def fb_gid_get_nday(xtfb, timeStr, nday=0, fgExt=False):
     if not timeStr:
         ktim = xtfb.tim_now
     else:
         ktim = arrow.get(timeStr)
-    #
-    nday = tfsys.xnday_down
+    # nday = tfsys.xnday_down
     for tc in range(0, nday):
         xtim = ktim.shift(days=-tc)
         xtimStr = xtim.format('YYYY-MM-DD')
         # print('\nxtim',xtim,xtim<xtfb.tim0_gid)
-        # 添加日志,无关紧要
-        xss = str(tc) + '#,' + xtimStr + ',@' + zt.get_fun_nam()
-        zt.f_addLog(xss)
+
+        # 添加日志,无关紧要, 所以暂时注释
+        # xss = str(tc) + '#,' + xtimStr + ',@' + zt.get_fun_nam()
+        # zt.f_addLog(xss)
+
         # 如果时间太早
         if xtim < xtfb.tim0_gid:
             break
+
+        filename = tfsys.rghtm + xtimStr + '.htm'
+        url = tfsys.us0_gid + xtimStr
+        # print(timeStr, tc, '#', filename)
         #
-        fss = tfsys.rghtm + xtimStr + '.htm'
-        uss = tfsys.us0_gid + xtimStr
-        print(timeStr, tc, '#', fss)
-        #
-        htm = zweb.web_get001txtFg(uss, fss)
+        htm = zweb.web_get001txtFg(url, filename)
         # 如果文件内容过小,可能没有数据,当天没有比赛
         if len(htm) > 5000:
+            # 处理htm网页内容, 返回格式化的数据
             df = fb_gid_get4htm(htm)
             if len(df['gid']) > 0:
                 tfsys.gids = tfsys.gids.append(df)
-                tfsys.gids.drop_duplicates(
-                    subset='gid', keep='last', inplace=True)
+                tfsys.gids.drop_duplicates(subset='gid', keep='last', inplace=True)
                 if fgExt:
                     fb_gid_getExtPool(df)
     # 如果设置文件路径,将数据保存到文件
     if tfsys.gidsFN:
-        print('')
         print(tfsys.gids.tail())
         tfsys.gids.to_csv(tfsys.gidsFN, index=False)
 

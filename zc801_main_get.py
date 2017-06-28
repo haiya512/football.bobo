@@ -25,7 +25,7 @@ def main_get(timeStr='', nday=2):
         print('nday,', tfsys.xnday_down)
 
     if nday != 0:
-        tft.fb_gid_get_nday(xtfb, timeStr, fgExt=True)
+        tft.fb_gid_get_nday(xtfb, timeStr, nday=nday, fgExt=True)
 
     # 获取时间差
     tn = zt.timNSec(timeStr, xtfb.tim0, '')
