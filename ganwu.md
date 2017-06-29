@@ -4,3 +4,11 @@ ziwang太让我失望了
 
 具有实战意义的应该是抽取出关键字段的数据, 脱离出网站,但又要和网站结合。
 有了关键字和思路, 在网站的样式变了之后就不会手忙脚乱, 无从下手了。
+
+
+1. 对网页编码先进行探测,探测之后再读取, 保存为tmp/500_datetime.htm
+        with open("your_file", 'rb') as fp:
+            file_data = fp.read()
+            result = chardet.detect(file_data)
+            file_content = file_data.decode(encoding=result['encoding'])
+2. 读取html网页文件或者直接获取内容, 在zc703_bs4_type.py

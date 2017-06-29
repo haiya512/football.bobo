@@ -5,6 +5,7 @@
 import urllib2
 
 from bs4 import BeautifulSoup
+from ztools_web import web_get001
 
 
 def bs010(fsr):
@@ -53,11 +54,13 @@ def bs010(fsr):
 # fss = 'dat/500_2010-01-01.htm'
 # print('f,', fss)
 
-_date_2010 = '2010-01-02'
+_date = '2017-06-29'
+# _date = '2010-01-02'
 # _date_2010 = '2010-01-01'
 url_pre = 'http://trade.500.com/jczq/?date='
-url = url_pre + _date_2010
-request = urllib2.Request(url)
-response = urllib2.urlopen(request)
-html_doc = response.read()
+url = url_pre + _date
+# request = urllib2.Request(url)
+# response = urllib2.urlopen(request)
+# html_doc = response.read()
+html_doc = web_get001(url)
 bs010(html_doc)

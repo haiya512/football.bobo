@@ -8,15 +8,18 @@
 import os
 import sys
 import random
+import inspect
+import pickle
+import time
+
 import arrow
 import numexpr as ne
 import pandas as pd
-import cpuinfo as cpu
 import psutil as psu
-import inspect
+
 import matplotlib as mpl
-import pickle
-import time
+
+import cpuinfo as cpu
 import zsys
 import ztools_str as zstr
 
@@ -227,24 +230,21 @@ def f_size(filename):
 
 
 def f_rd(fn):
-    f = open(fn, 'r')
-    content = f.read()
-    f.close()
+    with open(fn, 'r') as f:
+        content = f.read()
     return content
 
 
 def f_rdXHdr(fn, cod='gbk'):
-    f = open(fn, 'r', encoding=cod)
-    hdr = f.readline()
-    dss = f.read()
-    f.close()
+    with open(fn, 'r', encoding=cod) as f:
+        hdr = f.readline()
+        dss = f.read()
     return hdr, dss
 
 
 def f_rdXNum(fn, cod='gbk'):
-    f = open(fn, 'r', encoding=cod)
-    dss = f.readline()
-    f.close()
+    with open(fn, 'r', encoding=cod) as f:
+        dss = f.readline()
     dn = int(dss)
     return dn
 
@@ -289,7 +289,8 @@ def f_lstRndN(xlst, xn):
     x10=zt.lstRndN(xlst,80);ds=pd.Series(x10);ds.name='code'
     ds.to_csv('tmp\cod080.csv',index=False,header='code')
     '''
-    x10, xn9 = set(), len(xlst)
+    x10 = set()
+    xn9 = len(xlst)
     while len(x10) < xn:
         xc = random.randint(0, xn9)
         # print(xc,x10,'n',len(x10),xn9)
@@ -303,9 +304,8 @@ def f_lstRd(fnam):
     ''' 读取列表数据
     '''
 
-    f = open(fnam, 'rb')
-    lst = pickle.load(f)
-    f.close()
+    with open(fnam, 'rb') as f:
+        lst = pickle.load(f)
     return lst
 
 

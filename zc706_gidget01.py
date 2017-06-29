@@ -1,6 +1,7 @@
 # coding=utf-8
 '''
 编写一个真正的商业级别的提取球队比赛数据的程序
+这个数据获取gid有问题
 '''
 import urllib2
 
@@ -24,7 +25,7 @@ def gid_get001(htm):
     zsys.bs_get_ktag_kstr = 'isend'
     x10 = bs.find_all(zweb.bs_get_ktag)
     for xc, x in enumerate(x10):
-        print('\n@x\n', xc, '#', x.attrs)
+        # print('\n@x\n', xc, '#', x.attrs)
         # print('\n@x\n',xc,'#',x.attrs)
         ds['gid'] = zstr.str_fltHtmHdr(x['lg'])
         ds['gset'] = x['fid']
@@ -49,7 +50,7 @@ def gid_get001(htm):
 # print(df.tail())
 # df.to_csv('tmp\gid01.csv', index=False, encoding='gbk')
 
-_date_2010 = '2017-06-23'
+_date_2010 = '2017-06-29'
 # _date_2010 = '2010-01-01'
 url_pre = 'http://trade.500.com/jczq/?date='
 url = url_pre + _date_2010

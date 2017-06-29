@@ -78,7 +78,6 @@ def web_get001txtFg(url, filename):
     # 返回的一定是格式化好的数据
     file_siz = zt.f_size(filename)
     if zsys.web_get001txtFg or (file_siz < 1000):
-        # uss=xtfb.us0_extOuzhi+xtfb.kgid+'.shtml';#print(uss)
         htm = web_get001txt(url, filename)
     else:
         htm = zt.f_rd(filename)
