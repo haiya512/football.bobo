@@ -5,6 +5,7 @@
 
 import arrow
 import pandas as pd
+import numpy as np
 from bs4 import BeautifulSoup
 
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -16,6 +17,8 @@ import ztools_data as zdat
 
 import tfb_sys as tfsys
 import tfb_strategy as tfsty
+from matplotlib import pyplot as plt
+from zsys import cors_brg
 
 
 def fb_df_type_xed(df):
@@ -395,3 +398,30 @@ def fb_xdat_xlnk(rs0, ftg):
             df9.to_csv(fs2, index=False)
     #
     df9.to_csv(ftg, index=False)
+
+
+def gid_anz_top10(df, column):
+    # 出现过两次, 还有一次是在zc404_gid_des.py
+    total_numbers = len(df['gid'])
+    # 获取俱乐部排名前10,依据比赛次数从大到小排列
+    d10 = df[column].value_counts()[:10]
+    # print(d10)
+
+    # mpl.rcParams['font.sans-serif'] = ['STHeiti-Light.ttc']  # 指定默认字体
+    # mpl.rcParams['axes.unicode_minus'] = False  # 解决保存图像是负号'-'显示为方块的问题
+    # 以上是一种方式，还有一种改变的方式https://segmentfault.com/a/1190000005144275或者
+    # http://wenda.chinahadoop.cn/question/5304
+    # help(d10.plot)
+    # 柱状图
+    d10.plot(kind='bar', rot=0, color=cors_brg)
+    plt.show()
+    #
+    d10_sum = d10.sum()
+    d10['other'] = total_numbers - d10_sum
+
+    # d10是一个pandas对象
+    k10 = np.round(d10 / total_numbers * 100, decimals=2)
+    # print(k10)
+
+    k10.plot(kind='pie', rot=0, table=True)
+    plt.show()
