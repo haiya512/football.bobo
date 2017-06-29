@@ -12,6 +12,7 @@ from zsys import gid_file, file_dir
 
 
 def main_get(timeStr='', nday=2):
+    print timeStr
     tfsys.xnday_down = nday
     # 是否重新获取网页数据
     # zsys.web_get001txtFg = True
@@ -20,15 +21,16 @@ def main_get(timeStr='', nday=2):
     # rs0 = './'
     # xtfb = tft.fb_init(rs0, gid_file)
     xtfb = tft.fb_init(file_dir, gid_file)
+    # print xtfb
     if nday == -1:
         tfsys.xnday_down = xtfb.gid_nday + 10
         print('nday,', tfsys.xnday_down)
 
-    if nday != 0:
+    if nday > 0:
         tft.fb_gid_get_nday(xtfb, timeStr, nday=nday, fgExt=True)
 
     # 获取时间差
     tn = zt.timNSec(timeStr, xtfb.tim0, '')
 
 
-main_get()
+main_get('2017-06-29')

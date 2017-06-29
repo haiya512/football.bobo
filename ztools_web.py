@@ -46,6 +46,8 @@ def web_get001(url):
         rx = rx.decode("UTF-8")
     except:
         rx = rx.decode("gb2312")
+    finally:
+        print "rx decode error"
     return rx
 
 

@@ -12,10 +12,12 @@ gidSgn = ['gid', 'gset', 'mplay', 'mtid', 'gplay', 'gtid', 'qj',
 
 poolNil = ['', '', '', '', '', '', '-1', '-1', '0',
            '0', '-1', '-1', '', '', '', '0', 0, 0, 0, '-9']
-poolSgn = ['gid', 'gset', 'mplay',
-           'mtid', 'gplay', 'gtid', 'qj', 'qs', 'qr',
-           'kend', 'kwin', 'kwinrq', 'tweek', 'tplay',
-           'tsell', 'cid', 'pwin9', 'pdraw9', 'plost9', 'kwin_sta']
+poolSgn = ['gid', 'gset',
+           'mplay', 'mtid', 'gplay', 'gtid',
+           'qj', 'qs', 'qr',
+           'kend', 'kwin', 'kwinrq',
+           'tweek', 'tplay', 'tsell',
+           'cid', 'pwin9', 'pdraw9', 'plost9', 'kwin_sta']
 
 gxdatNil = ['', '', '', 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,

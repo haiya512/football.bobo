@@ -40,7 +40,7 @@ def fb_df_type4mlst(df, nlst, flst):
         df[xsgn] = df[xsgn].astype(float)
 
 
-def fb_init(rs0='./', gid_file=''):
+def fb_init(rs0='./', gid_file='', timeStr=''):
     # 给定义的类赋初始值
     xtfb = tfsys.zTopFoolball()
     xtfb.tim_now = arrow.now()
@@ -55,6 +55,7 @@ def fb_init(rs0='./', gid_file=''):
     xtfb.funSta = tfsty.sta00_sta
     #
     today_date = xtfb.timStr_now
+    # 这里没蛋用,就定义了一个路径
     xtfb.poolTrdFN = 'log/poolTrd_' + today_date + '.csv'
     xtfb.poolRetFN = 'log/poolRet_' + today_date + '.csv'
     # 定义存放数据的目录
@@ -85,10 +86,8 @@ def fb_init(rs0='./', gid_file=''):
         xtfb.gid_nday = zt.timNDay('', tim0)
         xtfb.gid_nday_tim9 = zt.timNDay('', tim9)
 
-        print('gid tim0: {0}, nday: {1}'.format(
-            xtfb.gid_tim0str, xtfb.gid_nday))
-        print('gid tim9: {0}, nday: {1}'.format(
-            xtfb.gid_tim9str, xtfb.gid_nday_tim9))
+        print('gid tim0: {0}, nday: {1}'.format(xtfb.gid_tim0str, xtfb.gid_nday))
+        print('gid tim9: {0}, nday: {1}'.format(xtfb.gid_tim9str, xtfb.gid_nday_tim9))
 
     return xtfb
 
@@ -312,10 +311,12 @@ def fb_gid_get_nday(xtfb, timeStr, nday=0, fgExt=False):
     if not timeStr:
         ktim = xtfb.tim_now
     else:
+        # print timeStr
         ktim = arrow.get(timeStr)
     # nday = tfsys.xnday_down
     for tc in range(0, nday):
         xtim = ktim.shift(days=-tc)
+        # print("xtime: {0}".format(xtim))
         xtimStr = xtim.format('YYYY-MM-DD')
         # print('\nxtim',xtim,xtim<xtfb.tim0_gid)
 
@@ -332,11 +333,15 @@ def fb_gid_get_nday(xtfb, timeStr, nday=0, fgExt=False):
         # print(timeStr, tc, '#', filename)
         #
         htm = zweb.web_get001txtFg(url, filename)
+        print url
         # 如果文件内容过小,可能没有数据,当天没有比赛
         if len(htm) > 5000:
             # 处理htm网页内容, 返回格式化的数据
+            print("htm > 5000")
             df = fb_gid_get4htm(htm)
+            print df
             if len(df['gid']) > 0:
+                print("{0}有比赛".format(xtim))
                 tfsys.gids = tfsys.gids.append(df)
                 tfsys.gids.drop_duplicates(subset='gid', keep='last', inplace=True)
                 if fgExt:
