@@ -142,7 +142,11 @@ def fb_gid_get4htm(htm):
         ds['gid'] = x['fid']
         ds['gset'] = zstr.str_fltHtmHdr(x['lg'])
         ds['mplay'] = zstr.str_fltHtmHdr(x['homesxname'])
+        # mtid 暂时未找到, 置空处理
+        ds['mtid'] = 'NAN'
         ds['gplay'] = zstr.str_fltHtmHdr(x['awaysxname'])
+        # gtid 暂时未找到, 置空处理
+        ds['gtid'] = 'NAN'
         ds['kend'] = x['isend']
         s2 = ds['tweek'] = x['gdate'].split(' ')[0]  # tweek
         ds['tweek'] = fb_tweekXed(s2)
@@ -173,7 +177,7 @@ def fb_gid_get4htm(htm):
                 xid = zstr.str_xmid(xss, '/team/', '/')
                 df['mtid'][xc] = xid
                 g01 = df['gid'][xc]
-                if xid == '':
+                if not xid:
                     zt.f_addLog('tid-mtid,nil,' + xss + ',gid,' + g01)
 
     x20 = bs.find_all('td', class_='right_team')

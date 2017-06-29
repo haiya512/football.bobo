@@ -3,8 +3,6 @@
 编写一个真正的商业级别的提取球队比赛数据的程序
 这个数据获取gid有问题
 '''
-import urllib2
-
 import pandas as pd
 from bs4 import BeautifulSoup
 
@@ -25,12 +23,14 @@ def gid_get001(htm):
     zsys.bs_get_ktag_kstr = 'isend'
     x10 = bs.find_all(zweb.bs_get_ktag)
     for xc, x in enumerate(x10):
-        # print('\n@x\n', xc, '#', x.attrs)
-        # print('\n@x\n',xc,'#',x.attrs)
-        ds['gid'] = zstr.str_fltHtmHdr(x['lg'])
-        ds['gset'] = x['fid']
+        print('\n@x\n', xc, '#', x.attrs)
+        ds['gset'] = zstr.str_fltHtmHdr(x['lg'])
+        ds['gid'] = x['fid']
         ds['mplay'] = zstr.str_fltHtmHdr(x['homesxname'])
+        # ds['mtid'] = x['mid']
+        ds['mtid'] = 'NAN'
         ds['gplay'] = zstr.str_fltHtmHdr(x['awaysxname'])
+        ds['gtid'] = 'NAN'
         ds['kend'] = x['isend']
         ds['tweek'] = x['gdate'].split(' ')[0]  # tweek
         ds['tplay'] = x['pendtime']  # tplay,tsell,

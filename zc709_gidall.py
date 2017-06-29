@@ -1,6 +1,6 @@
 # coding: utf-8
 '''
-
+fb_gid_get4htm 这个版本有所加强,难道是获取比赛完结后的结果?
 '''
 import arrow
 import zsys
@@ -28,9 +28,9 @@ def fb_gid_get_nday(xtfb, timeStr, fgExt=False, nday=0):
         # print("xtim: ", xtim)
         xtimeStr = xtime.format('YYYY-MM-DD')
         # print('\nxtim',xtim,xtim<xtfb.tim0_gid)
-        # 这个是日志文件内容
-        log_content = str(tc) + '#,' + xtimeStr + ',@' + zt.get_fun_nam()
-        zt.f_addLog(log_content)
+        # # 这个是日志文件内容
+        # log_content = str(tc) + '#,' + xtimeStr + ',@' + zt.get_fun_nam()
+        # zt.f_addLog(log_content)
         if xtime < xtfb.tim0_gid:
             # 如果当前的时间早于2010-01-01
             # print('#brk;')
