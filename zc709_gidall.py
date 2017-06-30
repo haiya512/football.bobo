@@ -1,13 +1,11 @@
 # coding: utf-8
 '''
-fb_gid_get4htm 这个版本有所加强,难道是获取比赛完结后的结果?
+fb_gid_get4htm 这个版本有所加强, 获取当日(及后两天的)球队比赛排表数据
 '''
 import arrow
 import zsys
-import ztools as zt
 import ztools_web as zweb
 import tfb_sys as tfsys
-# import tfb_tools as tft
 from tfb_tools import fb_init, fb_gid_get4htm, fb_gid_getExt
 import sys
 reload(sys)
@@ -38,7 +36,6 @@ def fb_gid_get_nday(xtfb, timeStr, fgExt=False, nday=0):
 
         html_filename = tfsys.rghtm + xtimeStr + '.htm'
         url = tfsys.us0_gid + xtimeStr
-        print url
         htm = zweb.web_get001txtFg(url, html_filename)
         if len(htm) > 5000:
             df = fb_gid_get4htm(htm)
@@ -65,7 +62,7 @@ zsys.web_get001txtFg = True
 # tn = arrow.now() - arrow.get('2010-01-01')
 # print('tn,',tn)
 
-timeStr = ''
+timeStr = '2017-06-23'
 # 算最近两天的数值
 fb_gid_get_nday(xtfb, timeStr, fgExt=False, nday=2)
 

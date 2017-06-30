@@ -75,8 +75,8 @@
 * zc701.py              打开2010-01-01和今天的网页数据并保存为.html 很好奇,这个文件是以网站名字开头的,那么怎么合成gid和xdat呢?数据是不是合成这两个文件需要的呢?
 * zc703_bs4_type.py     读取网页数据
 * zc705_htmchk01.py     *不知道这个文件有什么用*
-* zc706_gidget01.py     读取网页数据, 转换为适合pandas.DataFrame装载的数据
-* zc709_gidall.py       保存近2天的数据
+* zc706_gidget01.py     读取网页数据, 转换为适合pandas.DataFrame装载的数据, 示例用
+* zc709_gidall.py       获取当日(及后两天的)球队比赛排表数据
 * zc712_xdat001.py      生成网页数据文件
 * zc713_xdat002.py      从HTML文件获取某场比赛数据: 各大赔率等, 格式化并写入到tmp目录
 * zc801_main_get.py     实盘数据更新

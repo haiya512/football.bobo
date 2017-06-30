@@ -1,7 +1,7 @@
-# coding=utf-8
+# coding: utf-8
 '''
-编写一个真正的商业级别的提取球队比赛数据的程序
-这个数据获取gid有问题
+提取球队比赛未开奖之前的数据
+这个脚本暂时没有写获取mtid和gtid
 '''
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -32,10 +32,10 @@ def gid_get001(htm):
         ds['gplay'] = zstr.str_fltHtmHdr(x['awaysxname'])
         ds['gtid'] = 'NAN'
         ds['kend'] = x['isend']
-        ds['tweek'] = x['gdate'].split(' ')[0]  # tweek
-        ds['tplay'] = x['pendtime']  # tplay,tsell,
+        ds['tweek'] = x['gdate'].split(' ')[0]
+        ds['tplay'] = x['pendtime']
         ds['tsell'] = x['pdate']
-        #
+
         df = df.append(ds.T, ignore_index=True)
 
     df = df[df['gid'] != '-1']
@@ -63,4 +63,4 @@ df = gid_get001(html_doc)
 # print('')
 print(df)
 # print(df.tail())
-# df.to_csv('tmp\gid01.csv', index=False)
+df.to_csv('tmp/gid02.csv', index=False)

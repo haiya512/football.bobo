@@ -183,7 +183,6 @@ def fb_gid_get4htm(htm):
     x20 = bs.find_all('td', class_='right_team')
     if (len(x20) == len(x10)):
         for xc, x in enumerate(x20):
-            # print('@x',xc,'#',x.a['href'])
             xss = x.a['href']
             if xss.find('/team//') < 0:
                 xid = zstr.str_xmid(xss, '/team/', '/')
@@ -213,7 +212,6 @@ def fb_gid_getExt_oz4clst(ds, clst):
     i = i + 3
     ds['vwin9kali'], ds['vdraw9kali'], ds[
         'vlost9kali'] = clst[i], clst[i + 1], clst[i + 2]
-    #
     return ds
 
 
