@@ -17,10 +17,10 @@ import zsys
 import ztools as zt
 import ztools_str as zstr
 import ztools_data as zdat
-import urllib2
+import urllib.request
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
+#reload(sys)
+#sys.setdefaultencoding('utf-8')
 
 zt_headers = {
     'User-Agent': '''
@@ -38,8 +38,8 @@ zt_xagent = '''
 
 def web_get001(url):
     # 如果编码是gb2312, 则将gb2312改成utf-8
-    request = urllib2.Request(url)
-    response = urllib2.urlopen(request)
+    request = urllib.request.Request(url)
+    response = urllib.request.urlopen(request)
     rx = response.read()
     # print "web_get001, url: {0}\n rx: {1}".format(url, rx)
     try:
@@ -47,7 +47,7 @@ def web_get001(url):
     except:
         rx = rx.decode("gb2312")
     finally:
-        print "rx decode error"
+        print("rx decode error")
     return rx
 
 

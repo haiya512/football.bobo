@@ -338,13 +338,13 @@ def fb_gid_get_nday(xtfb, timeStr, nday=0, fgExt=False):
         # print(timeStr, tc, '#', filename)
         #
         htm = zweb.web_get001txtFg(url, filename)
-        print url
+        print(url)
         # 如果文件内容过小,可能没有数据,当天没有比赛
         if len(htm) > 5000:
             # 处理htm网页内容, 返回格式化的数据
             print("htm > 5000")
             df = fb_gid_get4htm(htm)
-            print df
+            print(df)
             if len(df['gid']) > 0:
                 print("{0}有比赛".format(xtim))
                 tfsys.gids = tfsys.gids.append(df)
