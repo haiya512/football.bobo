@@ -14,7 +14,6 @@ from zsys import file_dir, gid_file
 def main_bt(timeStr='', nday=2):
     tfsys.xnday_down = nday
     # 数据都已经获取了
-    # zsys.web_get001txtFg = True
     zsys.web_get001txtFg = True
 
     # rs0 = './'

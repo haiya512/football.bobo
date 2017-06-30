@@ -83,7 +83,7 @@ gidsNum = len(gids.index)
 xdatsNum = len(xdats.index)
 #
 xbars = None
-# 偏离今天的时间长度
+# 数据下载的天数(偏离今天的时间长度)
 xnday_down = 0
 
 
@@ -114,9 +114,13 @@ class zTopFoolball(object):
         self.kcid = ''
         self.ktimStr = ''
 
+        # 比赛索引数据, 只有gid编码和一天的数据
         self.poolInx = []
+        # 各场比赛的赔率数据, 只有一天的数据
         self.poolDay = pd.DataFrame(columns=poolSgn)
+        # 总的交易数据, 包括多日的数据, 是gid数据的增强版本
         self.poolTrd = pd.DataFrame(columns=poolSgn)
+        # 每天的回报率记录,包括多日的数据
         self.poolRet = pd.DataFrame(columns=retSgn)
 
         self.poolTrdFN = ''

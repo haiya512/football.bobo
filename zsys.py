@@ -9,10 +9,6 @@ from matplotlib import cm
 
 __version__ = '2016.M10'
 
-cpu_num_core = 8
-cpu_num9 = 8
-cpu_num = cpu_num9 - 1
-
 tim0_sys = None
 tim0_str = ''
 
@@ -29,7 +25,7 @@ sgnSP4 = '    '
 sgnSP8 = sgnSP4 + sgnSP4
 # 日志文件名
 logFN = ''
-#
+# 是否重新下载网页文件
 web_get001txtFg = False
 
 

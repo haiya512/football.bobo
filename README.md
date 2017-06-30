@@ -35,7 +35,7 @@
 * tplay 比赛日期
 * tsell 博彩销售截止日期
 *
-* cid 菠菜公司ID  全局唯一
+* cid 菠菜公司ID  全局唯一, 1代表国彩中心
 * cname 菠菜公司名称
 * pwin0 pdraw0 plost0  开盘时主队胜平负的赔率
 * vwin0 vdraw0 vlost0
@@ -43,8 +43,25 @@
 * pwin9 pdraw9 plost9  收盘时主队胜平负的赔率
 * vwin9 vdraw9 vlost9
 * vwin9kaili vdraw9 vlost9  主队胜平负的 收盘凯利指数
+* kret9 总回报率
+* kret3, kret1, kret0 买入主队胜、平、负盘的回报率
+* knum3, knum1, knum0 买入主队胜、平、负盘正确的盘数百分比
+* ret9 总的回报金额,包括投入本金
+* num9 总共下注的比赛盘数
+* nwin9 总共买对的比赛盘数
+* ret3, ret1, ret0 买入主队胜、平、负的总金额
+* nwin3 nwin1 nwin0 买入主队胜平负盘正确的总盘数
+* num3 num1 num0 买入主队胜平负盘总的盘数
 * kplost
 * dwin, fgid
+* xtim 比赛日期
+
+
+* poolTrd       下单交易数据
+* poolRet       回报数据记录
+
+
+
 
 ### 数据文件列表
 * gid2017.dat
@@ -80,6 +97,7 @@
 * zc712_xdat001.py      生成网页数据文件
 * zc713_xdat002.py      从HTML文件获取某场比赛数据: 各大赔率等, 格式化并写入到tmp目录
 * zc801_main_get.py     实盘数据更新
-* zc802_xdat.py         看看读取文件花费的时间
+* zc802_xdat.py         看看读取文件花费的时间, 没什么卵用
 * zc803_main_bt.py      一堆引用,MD
+* zc804_bt_sta01.py     zc803的扩展
 * zd401_sta01.py

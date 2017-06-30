@@ -28,7 +28,7 @@ def fb_gid_get_nday(xtfb, timeStr, fgExt=False):
         xss = str(tc) + '#,' + xtimStr + ',@' + zt.get_fun_nam()
         zt.f_addLog(xss)
         if xtim < xtfb.tim0_gid:
-            print('#brk;')
+            # print('#brk;')
             break
         # 网页数据文件名
         fss = tfsys.rghtm + xtimStr + '.htm'
@@ -47,7 +47,6 @@ def fb_gid_get_nday(xtfb, timeStr, fgExt=False):
                     # if fgExt:tft.fb_gid_getExtPool(df)
     # 如果设置保存数据文件名
     if tfsys.gidsFN:
-        # print('')
         print(tfsys.gids.tail())
         tfsys.gids.to_csv(tfsys.gidsFN, index=False)
 

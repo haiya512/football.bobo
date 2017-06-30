@@ -135,7 +135,7 @@ def bt_main(xtfb, timeStr):
     # 难道又是定死了推荐结果为-9?
     tfsys.gids['kwin_sta'] = -9
     xtfb.poolRet = pd.DataFrame(columns=tfsys.retSgn)
-    # print("这里输出了什么1")
+    #
     for tc in range(-3, nday):
         xtim = ktim.shift(days=-tc)
         xtimStr = xtim.format('YYYY-MM-DD')
