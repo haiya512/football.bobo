@@ -48,7 +48,8 @@ def fb_df_type4mlst(df, nlst, flst):
 def fb_init(rs0='./', gid_file='', timeStr=''):
     # 给定义的类赋初始值
     xtfb = tfsys.zTopFoolball()
-    xtfb.tim_now = arrow.now()
+    xtfb.tim_now = arrow.get('2017-01-10')
+    # xtfb.tim_now = arrow.now()
     xtfb.timStr_now = xtfb.tim_now.format('YYYY-MM-DD')
     xtfb.tim0 = xtfb.tim_now
     xtfb.tim0Str = xtfb.timStr_now

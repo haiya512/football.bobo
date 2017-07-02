@@ -13,7 +13,7 @@ from zsys import file_dir, gid_file
 
 def main_bt(timeStr='', nday=2):
     tfsys.xnday_down = nday
-    # 数据都已经获取了
+    # 是否覆盖数据
     zsys.web_get001txtFg = True
 
     # rs0 = './'
@@ -38,5 +38,5 @@ def main_bt(timeStr='', nday=2):
     print('\n#5,backtest,tim:{0:.2f} s'.format(tn))
 
 
-# main_bt('', 2)
-main_bt('', 100)
+main_bt('', 2)
+# main_bt('', 100)
