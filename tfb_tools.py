@@ -78,7 +78,7 @@ def fb_init(rs0='./', gid_file='', timeStr=''):
         # xtfb.gids = pd.read_csv(fgid,index_col=0,dtype=str,encoding='gbk')
         tfsys.gids = pd.read_csv(gid_file, index_col=False, dtype=str)
         # 为了方便查找最大最小值
-        # fb_df_type_xed(tfsys.gids)
+        fb_df_type_xed(tfsys.gids)
         tfsys.gidsNum = len(tfsys.gids.index)
         xtfb.gid_tim0str = tfsys.gids['tplay'].min()
         xtfb.gid_tim9str = tfsys.gids['tplay'].max()
