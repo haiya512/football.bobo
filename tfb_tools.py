@@ -17,6 +17,8 @@ import ztools_data as zdat
 
 import tfb_sys as tfsys
 import tfb_strategy as tfsty
+import matplotlib
+matplotlib.use('qt5agg')
 from matplotlib import pyplot as plt
 from zsys import cors_brg
 

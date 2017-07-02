@@ -193,8 +193,8 @@ def bt_main_ret(xtfb, fgMsg=False):
     for xsgn in float_lst:
         # print "zhe yi bu"
         if len(xtfb.poolRet[xsgn]) > 0:
-            print "> 0"
-            print xtfb.poolRet[xsgn]
+            print("> 0")
+            print(xtfb.poolRet[xsgn])
         if len(xtfb.poolRet[xsgn]):
             xtfb.poolRet[xsgn] = round(xtfb.poolRet[xsgn], 2)
             ret9[xsgn] = round(ret9[xsgn], 2)

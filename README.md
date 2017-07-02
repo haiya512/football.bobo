@@ -4,7 +4,12 @@
 ## 需要安装包
 * arrow
 * chardet 文件编码探测函数库
-*
+
+## Mac python3流程
+* 安装python3
+* 安装pyqt5
+** brew install pyqt5
+** pip install pyqt5
 
 
 >xdat2017.dat.utf8 太大，GitHub支持的单个文件大小上限为100M,
