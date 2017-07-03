@@ -14,6 +14,7 @@ def bt_lnkXDat(g10, kcid):
     g20 = pd.DataFrame(columns=tfsys.gidSgn)
     df9 = pd.DataFrame(columns=tfsys.gxdatSgn)
     for i, row in g10.iterrows():
+        print("i: {0},  row: {1}".format(i, row))
         gid = row['gid']
         fxdat = tfsys.rxdat + gid + '_oz.dat'
         if os.path.exists(fxdat):
@@ -154,7 +155,8 @@ def bt_main(xtfb, timeStr):
             print("g10: xxxx {0}".format(g10))
         xdat, xtfb.gid10 = bt_lnkXDat(g10, xtfb.kcid)
         if len(xdat.index) > 0:
-            xlst = ['pwin0', 'pdraw0', 'plost0', 'pwin9', 'pdraw9', 'plost9']
+            xlst = ['pwin0', 'pdraw0', 'plost0',
+                    'pwin9', 'pdraw9', 'plost9']
             tft.fb_df_type2float(xdat, xlst)
             tft.fb_df_type_xed(xdat)
             xtfb.xdat10 = xdat

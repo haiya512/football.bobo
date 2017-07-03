@@ -7,7 +7,7 @@ import tfb_sys as tfsys
 import tfb_tools as tft
 import tfb_backtest as tfbt
 import tfb_strategy as tfsty
-from zsys import gid_file, file_dir
+from zsys import file_dir, gid_file
 
 def main_get(timStr='', nday=2):
     print('\nmain_get,nday:', nday)
@@ -15,9 +15,9 @@ def main_get(timStr='', nday=2):
     zsys.web_get001txtFg = True
 
     # rs0 = 'tfbDat/'
-    # rs0 = './'
-    # fgid = rs0 + 'gid2017.dat'
-    xtfb = tft.fb_init(file_dir, gid_file)
+    rs0 = './'
+    fgid = rs0 + 'gid2017.dat'
+    xtfb = tft.fb_init(rs0, fgid)
     if nday == -1:
         tfsys.xnday_down = xtfb.gid_nday + 10
         print('nday,', tfsys.xnday_down)
@@ -67,13 +67,6 @@ def main_bt(timStr='', nday=2):
         print('kcid,', xtfb.kcid, ',nday,', nday)
         print('preVar,', xtfb.preVars)
         print('staVar,', xtfb.staVars)
-    #
-    # 5
-    # tn = zt.timNSec('', xtfb.tim0, '')
-    # print('\n#5,backtest,tim:{0:.2f} s'.format(tn))
-    #
-    # 6---end.main
-    # print('\n#6,end.main')
 
 
 def main_ai_bt(timStr='', nday=2):

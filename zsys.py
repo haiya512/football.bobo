@@ -15,11 +15,11 @@ tim0_str = ''
 fn_time_nloop = 5
 fn_time_nloop5 = 500
 
-file_dir = './'
+file_dir = '.'
 gid_file_name = 'gid2017.dat'
 xdat_file_name = 'xdat2017.dat'
-gid_file = file_dir + gid_file_name
-xdat_file = file_dir + xdat_file_name
+gid_file = file_dir + '/'+ gid_file_name
+xdat_file = file_dir + '/' + xdat_file_name
 
 sgnSP4 = '    '
 sgnSP8 = sgnSP4 + sgnSP4
