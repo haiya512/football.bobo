@@ -11,6 +11,7 @@ import ztools_str as zstr
 import ztools_web as zweb
 import tfb_sys as tfsys
 from ztools_web import web_get001
+from tfb_tools import get_date_list
 
 
 def gid_get001(htm):
@@ -42,25 +43,22 @@ def gid_get001(htm):
     return df
 
 
-# fss = 'dat/500_2017-01-01.htm'
-# print('f,', fss)
-# hss = zt.f_rd(fss)
-# df = gid_get001(hss)
-# print('')
-# print(df.tail())
-# df.to_csv('tmp\gid01.csv', index=False, encoding='gbk')
-
-_date_2010 = '2017-06-29'
-# _date_2010 = '2010-01-01'
 url_pre = 'http://trade.500.com/jczq/?date='
-url = url_pre + _date_2010
-# request = urllib2.Request(url)
-# response = urllib2.urlopen(request)
-# html_doc = response.read()
-html_doc = web_get001(url)
+# start_date = '2010-01-01'
+# start_date = '2017-02-14'
+# end_date = '2017-07-04'
+# date_list = get_date_list(start_date, end_date)
+# for date in ['2017-06-29', '2017-06-30']:
+date_list = ['2015-06-17', '2016-06-24']
+for date in date_list:
+    # _date_2010 = '2017-06-29'
+    # _date_2010 = '2010-01-01'
+    url = url_pre + date
+    html_doc = web_get001(url)
 
-df = gid_get001(html_doc)
-# print('')
-print(df)
-# print(df.tail())
-df.to_csv('tmp/gid02.csv', index=False)
+    df = gid_get001(html_doc)
+    if len(df.gid):
+        gid_filename = 'gid/gid_' + date + '.csv'
+        df.to_csv(gid_filename, index=False, encoding='utf-8')
+    else:
+        print(url)

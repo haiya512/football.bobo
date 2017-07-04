@@ -41,13 +41,19 @@ def web_get001(url):
     request = urllib.request.Request(url)
     response = urllib.request.urlopen(request)
     rx = response.read()
-    # print "web_get001, url: {0}\n rx: {1}".format(url, rx)
-    try:
-        rx = rx.decode("UTF-8")
-    except:
-        rx = rx.decode("gb2312")
-    finally:
-        print("rx decode error")
+    # rx = rx.decode('UTF-8')
+    # print(rx)
+    # # print "web_get001, url: {0}\n rx: {1}".format(url, rx)
+    # if isinstance(rx, bytes):
+    #     try:
+    #         rx = rx.decode("UTF-8")
+    #     except:
+    #         # rx = rx.decode("gb2312")
+    #         print("rx decode utf-8 error")
+    #     # finally:
+    #     #     print("rx decode error")
+    # else:
+    #     print("rx is not bytes")
     return rx
 
 
