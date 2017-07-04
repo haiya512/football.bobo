@@ -7,9 +7,6 @@ import zsys
 import ztools_web as zweb
 import tfb_sys as tfsys
 from tfb_tools import fb_init, fb_gid_get4htm, fb_gid_getExt
-import sys
-reload(sys)
-sys.setdefaultencoding("utf-8")
 
 
 def fb_gid_get_nday(xtfb, timeStr, fgExt=False, nday=0):

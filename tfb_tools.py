@@ -21,6 +21,7 @@ import matplotlib
 matplotlib.use('qt5agg')
 from matplotlib import pyplot as plt
 from zsys import cors_brg
+from datetime import datetime
 
 
 def fb_df_type_xed(df):
@@ -430,3 +431,18 @@ def gid_anz_top10(df, column):
 
     k10.plot(kind='pie', rot=0, table=True)
     plt.show()
+
+def get_date_list(start, end, time_type='day'):
+    """
+    获取日期列表
+    :param start: 日期的字符串格式
+    :param end: 日期的字符串格式
+    :param type: day, hour, minute, second
+    :return: 日期组成的list类型
+    """
+    datelist = []
+    start = datetime.strptime(start, "%Y-%m-%d")
+    end = datetime.strptime(end, "%Y-%m-%d")
+    for date in arrow.Arrow.range(time_type, start, end):
+        datelist.append(date.format("YYYY-MM-DD"))
+    return datelist
