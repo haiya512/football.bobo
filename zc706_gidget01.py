@@ -49,18 +49,19 @@ def gid_get001(htm):
 # print('')
 # print(df.tail())
 # df.to_csv('tmp\gid01.csv', index=False, encoding='gbk')
-
-_date_2010 = '2017-06-29'
-# _date_2010 = '2010-01-01'
 url_pre = 'http://trade.500.com/jczq/?date='
-url = url_pre + _date_2010
-# request = urllib2.Request(url)
-# response = urllib2.urlopen(request)
-# html_doc = response.read()
-html_doc = web_get001(url)
+for date in ['2017-06-29', '2017-06-30']:
+    # _date_2010 = '2017-06-29'
+    # _date_2010 = '2010-01-01'
+    url = url_pre + date
+    print(url)
+    # request = urllib2.Request(url)
+    # response = urllib2.urlopen(request)
+    # html_doc = response.read()
+    html_doc = web_get001(url)
 
-df = gid_get001(html_doc)
-# print('')
-print(df)
-# print(df.tail())
-df.to_csv('tmp/gid02.csv', index=False)
+    df = gid_get001(html_doc)
+    # print('')
+    # print(df)
+    # print(df.tail())
+    df.to_csv('tmp/gid0629_0630.csv', index=False, mode='a', encoding='utf-8')
