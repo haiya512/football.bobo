@@ -12,3 +12,6 @@ ziwang太让我失望了
             result = chardet.detect(file_data)
             file_content = file_data.decode(encoding=result['encoding'])
 2. 读取html网页文件或者直接获取内容, 在zc703_bs4_type.py
+
+3. 先处理已获取的,不必全部获取数据, 对已有的数据做分析也可以。数据越多,样本越大。但并不代表已有的样本集就不行。
+

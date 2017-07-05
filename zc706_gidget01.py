@@ -44,21 +44,27 @@ def gid_get001(htm):
 
 
 url_pre = 'http://trade.500.com/jczq/?date='
-# start_date = '2010-01-01'
-# start_date = '2017-02-14'
-# end_date = '2017-07-04'
-# date_list = get_date_list(start_date, end_date)
+start_date = '2010-01-01'
+end_date = '2017-07-04'
+date_list = get_date_list(start_date, end_date)
 # for date in ['2017-06-29', '2017-06-30']:
-date_list = ['2015-06-17', '2016-06-24']
+# date_list = ['2015-06-23', '2016-06-27']
+header = False
+date_number = 0
 for date in date_list:
     # _date_2010 = '2017-06-29'
     # _date_2010 = '2010-01-01'
     url = url_pre + date
     html_doc = web_get001(url)
-
     df = gid_get001(html_doc)
+    if date_number == 0:
+        header = True
+    else:
+        header = False
+    date_number += 1
     if len(df.gid):
         gid_filename = 'gid/gid_' + date + '.csv'
-        df.to_csv(gid_filename, index=False, encoding='utf-8')
+        # gid_filename = 'gid/gid_test.csv'
+        df.to_csv(gid_filename, index=False, encoding='utf-8', mode='a', header=header)
     else:
         print(url)

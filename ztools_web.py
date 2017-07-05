@@ -17,10 +17,10 @@ import zsys
 import ztools as zt
 import ztools_str as zstr
 import ztools_data as zdat
-import urllib.request
+import urllib2
 
-#reload(sys)
-#sys.setdefaultencoding('utf-8')
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 zt_headers = {
     'User-Agent': '''
