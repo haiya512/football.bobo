@@ -6,9 +6,9 @@ import os
 import re
 import random
 import sys
+import urllib2
 
 import pandas as pd
-import requests
 from bs4 import BeautifulSoup
 from robobrowser import RoboBrowser
 from concurrent.futures import as_completed
@@ -17,7 +17,6 @@ import zsys
 import ztools as zt
 import ztools_str as zstr
 import ztools_data as zdat
-import urllib2
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -38,8 +37,8 @@ zt_xagent = '''
 
 def web_get001(url):
     # 如果编码是gb2312, 则将gb2312改成utf-8
-    request = urllib.request.Request(url)
-    response = urllib.request.urlopen(request)
+    request = urllib2.Request(url)
+    response = urllib2.urlopen(request)
     rx = response.read()
     # rx = rx.decode('UTF-8')
     # print(rx)
@@ -62,11 +61,11 @@ def web_get001txt(url, filename=''):
     # htm = ''
     htm = web_get001(url)
     # if req_html:
-        # xcod = req_html.encoding
-        # print(xcod)
-        # htm = req_html.text
-        # htm = req_html
-        # if xcod == 'utf-8':
+    # xcod = req_html.encoding
+    # print(xcod)
+    # htm = req_html.text
+    # htm = req_html
+    # if xcod == 'utf-8':
     if htm:
         htm = htm.replace('&nbsp;', ' ')
         # css = htm.encode("UTF-8", 'ignore').decode("UTF-8", 'ignore')
@@ -465,14 +464,7 @@ def zwx_main500(xc0, xnk=1, fgGet=1, rs0='txt/', fhdr9='tmp/dz100hdr.csv', fkey=
             df_new.to_csv('tmp/new010_' + kstr + '.csv',
                           index=False, encoding='gbk')
             web_getXTxt100(df_new, rsk)
-        #
-        #  post
         zwx_post100(ulst, rsk, uid, df9_hdr)
-
-        #
-
-
-# ------bs4.xxx
 
 
 def bs_get_ktag(tag):
