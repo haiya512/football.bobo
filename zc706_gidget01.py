@@ -25,12 +25,10 @@ def gid_get001(htm):
     x10 = bs.find_all(zweb.bs_get_ktag)
     # print(x10)
     for xc, x in enumerate(x10):
-        print('\n@x\n', xc, '#', x.attrs)
-        html_a = x.find_all(attrs={"class" :"score"})
-        for i in html_a:
-            score_result = i.text
-            print score_result
-        print("\n")
+        # print('\n@x\n', xc, '#', x.attrs)
+        # print("x: ", x)
+        # print("\n")
+        sp_list = []
         ds['gset'] = zstr.str_fltHtmHdr(x['lg'])
         ds['gid'] = x['fid']
         ds['mplay'] = zstr.str_fltHtmHdr(x['homesxname'])
@@ -38,6 +36,27 @@ def gid_get001(htm):
         ds['mtid'] = 'NAN'
         ds['gplay'] = zstr.str_fltHtmHdr(x['awaysxname'])
         ds['gtid'] = 'NAN'
+        html_a = x.find_all(attrs={"class" :"score"})
+        for _htmla in html_a:
+            score_result = _htmla.text
+            score_list = score_result.split(":")
+            ds['mscore'] = score_list[0]
+            ds['pscore'] = score_list[1]
+
+        html_span = x.find_all(attrs={"class": "odds_item"})
+        for _htmlspan in html_span:
+            # print(_htmlspan.attrs)
+            sp_list.append(str(_htmlspan.text))
+            # print(_htmlspan)
+            # print("\n")
+        # print(sp_list)
+        # print("\n")
+        ds['nml_win'] = sp_list[0]
+        ds['nml_draw'] = sp_list[1]
+        ds['nml_lost'] = sp_list[2]
+        ds['rq_win'] = sp_list[3]
+        ds['rq_draw'] = sp_list[4]
+        ds['rq_lost'] = sp_list[5]
         ds['qr'] = x['rq']
         ds['kend'] = x['isend']
         ds['tweek'] = x['gdate'].split(' ')[0]
@@ -46,7 +65,7 @@ def gid_get001(htm):
 
         df = df.append(ds.T, ignore_index=True)
 
-        # print(df)
+        print(df)
     df = df[df['gid'] != '-1']
     return df
 
@@ -54,14 +73,13 @@ def gid_get001(htm):
 url_pre = 'http://trade.500.com/jczq/?date='
 # start_date = '2010-01-01'
 start_date = '2017-07-03'
-end_date = '2017-07-04'
-date_list = get_date_list(start_date, end_date)
-# date_list = ['2015-06-23', '2016-06-27']
+end_date = '2017-07-07'
+# date_list = get_date_list(start_date, end_date)
+date_list = [end_date]
 header = False
 date_number = 0
 for date in date_list:
     # _date_2010 = '2017-06-29'
-    # _date_2010 = '2010-01-01'
     url = url_pre + date
     html_doc = web_get001(url)
     df = gid_get001(html_doc)

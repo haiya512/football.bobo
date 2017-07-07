@@ -6,10 +6,13 @@ import arrow
 import pandas as pd
 
 gidNil = ['', '', '', '', '', '',
-          '-1', '-1', '0', '0', '-1', '-1',
+          '-1', '-1', '0',
+          '0', '-1', '-1',
           '', '', '']
-gidSgn = ['gid', 'gset', 'mplay', 'mtid', 'gplay', 'gtid', 'qj',
-          'qs', 'qr', 'kend', 'kwin', 'kwinrq', 'tweek', 'tplay', 'tsell']
+gidSgn = ['gid', 'gset', 'mplay', 'mtid', 'gplay', 'gtid',
+          'qj', 'qs', 'qr',
+          'kend', 'kwin', 'kwinrq',
+          'tweek', 'tplay', 'tsell']
 
 poolNil = ['', '', '', '', '', '', '-1', '-1', '0',
            '0', '-1', '-1', '', '', '', '0', 0, 0, 0, '-9']
