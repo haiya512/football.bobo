@@ -23,8 +23,14 @@ def gid_get001(htm):
     # ---1#
     zsys.bs_get_ktag_kstr = 'isend'
     x10 = bs.find_all(zweb.bs_get_ktag)
+    # print(x10)
     for xc, x in enumerate(x10):
         print('\n@x\n', xc, '#', x.attrs)
+        html_a = x.find_all(attrs={"class" :"score"})
+        for i in html_a:
+            score_result = i.text
+            print score_result
+        print("\n")
         ds['gset'] = zstr.str_fltHtmHdr(x['lg'])
         ds['gid'] = x['fid']
         ds['mplay'] = zstr.str_fltHtmHdr(x['homesxname'])
@@ -32,6 +38,7 @@ def gid_get001(htm):
         ds['mtid'] = 'NAN'
         ds['gplay'] = zstr.str_fltHtmHdr(x['awaysxname'])
         ds['gtid'] = 'NAN'
+        ds['qr'] = x['rq']
         ds['kend'] = x['isend']
         ds['tweek'] = x['gdate'].split(' ')[0]
         ds['tplay'] = x['pendtime']
@@ -39,7 +46,7 @@ def gid_get001(htm):
 
         df = df.append(ds.T, ignore_index=True)
 
-        print(df)
+        # print(df)
     df = df[df['gid'] != '-1']
     return df
 
@@ -49,7 +56,6 @@ url_pre = 'http://trade.500.com/jczq/?date='
 start_date = '2017-07-03'
 end_date = '2017-07-04'
 date_list = get_date_list(start_date, end_date)
-# for date in ['2017-06-29', '2017-06-30']:
 # date_list = ['2015-06-23', '2016-06-27']
 header = False
 date_number = 0
