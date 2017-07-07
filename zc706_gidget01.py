@@ -12,6 +12,7 @@ import ztools_web as zweb
 import tfb_sys as tfsys
 from ztools_web import web_get001
 from tfb_tools import get_date_list
+from ztools import maxium_fun, score_kwin_result
 
 
 def gid_get001(htm):
@@ -29,19 +30,25 @@ def gid_get001(htm):
         # print("x: ", x)
         # print("\n")
         sp_list = []
+        # sp_nml_dict = {}
+        # sp_rq_dict = {}
         ds['gset'] = zstr.str_fltHtmHdr(x['lg'])
         ds['gid'] = x['fid']
         ds['mplay'] = zstr.str_fltHtmHdr(x['homesxname'])
         # ds['mtid'] = x['mid']
-        ds['mtid'] = 'NAN'
+        # ds['mtid'] = 'NAN'
         ds['gplay'] = zstr.str_fltHtmHdr(x['awaysxname'])
-        ds['gtid'] = 'NAN'
+        ds['qr'] = x['rq']
+        # ds['gtid'] = 'NAN'
         html_a = x.find_all(attrs={"class" :"score"})
         for _htmla in html_a:
             score_result = _htmla.text
             score_list = score_result.split(":")
             ds['mscore'] = score_list[0]
             ds['pscore'] = score_list[1]
+            ds['kwin'] = score_kwin_result(ds['mscore'], ds['pscore'])
+            ds['kwinrq'] = score_kwin_result(ds['mscore'], ds['pscore'], rq=ds['qr'])
+            print(ds['kwinrq'])
 
         html_span = x.find_all(attrs={"class": "odds_item"})
         for _htmlspan in html_span:
@@ -51,21 +58,37 @@ def gid_get001(htm):
             # print("\n")
         # print(sp_list)
         # print("\n")
-        ds['nml_win'] = sp_list[0]
-        ds['nml_draw'] = sp_list[1]
-        ds['nml_lost'] = sp_list[2]
-        ds['rq_win'] = sp_list[3]
-        ds['rq_draw'] = sp_list[4]
-        ds['rq_lost'] = sp_list[5]
-        ds['qr'] = x['rq']
+        ds['nml_win'] = nml_win = sp_list[0]
+        ds['nml_draw'] = nml_draw = sp_list[1]
+        ds['nml_lost'] = nml_lost = sp_list[2]
+        ds['rq_win'] = rq_win = sp_list[3]
+        ds['rq_draw'] = rq_draw = sp_list[4]
+        ds['rq_lost'] = rq_lost = sp_list[5]
+
+        sp_nml_dict = {
+            3: nml_win,
+            1: nml_draw,
+            0: nml_lost,
+        }
+
+        sp_rq_dict = {
+            3: rq_win,
+            1: rq_draw,
+            0: rq_lost,
+        }
+        # print(sp_nml_dict)
+        ds['nml_sp_result'] = maxium_fun(sp_nml_dict)
+        # print(maxium_fun(sp_nml_dict))
+        ds['rp_sp_result'] = maxium_fun(sp_rq_dict)
+
         ds['kend'] = x['isend']
-        ds['tweek'] = x['gdate'].split(' ')[0]
+        # ds['tweek'] = x['gdate'].split(' ')[0]
         ds['tplay'] = x['pendtime']
         ds['tsell'] = x['pdate']
 
         df = df.append(ds.T, ignore_index=True)
 
-        print(df)
+        # print(df)
     df = df[df['gid'] != '-1']
     return df
 
@@ -73,7 +96,7 @@ def gid_get001(htm):
 url_pre = 'http://trade.500.com/jczq/?date='
 # start_date = '2010-01-01'
 start_date = '2017-07-03'
-end_date = '2017-07-07'
+end_date = '2017-07-04'
 # date_list = get_date_list(start_date, end_date)
 date_list = [end_date]
 header = False

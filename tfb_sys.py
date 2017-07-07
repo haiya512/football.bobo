@@ -5,14 +5,28 @@
 import arrow
 import pandas as pd
 
-gidNil = ['', '', '', '', '', '',
-          '-1', '-1', '0',
-          '0', '-1', '-1',
-          '', '', '']
-gidSgn = ['gid', 'gset', 'mplay', 'mtid', 'gplay', 'gtid',
-          'qj', 'qs', 'qr',
-          'kend', 'kwin', 'kwinrq',
-          'tweek', 'tplay', 'tsell']
+# df的初始默认值
+gidNil = [
+    '', '', '', '',
+    # '-1', '-1', '0',
+    '0',
+    #
+    '2', '-1', '-1',
+    # '', '', ''
+    '', '',
+    '', '',
+]
+# df 的列名
+gidSgn = [
+    # 'gid', 'gset', 'mplay', 'mtid', 'gplay', 'gtid',
+    'gid', 'gset', 'mplay', 'gplay',
+    # 'qj', 'qs', 'qr',
+    'qr',
+    'kend', 'kwin', 'kwinrq',
+    # 'tweek', 'tplay', 'tsell',
+    'nml_sp_result', 'rp_sp_result',
+    'tplay', 'tsell',
+]
 
 poolNil = ['', '', '', '', '', '', '-1', '-1', '0',
            '0', '-1', '-1', '', '', '', '0', 0, 0, 0, '-9']
@@ -96,6 +110,7 @@ class zTopFoolball(object):
     设置TopFoolball项目的各个全局参数
     尽量做到all in one
     '''
+
     def __init__(self):
         self.tim0Str_gid = '2010-01-01'
         self.tim0_gid = arrow.get(self.tim0Str_gid)

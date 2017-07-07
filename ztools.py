@@ -14,7 +14,9 @@ import time
 
 import arrow
 import numexpr as ne
+
 import pandas as pd
+
 import psutil as psu
 
 import matplotlib as mpl
@@ -397,3 +399,43 @@ def timNDay(time, tim0, fgPr=False):
         print(day_nums, ' days,', time.format('YYYY-MM-DD'),
               ',t0,', tim0.format('YYYY-MM-DD'))
     return day_nums
+
+
+def maxium_fun(sp_dict):
+    '''
+    接收一个长度为3的字典,字典的3个键为3,1,0,分别代表胜平负
+    value为开出的对应的SP,因为开出的赔率值有可能相同(虽然少,还是有可能的),
+    所以返回的结果应该是key组成的list
+    返回的是从赔率的最小值判断出的结果
+    :param sp_dict:
+    :return:
+    '''
+    if not isinstance(sp_dict, dict) or len(sp_dict) != 3:
+        print("ERROR: not a dict or dict length is not 3")
+        return False
+    value_list = [sp_dict[key] for key in sp_dict]
+    min_sp = min(value_list)
+    min_sp_result = [key for key in sp_dict if sp_dict[key] == min_sp]
+    return min_sp_result
+
+
+def score_kwin_result(mplay_score, gplay_score, rq=0):
+    """
+    传递主场得分和客场得分,然后得到比赛结果
+    :param mplay_score:
+    :param gplay_score:
+    :return:
+    """
+
+    mplay_score = int(mplay_score)
+    gplay_score = int(gplay_score)
+    print(mplay_score,gplay_score,rq)
+    if rq:
+        mplay_score = mplay_score + int(rq)
+    if mplay_score > gplay_score:
+        result = '3'
+    if mplay_score == gplay_score:
+        result = '1'
+    if mplay_score < gplay_score:
+        result = '0'
+    return result
