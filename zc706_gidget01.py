@@ -15,7 +15,7 @@ from tfb_tools import get_date_list
 from ztools import maxium_fun, score_kwin_result
 
 
-def gid_get001(htm):
+def gid_get001(htm, print_str=None):
     # bs = BeautifulSoup(htm, 'html5lib')  # 'lxml'
     bs = BeautifulSoup(htm, 'lxml')  # 'lxml'
     df = pd.DataFrame(columns=tfsys.gidSgn, dtype=str)
@@ -48,7 +48,7 @@ def gid_get001(htm):
             ds['pscore'] = score_list[1]
             ds['kwin'] = score_kwin_result(ds['mscore'], ds['pscore'])
             ds['kwinrq'] = score_kwin_result(ds['mscore'], ds['pscore'], rq=ds['qr'])
-            print(ds['kwinrq'])
+            # print(ds['kwinrq'])
 
         html_span = x.find_all(attrs={"class": "odds_item"})
         for _htmlspan in html_span:
@@ -58,6 +58,10 @@ def gid_get001(htm):
             # print("\n")
         # print(sp_list)
         # print("\n")
+        ds['tsell'] = x['pdate']
+        if len(sp_list) != 6:
+            print("无法解析SP的比赛URL: {0}".format(print_str))
+            continue
         ds['nml_win'] = nml_win = sp_list[0]
         ds['nml_draw'] = nml_draw = sp_list[1]
         ds['nml_lost'] = nml_lost = sp_list[2]
@@ -82,9 +86,16 @@ def gid_get001(htm):
         ds['rp_sp_result'] = maxium_fun(sp_rq_dict)
 
         ds['kend'] = x['isend']
+        if str(ds['kwin']) in ds['nml_sp_result']:
+            ds['zhongjiang'] = True
+        else:
+            ds['zhongjiang'] = False
+        if str(ds['kwinrq']) in ds['rp_sp_result']:
+            ds['zhongjiang_rq'] = True
+        else:
+            ds['zhongjiang_rq'] = False
         # ds['tweek'] = x['gdate'].split(' ')[0]
         ds['tplay'] = x['pendtime']
-        ds['tsell'] = x['pdate']
 
         df = df.append(ds.T, ignore_index=True)
 
@@ -94,27 +105,27 @@ def gid_get001(htm):
 
 
 url_pre = 'http://trade.500.com/jczq/?date='
-# start_date = '2010-01-01'
-start_date = '2017-07-03'
-end_date = '2017-07-04'
-# date_list = get_date_list(start_date, end_date)
-date_list = [end_date]
+start_date = '2010-01-01'
+# start_date = '2017-07-03'
+end_date = '2017-07-07'
+date_list = get_date_list(start_date, end_date)
+# date_list = [end_date]
 header = False
 date_number = 0
 for date in date_list:
     # _date_2010 = '2017-06-29'
     url = url_pre + date
     html_doc = web_get001(url)
-    df = gid_get001(html_doc)
+    df = gid_get001(html_doc, url)
     if date_number == 0:
         header = True
     else:
         header = False
     date_number += 1
     if len(df.gid):
-        gid_filename = 'gid/gid_' + date + '.csv'
-        # gid_filename = 'gid/gid_test.csv'
-        df.to_csv(gid_filename, index=False, encoding='utf-8', header=header)
-        # df.to_csv(gid_filename, index=False, encoding='utf-8', mode='a', header=header)
+        # gid_filename = 'gid/gid_' + date + '.csv'
+        gid_filename = 'gid/gid_test.csv'
+        # df.to_csv(gid_filename, index=False, encoding='utf-8', header=header)
+        df.to_csv(gid_filename, index=False, encoding='utf-8', mode='a', header=header)
     else:
         print(url)

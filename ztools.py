@@ -413,9 +413,9 @@ def maxium_fun(sp_dict):
     if not isinstance(sp_dict, dict) or len(sp_dict) != 3:
         print("ERROR: not a dict or dict length is not 3")
         return False
-    value_list = [sp_dict[key] for key in sp_dict]
+    value_list = [str(sp_dict[key]) for key in sp_dict]
     min_sp = min(value_list)
-    min_sp_result = [key for key in sp_dict if sp_dict[key] == min_sp]
+    min_sp_result = [str(key) for key in sp_dict if sp_dict[key] == min_sp]
     return min_sp_result
 
 
@@ -429,7 +429,7 @@ def score_kwin_result(mplay_score, gplay_score, rq=0):
 
     mplay_score = int(mplay_score)
     gplay_score = int(gplay_score)
-    print(mplay_score,gplay_score,rq)
+    # print(mplay_score,gplay_score,rq)
     if rq:
         mplay_score = mplay_score + int(rq)
     if mplay_score > gplay_score:
