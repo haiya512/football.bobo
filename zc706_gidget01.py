@@ -45,7 +45,9 @@ def gid_get001(htm, print_str=None):
             score_result = _htmla.text
             score_list = score_result.split(":")
             ds['mscore'] = score_list[0]
+            # print("mscore: {0}".format(ds['mscore']))
             ds['pscore'] = score_list[1]
+            # print("gscore: {0}".format(ds['pscore']))
             ds['kwin'] = score_kwin_result(ds['mscore'], ds['pscore'])
             ds['kwinrq'] = score_kwin_result(ds['mscore'], ds['pscore'], rq=ds['qr'])
             # print(ds['kwinrq'])
@@ -53,14 +55,24 @@ def gid_get001(htm, print_str=None):
         html_span = x.find_all(attrs={"class": "odds_item"})
         for _htmlspan in html_span:
             # print(_htmlspan.attrs)
-            sp_list.append(str(_htmlspan.text))
+            # print("_htmlspan.text: {0}".format(_htmlspan.text))
+            if str(_htmlspan.text) == u'\xa0':
+                # print("_htmlspan.text is u' ' ")
+                continue
+            else:
+                # print("_htmlspan.text is not u' ' ")
+                sp_list.append(str(_htmlspan.text))
             # print(_htmlspan)
             # print("\n")
         # print(sp_list)
         # print("\n")
         ds['tsell'] = x['pdate']
         if len(sp_list) != 6:
-            print("无法解析SP的比赛URL: {0}".format(print_str))
+            print("无法解析SP的比赛URL: {0} {1} {2} {3}".format(print_str,
+                                                         ds['gset'],
+                                                         ds['mplay'],
+                                                         ds['gplay'],
+                                                         ))
             continue
         ds['nml_win'] = nml_win = sp_list[0]
         ds['nml_draw'] = nml_draw = sp_list[1]
@@ -106,8 +118,10 @@ def gid_get001(htm, print_str=None):
 
 url_pre = 'http://trade.500.com/jczq/?date='
 start_date = '2010-01-01'
+# start_date = '2014-08-25'
 # start_date = '2017-07-03'
 end_date = '2017-07-07'
+# end_date = '2010-01-02'
 date_list = get_date_list(start_date, end_date)
 # date_list = [end_date]
 header = False
@@ -123,6 +137,7 @@ for date in date_list:
         header = False
     date_number += 1
     if len(df.gid):
+        # pass
         # gid_filename = 'gid/gid_' + date + '.csv'
         gid_filename = 'gid/gid_test.csv'
         # df.to_csv(gid_filename, index=False, encoding='utf-8', header=header)
